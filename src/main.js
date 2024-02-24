@@ -1,8 +1,13 @@
 import { Boot } from "./scenes/Boot";
-import { Game } from "./scenes/Game";
+import { Difficulty } from "./scenes/Difficulty";
 import { GameOver } from "./scenes/GameOver";
 import { MainMenu } from "./scenes/MainMenu";
 import { Preloader } from "./scenes/Preloader";
+import { Singleplayer } from "./scenes/Singleplayer";
+import { Multiplayer } from "./scenes/Multiplayer";
+import { Creditos } from "./scenes/Creditos";
+import { Info } from "./scenes/Info";
+import { Leaderboard } from "./scenes/Leaderboard";
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -16,7 +21,18 @@ const config = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [Boot, Preloader, MainMenu, Game, GameOver],
+  scene: [
+    Boot,
+    Preloader,
+    MainMenu,
+    Difficulty,
+    Singleplayer,
+    Multiplayer,
+    GameOver,
+    Leaderboard,
+    Info,
+    Creditos,
+  ],
 };
 
 export default new Phaser.Game(config);
