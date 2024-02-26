@@ -186,11 +186,12 @@ export class vsCPU {
         };
     for (const move of this.getCurrentPlayer().get_possible_moves()) {
       this.makeMove(move);
-      const [childEvalution, _] = this.minimax(depth - 1, alpha, beta);
+      const res = this.minimax(depth - 1, alpha, beta);
+      const childEvaluation = res[0];
       this.undoMove(move);
-      if (shouldReplace(childEvalution, evaluation)) {
+      if (shouldReplace(childEvaluation, evaluation)) {
         best_move = move;
-        evaluation = childEvalution;
+        evaluation = childEvaluation;
       }
       if (this.turn) alpha = Math.max(alpha, childEvalution);
       else beta = Math.min(beta, childEvalution);
@@ -230,8 +231,8 @@ export class vsCPU {
   }
 
   cpuMove() {
-    const [, best_move] = this.minimax(this.difficulty);
-    return best_move;
+    const res = this.minimax(this.difficulty);
+    return res[1];
   }
 
   printBoard() {
