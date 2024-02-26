@@ -6,9 +6,9 @@ export class MainMenu extends Scene {
   }
 
   create() {
-    this.add.image(512, 384, "background");
+    this.add.image(660, 384, "background");
 
-    this.add.image(512, 200, "logo");
+    this.add.image(272, 160, "logo");
 
     // this.add
     //   .text(512, 260, "Main Menu", {
@@ -21,22 +21,17 @@ export class MainMenu extends Scene {
     //   })
     //   .setOrigin(0.5);
 
-    const pvp = this.add.image(500, 360, "pvp").setInteractive();
-    const pve = this.add.image(500, 480, "pve").setInteractive();
-    const fullscreen = this.add.image(950, 460, "fullscreen").setInteractive();
+    const pvp = this.add.image(700, 360, "pvp").setInteractive();
+    const pve = this.add.image(700, 530, "pve").setInteractive();
+    const login = this.add.image(1150, 150, "login").setInteractive();
     const leaderboard = this.add
-      .image(950, 540, "leaderboard")
+      .image(1180, 350, "leaderboard")
       .setInteractive();
-    const info = this.add.image(950, 620, "info").setInteractive();
-    const creditos = this.add.image(950, 700, "creditos").setInteractive();
+    const info = this.add.image(1180, 480, "info").setInteractive();
+    const creditos = this.add.image(1180, 610, "creditos").setInteractive();
+    this.add.image(80, 600, "semaforo");
 
-    fullscreen.addListener("pointerdown", () => {
-      if (this.scale.isFullscreen) {
-        this.scale.stopFullscreen();
-      } else {
-        this.scale.startFullscreen();
-      }
-    });
+    login.addListener("pointerdown", () => {});
     leaderboard.once("pointerdown", () => {
       this.scene.start("Leaderboard");
     });
@@ -50,7 +45,7 @@ export class MainMenu extends Scene {
       this.scene.start("Multiplayer");
     });
     pve.once("pointerdown", () => {
-      this.scene.start("Difficulty");
+      this.scene.start("Singleplayer");
     });
   }
 }

@@ -36,6 +36,13 @@ export class Preloader extends Scene {
     this.load.image("pve", "pve.png");
     this.load.image("pvp", "pvp.png");
     this.load.image("info", "info.png");
+    this.load.image("semaforo", "semaforo.png");
+    this.load.image("login", "login.png");
+    this.load.image("home", "home.png");
+    this.load.image("grid", "grid.png");
+    this.load.image("pl1", "pl1.png");
+    this.load.image("plcomputer", "plcomputer.png");
+    this.load.image("pl2", "pl2.png");
   }
 
   create() {
