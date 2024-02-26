@@ -40,7 +40,7 @@ export class MainMenu extends Scene {
     const easy = this.add.image(930, 440, "easy").setInteractive();
     const medium = this.add.image(930, 530, "medium").setInteractive();
     const hard = this.add.image(930, 620, "hard").setInteractive();
-    easy.scale *= 0.65;
+    easy.scale *= 0.7;
     medium.scale = 0.6;
     hard.scale *= 0.44;
     login.on("pointerdown", () => {});
