@@ -7,11 +7,17 @@ export class Multiplayer extends Scene {
 
   create() {
     this.add.image(660, 384, "background");
-    this.add.image(272, 160, "logo");
-    const home = this.add.image(150, 600, "home").setInteractive();
-    const grid = this.add.image(650, 370, "grid").setInteractive();
-    this.add.image(1150, 300, "pl1");
-    this.add.image(1150, 400, "pl2");
+    const home = this.add.image(120, 620, "home").setInteractive();
+    home.scale *= 0.7;
+    const grid = this.add.sprite(700, 380, "grid");
+    const logo = this.add.sprite(180, 125, "logo");
+    logo.scale *= 0.7;
+    const pl1 = this.add.sprite(1180, 300, "pl1");
+    pl1.scale *= 0.85;
+    const pl2 = this.add.sprite(1180, 400, "pl2");
+    pl2.scale *= 0.85;
+    const pvp = this.add.sprite(170, 270, "pvp");
+    pvp.scale *= 0.5;
     home.once("pointerdown", () => {
       this.scene.start("MainMenu");
     });

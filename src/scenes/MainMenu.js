@@ -7,8 +7,9 @@ export class MainMenu extends Scene {
 
   create() {
     this.add.image(660, 384, "background");
-
-    this.add.image(272, 160, "logo");
+    var difficulty = 3;
+    const logo = this.add.sprite(180, 125, "logo");
+    logo.scale *= 0.7;
 
     // this.add
     //   .text(512, 260, "Main Menu", {
@@ -21,16 +22,27 @@ export class MainMenu extends Scene {
     //   })
     //   .setOrigin(0.5);
 
-    const pvp = this.add.image(700, 360, "pvp").setInteractive();
+    const pvp = this.add.image(700, 320, "pvp").setInteractive();
+    pvp.scale *= 0.9;
     const pve = this.add.image(700, 530, "pve").setInteractive();
-    const login = this.add.image(1150, 150, "login").setInteractive();
+    pve.scale *= 0.9;
+    const login = this.add.image(1180, 130, "login").setInteractive();
+    login.scale *= 0.7;
     const leaderboard = this.add
-      .image(1180, 350, "leaderboard")
+      .image(1180, 390, "leaderboard")
       .setInteractive();
-    const info = this.add.image(1180, 480, "info").setInteractive();
-    const creditos = this.add.image(1180, 610, "creditos").setInteractive();
+    const info = this.add.image(1180, 510, "info").setInteractive();
+    const creditos = this.add.image(1180, 630, "creditos").setInteractive();
+    info.scale *= 0.8;
+    creditos.scale *= 0.8;
+    leaderboard.scale *= 0.8;
     this.add.image(80, 600, "semaforo");
-
+    const easy = this.add.sprite(930, 440, "easy");
+    const medium = this.add.sprite(930, 530, "medium");
+    const hard = this.add.sprite(930, 620, "hard");
+    easy.scale *= 0.6;
+    medium.scale = 0.6;
+    hard.scale *= 0.44;
     login.addListener("pointerdown", () => {});
     leaderboard.once("pointerdown", () => {
       this.scene.start("Leaderboard");
@@ -45,7 +57,16 @@ export class MainMenu extends Scene {
       this.scene.start("Multiplayer");
     });
     pve.once("pointerdown", () => {
-      this.scene.start("Singleplayer");
+      this.scene.start("Singleplayer", { difficulty });
+    });
+    easy.on("pointerdown", () => {
+      difficulty = 3;
+    });
+    medium.on("pointerdown", () => {
+      difficulty = 6;
+    });
+    hard.on("pointerdown", () => {
+      difficulty = 8;
     });
   }
 }
