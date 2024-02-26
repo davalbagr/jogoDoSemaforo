@@ -31,7 +31,6 @@ export class Preloader extends Scene {
     this.load.image("medium", "medium.png");
     this.load.image("hard", "hard.png");
     this.load.image("creditos", "creditos.png");
-    this.load.image("fullscreen", "fullscreen.png");
     this.load.image("leaderboard", "leaderboard.png");
     this.load.image("pve", "pve.png");
     this.load.image("pvp", "pvp.png");

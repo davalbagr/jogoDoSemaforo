@@ -7,7 +7,7 @@ export class Leaderboard extends Scene {
 
   create() {
     this.add.image(660, 384, "background");
-    const logo = this.add.sprite(180, 125, "logo");
+    const logo = this.add.image(180, 125, "logo");
     logo.scale *= 0.7;
     const home = this.add.image(120, 620, "home").setInteractive();
     home.scale *= 0.7;

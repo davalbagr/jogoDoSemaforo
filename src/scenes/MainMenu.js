@@ -8,7 +8,7 @@ export class MainMenu extends Scene {
   create() {
     this.add.image(660, 384, "background");
     var difficulty = 3;
-    const logo = this.add.sprite(180, 125, "logo");
+    const logo = this.add.image(180, 125, "logo");
     logo.scale *= 0.7;
 
     // this.add
@@ -37,13 +37,13 @@ export class MainMenu extends Scene {
     creditos.scale *= 0.8;
     leaderboard.scale *= 0.8;
     this.add.image(80, 600, "semaforo");
-    const easy = this.add.sprite(930, 440, "easy");
-    const medium = this.add.sprite(930, 530, "medium");
-    const hard = this.add.sprite(930, 620, "hard");
-    easy.scale *= 0.6;
+    const easy = this.add.image(930, 440, "easy").setInteractive();
+    const medium = this.add.image(930, 530, "medium").setInteractive();
+    const hard = this.add.image(930, 620, "hard").setInteractive();
+    easy.scale *= 0.65;
     medium.scale = 0.6;
     hard.scale *= 0.44;
-    login.addListener("pointerdown", () => {});
+    login.on("pointerdown", () => {});
     leaderboard.once("pointerdown", () => {
       this.scene.start("Leaderboard");
     });
@@ -57,15 +57,36 @@ export class MainMenu extends Scene {
       this.scene.start("Multiplayer");
     });
     pve.once("pointerdown", () => {
-      this.scene.start("Singleplayer", { difficulty });
+      this.scene.start("Singleplayer", { difficulty: difficulty });
     });
     easy.on("pointerdown", () => {
+      if (difficulty == 6) {
+        medium.scale /= 1.2;
+        easy.scale *= 1.2;
+      } else if (difficulty == 8) {
+        hard.scale /= 1.2;
+        easy.scale *= 1.2;
+      }
       difficulty = 3;
     });
     medium.on("pointerdown", () => {
+      if (difficulty == 3) {
+        easy.scale /= 1.2;
+        medium.scale *= 1.2;
+      } else if (difficulty == 8) {
+        hard.scale /= 1.2;
+        medium.scale *= 1.2;
+      }
       difficulty = 6;
     });
     hard.on("pointerdown", () => {
+      if (difficulty == 3) {
+        easy.scale /= 1.2;
+        hard.scale *= 1.2;
+      } else if (difficulty == 6) {
+        medium.scale /= 1.2;
+        hard.scale *= 1.2;
+      }
       difficulty = 8;
     });
   }
