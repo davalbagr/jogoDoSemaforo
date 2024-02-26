@@ -139,6 +139,8 @@ export class Singleplayer extends Scene {
   }
 }
 
+// CPU engine
+
 class Board {
   constructor() {
     this.board = Array(12).fill(0);
@@ -334,8 +336,8 @@ export class vsCPU {
         best_move = move;
         evaluation = childEvaluation;
       }
-      if (this.turn) alpha = Math.max(alpha, childEvalution);
-      else beta = Math.min(beta, childEvalution);
+      if (this.turn) alpha = Math.max(alpha, childEvaluation);
+      else beta = Math.min(beta, childEvaluation);
       if (alpha >= beta) break;
     }
     return [evaluation, best_move];
@@ -374,11 +376,5 @@ export class vsCPU {
   cpuMove() {
     const res = this.minimax(this.difficulty);
     return res[1];
-  }
-
-  printBoard() {
-    console.log(this.board.board.slice(0, 4));
-    console.log(this.board.board.slice(4, 8));
-    console.log(this.board.board.slice(8, 12));
   }
 }
