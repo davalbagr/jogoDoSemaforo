@@ -11,19 +11,24 @@ export class Singleplayer extends Scene {
 
   update() {
     // this.turn.rotation += 0.02;
-    if (this.game.turn && this.turn.name === "cputarget") {
+    if (this.gameState.turn && this.turn.name === "cputarget") {
       this.turn.destroy();
-      this.turn = this.add.image(1122, 298, "pl1target");
+      this.turn = this.add.image(1122, 298, "pl2target");
       this.turn.name = "pl1target";
       this.turn.scale *= 0.55;
-    } else if (!this.game.turn && this.turn.name === "pl1target") {
+    } else if (!this.gameState.turn && this.turn.name === "pl1target") {
       this.turn.destroy();
       this.turn = this.add.image(1122, 398, "cputarget");
       this.turn.name = "cputarget";
       this.turn.scale *= 0.55;
     }
   }
-
+  won() {
+    this.scene.start("GameOver", { turn: true });
+  }
+  lost() {
+    this.scene.start("GameOver", { turn: false });
+  }
   create() {
     this.add.image(660, 384, "background");
     const home = this.add.image(120, 620, "home").setInteractive();
@@ -37,7 +42,7 @@ export class Singleplayer extends Scene {
     plcomputer.scale *= 0.8;
     const pve = this.add.image(170, 270, "pve");
     pve.scale *= 0.5;
-    this.turn = this.add.image(1122, 298, "pl1target");
+    this.turn = this.add.image(1122, 298, "pl2target");
     this.turn.name = "pl1target";
     this.turn.scale *= 0.55;
     var difficulty;
@@ -50,7 +55,7 @@ export class Singleplayer extends Scene {
     }
     difficulty.scale *= 0.3;
     const game = new vsCPU(this.difficulty, false);
-    this.game = game;
+    this.gameState = game;
     const images = Array(12).fill(null);
     grid.on("pointerdown", (pointer) => {
       if (game.turn) {
@@ -62,7 +67,7 @@ export class Singleplayer extends Scene {
           const playerWon = game.makeMove(pos);
           images[pos] = this.createPiece(pos);
           if (playerWon) {
-            this.scene.start("GameOver", { turn: true });
+            this.won();
             return;
           }
           const botMove = function () {
@@ -72,7 +77,7 @@ export class Singleplayer extends Scene {
             }
             const cpuWon = game.makeMove(cpuPos);
             images[cpuPos] = this.createPiece(cpuPos);
-            if (cpuWon) this.scene.start("GameOver", { turn: false });
+            if (cpuWon) this.lost();
           };
           setTimeout(botMove.bind(this), 2000);
         }
@@ -332,9 +337,7 @@ export class vsCPU {
     alpha = Number.NEGATIVE_INFINITY,
     beta = Number.POSITIVE_INFINITY,
   ) {
-    var evaluation = this.turn
-      ? Number.NEGATIVE_INFINITY
-      : Number.POSITIVE_INFINITY;
+    var evaluation = this.turn ? -1000000 : 1000000;
     if (this.board.is_terminal()) {
       return [evaluation, null];
     }
