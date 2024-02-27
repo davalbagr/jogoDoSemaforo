@@ -65,33 +65,33 @@ export class Singleplayer extends Scene {
     // quadrados da tela de jogo
     var squares = Array(12).fill(null);
     // tamanho do espaco branco entre quadrados
-    console.log(squares);
-    const offset = 30;
-    // 670 500 160
+    const offsetY = 9;
+    const offsetX = 6;
+    // coordenadas do primeiro quadrado
     squares[0] = {
-      a: grid.x - 320,
-      b: grid.y - 245,
-      c: grid.x - 187,
-      d: grid.y - 95,
+      a: 375,
+      b: 133,
+      c: 532,
+      d: 290,
     };
     squares[4] = {
       a: squares[0].a,
-      b: squares[0].d + offset,
+      b: squares[0].b + offsetY + (squares[0].d - squares[0].b),
       c: squares[0].c,
-      d: squares[0].d + offset + (squares[0].d - squares[0].b),
+      d: squares[0].d + offsetY + (squares[0].d - squares[0].b),
     };
     squares[8] = {
       a: squares[4].a,
-      b: squares[4].d + offset,
+      b: squares[4].b + offsetY + (squares[0].d - squares[0].b),
       c: squares[4].c,
-      d: squares[4].d + offset + (squares[4].d - squares[4].b),
+      d: squares[4].d + offsetY + (squares[0].d - squares[0].b),
     };
     for (var i = 0; i < 12; i++) {
       if (i % 4 == 0) continue;
       squares[i] = {
-        a: squares[i - 1].c + offset,
+        a: squares[i - 1].c + offsetX,
         b: squares[i - 1].b,
-        c: squares[i - 1].c + offset + (squares[i - 1].c - squares[i - 1].a),
+        c: squares[i - 1].c + offsetX + (squares[0].c - squares[0].a),
         d: squares[i - 1].d,
       };
     }
