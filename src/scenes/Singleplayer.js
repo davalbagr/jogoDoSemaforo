@@ -9,6 +9,21 @@ export class Singleplayer extends Scene {
     this.difficulty = data.difficulty;
   }
 
+  update() {
+    // this.turn.rotation += 0.02;
+    if (this.game.turn && this.turn.name === "cputarget") {
+      this.turn.destroy();
+      this.turn = this.add.image(1122, 298, "pl1target");
+      this.turn.name = "pl1target";
+      this.turn.scale *= 0.55;
+    } else if (!this.game.turn && this.turn.name === "pl1target") {
+      this.turn.destroy();
+      this.turn = this.add.image(1122, 398, "cputarget");
+      this.turn.name = "cputarget";
+      this.turn.scale *= 0.55;
+    }
+  }
+
   create() {
     this.add.image(660, 384, "background");
     const home = this.add.image(120, 620, "home").setInteractive();
@@ -17,11 +32,14 @@ export class Singleplayer extends Scene {
     const logo = this.add.image(180, 125, "logo");
     logo.scale *= 0.7;
     const pl1 = this.add.image(1180, 300, "pl1");
-    pl1.scale *= 0.85;
+    pl1.scale *= 0.8;
     const plcomputer = this.add.image(1180, 400, "plcomputer");
-    plcomputer.scale *= 0.85;
+    plcomputer.scale *= 0.8;
     const pve = this.add.image(170, 270, "pve");
     pve.scale *= 0.5;
+    this.turn = this.add.image(1122, 298, "pl1target");
+    this.turn.name = "pl1target";
+    this.turn.scale *= 0.55;
     var difficulty;
     if (this.difficulty == 3) {
       difficulty = this.add.image(250, 290, "easy");
@@ -32,6 +50,7 @@ export class Singleplayer extends Scene {
     }
     difficulty.scale *= 0.3;
     const game = new vsCPU(this.difficulty, false);
+    this.game = game;
     const images = Array(12).fill(null);
     grid.on("pointerdown", (pointer) => {
       if (game.turn) {
@@ -41,18 +60,21 @@ export class Singleplayer extends Scene {
             images[pos].destroy();
           }
           const playerWon = game.makeMove(pos);
+          images[pos] = this.createPiece(pos);
           if (playerWon) {
             this.scene.start("GameOver", { turn: true });
             return;
           }
-          images[pos] = this.createPiece(pos);
-          const cpuPos = game.cpuMove();
-          if (game.board.board[cpuPos] > 0) {
-            images[cpuPos].destroy();
-          }
-          const cpuWon = game.makeMove(cpuPos);
-          images[cpuPos] = this.createPiece(cpuPos);
-          if (cpuWon) this.scene.start("GameOver", { turn: false });
+          const botMove = function () {
+            const cpuPos = game.cpuMove();
+            if (game.board.board[cpuPos] > 0) {
+              images[cpuPos].destroy();
+            }
+            const cpuWon = game.makeMove(cpuPos);
+            images[cpuPos] = this.createPiece(cpuPos);
+            if (cpuWon) this.scene.start("GameOver", { turn: false });
+          };
+          setTimeout(botMove.bind(this), 2000);
         }
       }
     });
@@ -87,7 +109,7 @@ export class Singleplayer extends Scene {
       d: squares[4].d + offsetY + (squares[0].d - squares[0].b),
     };
     for (var i = 0; i < 12; i++) {
-      if (i % 4 == 0) continue;
+      if (i % 4 === 0) continue;
       squares[i] = {
         a: squares[i - 1].c + offsetX,
         b: squares[i - 1].b,
@@ -100,11 +122,11 @@ export class Singleplayer extends Scene {
       const centerX = (squares[pos].a + squares[pos].c) / 2;
       const centerY = (squares[pos].b + squares[pos].d) / 2;
       var piece;
-      if (color == 1) {
+      if (color === 1) {
         piece = this.add.image(centerX, centerY, "green");
-      } else if (color == 2) {
+      } else if (color === 2) {
         piece = this.add.image(centerX, centerY, "yellow");
-      } else if (color == 3) {
+      } else if (color === 3) {
         piece = this.add.image(centerX, centerY, "red");
       }
       piece.scale *= 0.7;

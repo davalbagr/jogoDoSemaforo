@@ -45,6 +45,9 @@ export class Preloader extends Scene {
     this.load.image("green", "green.png");
     this.load.image("yellow", "yellow.png");
     this.load.image("red", "red.png");
+    this.load.image("pl1target", "pl1target.png");
+    this.load.image("pl2target", "pl2target.png");
+    this.load.image("cputarget", "cputarget.png");
   }
 
   create() {

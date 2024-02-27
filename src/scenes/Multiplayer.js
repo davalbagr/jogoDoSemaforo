@@ -21,9 +21,9 @@ export class Multiplayer extends Scene {
     home.once("pointerdown", () => {
       this.scene.start("MainMenu");
     });
-    grid.on("pointerdown", (pointer) => {
-      console.log(pointer.position);
-    });
+    // grid.on("pointerdown", (pointer) => {
+    //   console.log(pointer.position);
+    // });
 
     var squares = Array(12).fill(null);
     // tamanho do espaco branco entre quadrados

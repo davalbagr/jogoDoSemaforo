@@ -1,6 +1,6 @@
 {
-  "name": "template-esbuild",
-  "description": "A Phaser 3 template using esbuild.",
+  "name": "Jogo do semaforo",
+  "description": "",
   "version": "1.1.0",
   "main": "index.js",
   "type": "module",
@@ -8,15 +8,12 @@
     "dev": "node esbuild/dev.server.js -w",
     "build": "node esbuild/build.prod.js"
   },
-  "author": "Phaser Studio <support@phaser.io> (https://phaser.io/)",
+  "author": "David Agra, Tiago Teixiera, João Silva",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phaserjs/template-esbuild.git"
+    "url": "git+https://github.com/davalbagr/jogoDoSemaforo"
   },
-  "bugs": {
-    "url": "https://github.com/phaserjs/template-esbuild/issues"
-  },
-  "homepage": "https://github.com/phaserjs/template-esbuild#readme",
+  "homepage": "",
   "license": "MIT",
   "dependencies": {
     "phaser": "^3.80.0"
