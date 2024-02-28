@@ -171,22 +171,11 @@ export class Singleplayer extends Scene {
 class Board {
   constructor() {
     this.board = Array(12).fill(0);
-    this.green = 0;
-    this.yellow = 0;
-    this.red = 0;
   }
 
   move(pos) {
     if (pos < 0 || pos > 11 || this.board[pos] == 3) {
       return null;
-    }
-    if (this.board[pos] == 0) this.green += 1;
-    else if (this.board[pos] == 1) {
-      this.green -= 1;
-      this.yellow += 1;
-    } else if (this.board[pos] == 2) {
-      this.yellow -= 1;
-      this.red += 1;
     }
     this.board[pos] += 1;
     return this.check(pos);
@@ -272,11 +261,7 @@ class Board {
 
   *get_possible_moves() {
     for (let pos = 0; pos < 12; pos++) {
-      if (
-        (this.board[pos] == 0 && this.green < 8) ||
-        (this.board[pos] == 1 && this.yellow < 8) ||
-        (this.board[pos] == 2 && this.red < 8)
-      ) {
+      if (this.board[pos] < 3) {
         yield pos;
       }
     }
@@ -351,10 +336,6 @@ export class vsCPU {
     return score;
   }
 
-  getCurrentPlayer() {
-    return this.turn ? this.player : this.bot;
-  }
-
   makeMove(pos) {
     const t = this.board.move(pos);
     if (t != null) this.turn = !this.turn;
@@ -364,14 +345,6 @@ export class vsCPU {
   undoMove(pos) {
     this.board.board[pos] -= 1;
     this.turn = !this.turn;
-    if (this.board.board[pos] == 0) this.board.green -= 1;
-    else if (this.board.board[pos] == 1) {
-      this.board.green += 1;
-      this.board.yellow -= 1;
-    } else if (this.board.board[pos] == 2) {
-      this.board.yellow += 1;
-      this.board.red -= 1;
-    }
   }
 
   cpuMove() {
