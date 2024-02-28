@@ -171,11 +171,22 @@ export class Singleplayer extends Scene {
 class Board {
   constructor() {
     this.board = Array(12).fill(0);
+    this.green = 0;
+    this.yellow = 0;
+    this.red = 0;
   }
 
   move(pos) {
     if (pos < 0 || pos > 11 || this.board[pos] == 3) {
       return null;
+    }
+    if (this.board[pos] == 0) this.green += 1;
+    else if (this.board[pos] == 1) {
+      this.green -= 1;
+      this.yellow += 1;
+    } else if (this.board[pos] == 2) {
+      this.yellow -= 1;
+      this.red += 1;
     }
     this.board[pos] += 1;
     return this.check(pos);
@@ -259,9 +270,13 @@ class Board {
     return false;
   }
 
-  *get_possible_moves(color) {
+  *get_possible_moves() {
     for (let pos = 0; pos < 12; pos++) {
-      if (this.board[pos] + 1 === color) {
+      if (
+        (this.board[pos] == 0 && this.green < 8) ||
+        (this.board[pos] == 1 && this.yellow < 8) ||
+        (this.board[pos] == 2 && this.red < 8)
+      ) {
         yield pos;
       }
     }
@@ -272,54 +287,9 @@ class Board {
   }
 }
 
-class Player {
-  constructor(board) {
-    this.board = board;
-    this.green = 8;
-    this.yellow = 8;
-    this.red = 8;
-  }
-
-  makeMove(pos) {
-    if (this.board[pos] === 0) {
-      if (this.green === 0) {
-        return null;
-      }
-      this.green -= 1;
-    }
-    if (this.board[pos] === 1) {
-      if (this.yellow === 0) {
-        return null;
-      }
-      this.yellow -= 1;
-    }
-    if (this.board[pos] === 2) {
-      if (this.red === 0) {
-        return null;
-      }
-      this.red -= 1;
-    }
-    return this.board.move(pos);
-  }
-
-  *get_possible_moves() {
-    if (this.green > 0) {
-      yield* this.board.get_possible_moves(1);
-    }
-    if (this.yellow > 0) {
-      yield* this.board.get_possible_moves(2);
-    }
-    if (this.red > 0) {
-      yield* this.board.get_possible_moves(3);
-    }
-  }
-}
-
 export class vsCPU {
   constructor(difficulty, tossCoin = true) {
     this.board = new Board();
-    this.player = new Player(this.board);
-    this.bot = new Player(this.board);
     this.turn = true;
     this.difficulty = difficulty;
     if (tossCoin) {
@@ -352,7 +322,7 @@ export class vsCPU {
       : function (x, y) {
           return x < y;
         };
-    for (const move of this.getCurrentPlayer().get_possible_moves()) {
+    for (const move of this.board.get_possible_moves()) {
       this.makeMove(move);
       const res = this.minimax(depth - 1, alpha, beta);
       const childEvaluation = res[0];
@@ -370,7 +340,7 @@ export class vsCPU {
 
   evaluate() {
     let score = 0;
-    for (const pos of this.getCurrentPlayer().get_possible_moves()) {
+    for (const pos of this.board.get_possible_moves()) {
       if (this.makeMove(pos)) {
         score += 10000;
       }
@@ -384,7 +354,7 @@ export class vsCPU {
   }
 
   makeMove(pos) {
-    const t = this.getCurrentPlayer().makeMove(pos);
+    const t = this.board.move(pos);
     if (t != null) this.turn = !this.turn;
     return t;
   }
@@ -392,10 +362,14 @@ export class vsCPU {
   undoMove(pos) {
     this.board.board[pos] -= 1;
     this.turn = !this.turn;
-    const player = this.getCurrentPlayer();
-    if (this.board.board[pos] == 0) player.green += 1;
-    else if (this.board.board[pos] == 1) player.yellow += 1;
-    else if (this.board.board[pos] == 2) player.red += 1;
+    if (this.board.board[pos] == 0) this.board.green -= 1;
+    else if (this.board.board[pos] == 1) {
+      this.board.green += 1;
+      this.board.yellow -= 1;
+    } else if (this.board.board[pos] == 2) {
+      this.board.yellow += 1;
+      this.board.red -= 1;
+    }
   }
 
   cpuMove() {
