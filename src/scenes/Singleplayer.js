@@ -307,13 +307,15 @@ export class vsCPU {
     alpha = Number.NEGATIVE_INFINITY,
     beta = Number.POSITIVE_INFINITY,
   ) {
-    var evaluation = this.turn ? -1000000 : 1000000;
     if (this.board.is_terminal()) {
-      return [evaluation, null];
+      return [this.turn ? -1000000 : 1000000, null];
     }
     if (depth === 0) {
       return [this.evaluate(), null];
     }
+    var evaluation = this.turn
+      ? Number.NEGATIVE_INFINITY
+      : Number.POSITIVE_INFINITY;
     var best_move = null;
     let shouldReplace = this.turn
       ? function (x, y) {
