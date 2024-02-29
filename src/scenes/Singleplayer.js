@@ -21,6 +21,13 @@ export class Singleplayer extends Scene {
       this.turn = this.add.image(1122, 398, "cputarget");
       this.turn.name = "cputarget";
       this.turn.scale *= 0.55;
+      const botMove = function () {
+        const cpuPos = this.gameState.cpuMove();
+        const cpuWon = this.gameState.makeMove(cpuPos);
+        this.createPiece(cpuPos);
+        if (cpuWon) this.lost();
+      };
+      setTimeout(botMove.bind(this), 2000);
     }
   }
   won() {
@@ -54,32 +61,18 @@ export class Singleplayer extends Scene {
       difficulty = this.add.image(250, 290, "hard");
     }
     difficulty.scale *= 0.3;
-    const game = new vsCPU(this.difficulty, false);
+    const game = new vsCPU(this.difficulty);
     this.gameState = game;
     const images = Array(12).fill(null);
     grid.on("pointerdown", (pointer) => {
       if (game.turn) {
         const pos = coordToPos(pointer.position.x, pointer.position.y);
         if (pos >= 0 && game.board.board[pos] < 3) {
-          if (game.board.board[pos] > 0) {
-            images[pos].destroy();
-          }
           const playerWon = game.makeMove(pos);
-          images[pos] = this.createPiece(pos);
+          this.createPiece(pos);
           if (playerWon) {
             this.won();
-            return;
           }
-          const botMove = function () {
-            const cpuPos = game.cpuMove();
-            if (game.board.board[cpuPos] > 0) {
-              images[cpuPos].destroy();
-            }
-            const cpuWon = game.makeMove(cpuPos);
-            images[cpuPos] = this.createPiece(cpuPos);
-            if (cpuWon) this.lost();
-          };
-          setTimeout(botMove.bind(this), 2000);
         }
       }
     });
@@ -124,6 +117,9 @@ export class Singleplayer extends Scene {
     }
     this.createPiece = function createPiece(pos) {
       const color = game.board.board[pos];
+      if (color > 1) {
+        images[pos].destroy();
+      }
       const centerX = (squares[pos].a + squares[pos].c) / 2;
       const centerY = (squares[pos].b + squares[pos].d) / 2;
       var piece;
@@ -135,7 +131,7 @@ export class Singleplayer extends Scene {
         piece = this.add.image(centerX, centerY, "red");
       }
       piece.scale *= 0.7;
-      return piece;
+      images[pos] = piece;
     };
     this.createPiece = this.createPiece.bind(this);
     function coordToPos(x, y) {
@@ -281,8 +277,6 @@ export class vsCPU {
       const coinToss = Math.random();
       if (coinToss > 0.5) {
         this.turn = false;
-        const move = this.cpuMove();
-        return this.makeMove(move);
       }
     }
   }

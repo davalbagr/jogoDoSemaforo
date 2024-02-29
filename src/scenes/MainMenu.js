@@ -67,7 +67,7 @@ export class MainMenu extends Scene {
         hard.scale /= 1.2;
         easy.scale *= 1.2;
       }
-      difficulty = 3;
+      difficulty = 2;
     });
     medium.on("pointerdown", () => {
       if (difficulty == 3) {
@@ -77,7 +77,7 @@ export class MainMenu extends Scene {
         hard.scale /= 1.2;
         medium.scale *= 1.2;
       }
-      difficulty = 6;
+      difficulty = 4;
     });
     hard.on("pointerdown", () => {
       if (difficulty == 3) {
