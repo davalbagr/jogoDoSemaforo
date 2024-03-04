@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for jogodosemaforo-red-waterfall-6331 on 2024-02-23T14:51:41Z
+# fly.toml app configuration file generated for jogodosemaforo on 2024-03-04T17:53:48Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -9,14 +9,14 @@ primary_region = 'mad'
 [build]
 
 [http_service]
-internal_port = 8043
-force_https = true
-auto_stop_machines = true
-auto_start_machines = true
-min_machines_running = 0
-processes = ['app']
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
-memory = '1gb'
-cpu_kind = 'shared'
-cpus = 1
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node esbuild/dev.server.js -w",
-    "build": "node esbuild/build.prod.js"
+    "dev": "node esbuild/build.prod.js && node server.js",
+    "build": "node esbuild/build.prod.js",
+    "start": "node server.js"
   },
   "author": "David Agra, Tiago Teixiera, João Silva",
   "repository": {
@@ -16,9 +17,14 @@
   "homepage": "",
   "license": "MIT",
   "dependencies": {
-    "phaser": "^3.80.0"
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "phaser": "^3.80.0",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.2",
     "@jgoz/esbuild-plugin-livereload": "^2.0.4",
     "esbuild": "^0.20.1",
     "esbuild-plugin-clean": "^1.0.1",
