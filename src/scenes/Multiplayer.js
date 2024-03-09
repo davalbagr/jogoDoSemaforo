@@ -8,9 +8,6 @@ export class Multiplayer extends Scene {
         super("Multiplayer");
     }
 
-    shutdown() {
-        this.socket.close();
-    }
 
     update(time, delta) {
         if (this.turn === undefined) return;
@@ -34,12 +31,10 @@ export class Multiplayer extends Scene {
     }
 
     won() {
-        this.socket.close();
         this.scene.start("GameOver", {turn: true});
     }
 
     lost() {
-        this.socket.close();
         this.scene.start("GameOver", {turn: false});
     }
 
@@ -57,17 +52,12 @@ export class Multiplayer extends Scene {
         const pvp = this.add.image(170, 270, "pvp");
         pvp.scale *= 0.5;
         home.once("pointerdown", () => {
-            this.socket.close();
+            this.socket.disconnect();
             this.scene.start("MainMenu");
         });
         this.socket = io();
         this.target = undefined;
         this.turn = undefined;
-
-        this.socket.on("surrender", () => {
-            this.won();
-        });
-        const save = Array(12).fill(0);
 
         this.socket.on("update", (board, turn, hasEnded) => {
             for (let i = 0; i < 12; i++) this.createPiece(board, i);

@@ -7,12 +7,11 @@ import {createServer} from "http";
 
 const app = express();
 app.use(cors());
-app.use(cors({
-    origin: ['ws://localhost:8080', 'ws://jogodosemaforo.fly.dev']
-}));
 app.use('/', express.static('dist'));
 const http = createServer(app);
-const io = new Server(http);
+const io = new Server(http, {
+    connectionStateRecovery: {}
+});
 http.listen(8080);
 
 class Queue extends EventEmitter {
@@ -94,11 +93,15 @@ function makeMove(socket, pos) {
 function cleanup(socket) {
     const opponent = opponents[socket];
     if (opponent === undefined) {return; }
-    opponent.emit("surrender");
-    games.delete([opponent, socket]);
-    games.delete([socket, opponent]);
-    opponents.delete(opponent);
-    opponents.delete(socket);
+    const [p1, p2, game] = games[[socket, opponent]];
+    if (game === undefined) {return;}
+    if (p1 !== socket) p1.emit("update", game.board.board, false, true);
+    if (p2 !== socket) p2.emit("update", game.board.board, false, true);
+    games.delete([p1, p2]);
+    games.delete([p2, p1]);
+    opponents.delete(p1);
+    opponents.delete(p2);
+    opponent.disconnect();
 }
 
 io.on("connection", (socket) => {
