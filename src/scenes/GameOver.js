@@ -14,7 +14,7 @@ export class GameOver extends Scene {
     this.add.image(660, 384, "background");
     if (this.playerWon) {
       this.add
-        .text(612, 300, "You Won!", {
+        .text(512, 300, "You Won", {
           fontFamily: "Arial Black",
           fontSize: 64,
           color: "#ffffff",
@@ -22,10 +22,9 @@ export class GameOver extends Scene {
           strokeThickness: 8,
           align: "center",
         })
-        .setOrigin(0.5);
     } else {
       this.add
-        .text(612, 300, "You Lost", {
+        .text(512, 300, "You Lost", {
           fontFamily: "Arial Black",
           fontSize: 64,
           color: "#ffffff",
@@ -33,22 +32,11 @@ export class GameOver extends Scene {
           strokeThickness: 8,
           align: "center",
         })
-        .setOrigin(0.5);
     }
-
-    const restart = this.add
-      .text(580, 380, "Restart", {
-        fontFamily: "Arial Black",
-        fontSize: 16,
-        color: "#ffffff",
-        stroke: "#000000",
-        strokeThickness: 8,
-        align: "center",
-      })
-      .setInteractive();
-
-    restart.once("pointerdown", () => {
-      this.scene.start("MainMenu");
-    });
+      const home = this.add.image(120, 620, "home").setInteractive();
+      home.scale *= 0.7;
+      home.once("pointerdown", () => {
+          this.scene.start("MainMenu");
+      });
   }
 }
