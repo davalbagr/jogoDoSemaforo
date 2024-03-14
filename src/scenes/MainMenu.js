@@ -6,8 +6,11 @@ export class MainMenu extends Scene {
   }
 
   create() {
+    const easyDif = 1;
+    const mediumDif = 4;
+    const hardDif = 6;
     this.add.image(660, 384, "background");
-    var difficulty = 3;
+    var difficulty = easyDif;
     const logo = this.add.image(180, 125, "logo");
     logo.scale *= 0.7;
 
@@ -40,9 +43,9 @@ export class MainMenu extends Scene {
     const easy = this.add.image(930, 440, "easy").setInteractive();
     const medium = this.add.image(930, 530, "medium").setInteractive();
     const hard = this.add.image(930, 620, "hard").setInteractive();
-    easy.scale *= 0.7;
-    medium.scale = 0.65;
-    hard.scale *= 0.44;
+    easy.scale *= 0.65;
+    medium.scale *= 0.65;
+    hard.scale *= 0.45;
     login.on("pointerdown", () => {});
     leaderboard.once("pointerdown", () => {
       this.scene.start("Leaderboard");
@@ -56,25 +59,22 @@ export class MainMenu extends Scene {
     pvp.once("pointerdown", () => {
       this.scene.start("Multiplayer");
     });
-    const easyDif = 1;
-    const mediumDif = 4;
-    const hardDif = 6;
     pve.once("pointerdown", () => {
       this.scene.start("Singleplayer", { difficulty: difficulty, easyDif: easyDif, mediumDif: mediumDif });
     });
     easy.on("pointerdown", () => {
       if (difficulty === mediumDif) {
         medium.scale /= 1.2;
-        easy.scale *= 1.2;
+        easy.scale *= 1.3;
       } else if (difficulty === hardDif) {
         hard.scale /= 1.2;
-        easy.scale *= 1.2;
+        easy.scale *= 1.3;
       }
       difficulty = easyDif;
     });
     medium.on("pointerdown", () => {
       if (difficulty === easyDif) {
-        easy.scale /= 1.2;
+        easy.scale /= 1.3;
         medium.scale *= 1.2;
       } else if (difficulty === hardDif) {
         hard.scale /= 1.2;
@@ -84,7 +84,7 @@ export class MainMenu extends Scene {
     });
     hard.on("pointerdown", () => {
       if (difficulty === easyDif) {
-        easy.scale /= 1.2;
+        easy.scale /= 1.3;
         hard.scale *= 1.2;
       } else if (difficulty === mediumDif) {
         medium.scale /= 1.2;
