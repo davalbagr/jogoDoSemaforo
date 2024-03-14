@@ -41,7 +41,7 @@ export class MainMenu extends Scene {
     const medium = this.add.image(930, 530, "medium").setInteractive();
     const hard = this.add.image(930, 620, "hard").setInteractive();
     easy.scale *= 0.7;
-    medium.scale = 0.6;
+    medium.scale = 0.65;
     hard.scale *= 0.44;
     login.on("pointerdown", () => {});
     leaderboard.once("pointerdown", () => {
@@ -56,38 +56,41 @@ export class MainMenu extends Scene {
     pvp.once("pointerdown", () => {
       this.scene.start("Multiplayer");
     });
+    const easyDif = 1;
+    const mediumDif = 4;
+    const hardDif = 6;
     pve.once("pointerdown", () => {
-      this.scene.start("Singleplayer", { difficulty: difficulty });
+      this.scene.start("Singleplayer", { difficulty: difficulty, easyDif: easyDif, mediumDif: mediumDif });
     });
     easy.on("pointerdown", () => {
-      if (difficulty == 6) {
+      if (difficulty === mediumDif) {
         medium.scale /= 1.2;
         easy.scale *= 1.2;
-      } else if (difficulty == 8) {
+      } else if (difficulty === hardDif) {
         hard.scale /= 1.2;
         easy.scale *= 1.2;
       }
-      difficulty = 2;
+      difficulty = easyDif;
     });
     medium.on("pointerdown", () => {
-      if (difficulty == 3) {
+      if (difficulty === easyDif) {
         easy.scale /= 1.2;
         medium.scale *= 1.2;
-      } else if (difficulty == 8) {
+      } else if (difficulty === hardDif) {
         hard.scale /= 1.2;
         medium.scale *= 1.2;
       }
-      difficulty = 4;
+      difficulty = mediumDif;
     });
     hard.on("pointerdown", () => {
-      if (difficulty == 3) {
+      if (difficulty === easyDif) {
         easy.scale /= 1.2;
         hard.scale *= 1.2;
-      } else if (difficulty == 6) {
+      } else if (difficulty === mediumDif) {
         medium.scale /= 1.2;
         hard.scale *= 1.2;
       }
-      difficulty = 8;
+      difficulty = hardDif;
     });
   }
 }

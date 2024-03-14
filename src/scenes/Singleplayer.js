@@ -8,6 +8,8 @@ export class Singleplayer extends Scene {
 
   init(data) {
     this.difficulty = data.difficulty;
+    this.easyDif = data.easyDif;
+    this.mediumDif = data.mediumDif;
   }
 
   update(time , delta) {
@@ -54,9 +56,9 @@ export class Singleplayer extends Scene {
     this.turn.name = "pl1target";
     this.turn.scale *= 0.55;
     var difficulty;
-    if (this.difficulty === 3) {
+    if (this.difficulty === this.easyDif) {
       difficulty = this.add.image(250, 290, "easy");
-    } else if (this.difficulty === 6) {
+    } else if (this.difficulty === this.mediumDif) {
       difficulty = this.add.image(250, 290, "medium");
     } else {
       difficulty = this.add.image(250, 290, "hard");

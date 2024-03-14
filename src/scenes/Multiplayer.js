@@ -1,6 +1,6 @@
 import {Scene} from "phaser";
 import {io} from "socket.io-client";
-import {Board} from "../../game.js";
+import {Board, Game} from "../../game.js";
 
 
 export class Multiplayer extends Scene {
@@ -10,8 +10,7 @@ export class Multiplayer extends Scene {
 
 
     update(time, delta) {
-        if (this.turn === undefined) return;
-        if (this.turn) {
+        if (this.gameState.turn) {
             if (this.target !== undefined && this.target.name === "pl1target") return;
             if (this.target !== undefined) {
                 this.target.destroy();
@@ -30,11 +29,11 @@ export class Multiplayer extends Scene {
         }
     }
 
-    won() {
+    p1Won() {
         this.scene.start("GameOver", {turn: true});
     }
 
-    lost() {
+    p2Won() {
         this.scene.start("GameOver", {turn: false});
     }
 
@@ -52,25 +51,18 @@ export class Multiplayer extends Scene {
         const pvp = this.add.image(170, 270, "pvp");
         pvp.scale *= 0.5;
         home.once("pointerdown", () => {
-            this.socket.disconnect();
             this.scene.start("MainMenu");
         });
-        this.socket = io();
-        this.target = undefined;
-        this.turn = undefined;
+        this.gameState = new Game(0, false);
 
-        this.socket.on("update", (board, turn, hasEnded) => {
-            for (let i = 0; i < 12; i++) this.createPiece(board, i);
-            this.turn = turn;
-            if (hasEnded) {
-                if (this.turn) this.lost();
-                else this.won();
-            }
-        });
         grid.on("pointerdown", (pointer) => {
-            if (this.turn) {
-                const pos = coordToPos(pointer.x, pointer.y);
-                this.socket.emit("move", pos);
+            const pos = coordToPos(pointer.x, pointer.y);
+            const move = this.gameState.makeMove(pos);
+            if (move == null) return;
+            this.createPiece(pos);
+            if (move) {
+                if (this.turn) this.p2Won();
+                else this.p1Won();
             }
         });
         const images = Array(12).fill(null);
@@ -107,8 +99,8 @@ export class Multiplayer extends Scene {
                 d: squares[i - 1].d,
             };
         }
-        this.createPiece = function createPiece(board, pos) {
-            const color = board[pos];
+        this.createPiece = function createPiece(pos) {
+            const color = this.gameState.board.board[pos];
             if (images[pos] != null) {
                 images[pos].destroy();
             }
