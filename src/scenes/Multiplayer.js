@@ -1,5 +1,4 @@
 import {Scene} from "phaser";
-import {io} from "socket.io-client";
 import {Board, Game} from "../../game.js";
 
 
