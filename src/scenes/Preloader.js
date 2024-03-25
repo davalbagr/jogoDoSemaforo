@@ -7,7 +7,6 @@ export class Preloader extends Scene {
 
   init() {
     //  We loaded this image in our Boot Scene, so we can display it here
-    this.add.image(660, 384, "background");
 
     //  A simple progress bar. This is the outline of the bar.
 

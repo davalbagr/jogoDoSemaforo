@@ -1,5 +1,5 @@
 import {Scene} from "phaser";
-import {Board, Game} from "../../game.js";
+import {Game} from "../../game.js";
 
 
 export class Multiplayer extends Scene {
@@ -9,19 +9,13 @@ export class Multiplayer extends Scene {
 
 
     update(time, delta) {
-        if (this.gameState.turn) {
-            if (this.target !== undefined && this.target.name === "pl1target") return;
-            if (this.target !== undefined) {
-                this.target.destroy();
-            }
+        if (this.gameState.turn && this.target.name === "pl2target") {
+            this.target.destroy();
             this.target = this.add.image(1122, 298, "pl2target");
             this.target.name = "pl1target";
             this.target.scale *= 0.55;
-        } else {
-            if (this.target !== undefined && this.target.name === "pl2target") return;
-            if (this.target !== undefined) {
-                this.target.destroy();
-            }
+        } else if (!this.gameState.turn && this.target.name === "pl1target") {
+            this.target.destroy();
             this.target = this.add.image(1122, 398, "pl1target");
             this.target.name = "pl2target";
             this.target.scale *= 0.55;
@@ -52,6 +46,9 @@ export class Multiplayer extends Scene {
         home.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
+        this.target = this.add.image(1122, 298, "pl2target");
+        this.target.name = "pl1target";
+        this.target.scale *= 0.55;
         this.gameState = new Game(0, false);
 
         grid.on("pointerdown", (pointer) => {
