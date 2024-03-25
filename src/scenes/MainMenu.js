@@ -9,9 +9,10 @@ export class MainMenu extends Scene {
     const easyDif = 1;
     const mediumDif = 4;
     const hardDif = 6;
-    this.add.image(660, 384, "background");
+    // +340 +116
+    this.add.image(1000, 500, "background");
     var difficulty = easyDif;
-    const logo = this.add.image(180, 125, "logo");
+    const logo = this.add.image(526, 241, "logo");
     logo.scale *= 0.7;
 
     // this.add
@@ -25,24 +26,24 @@ export class MainMenu extends Scene {
     //   })
     //   .setOrigin(0.5);
 
-    const pvp = this.add.image(700, 320, "pvp").setInteractive();
+    const pvp = this.add.image(1040, 436, "pvp").setInteractive();
     pvp.scale *= 0.9;
-    const pve = this.add.image(700, 530, "pve").setInteractive();
+    const pve = this.add.image(1040, 646, "pve").setInteractive();
     pve.scale *= 0.9;
-    const login = this.add.image(1180, 130, "login").setInteractive();
+    const login = this.add.image(1520, 246, "login").setInteractive();
     login.scale *= 0.7;
     const leaderboard = this.add
-      .image(1180, 390, "leaderboard")
+      .image(1520, 506, "leaderboard")
       .setInteractive();
-    const info = this.add.image(1180, 510, "info").setInteractive();
-    const creditos = this.add.image(1180, 630, "creditos").setInteractive();
+    const info = this.add.image(1520, 626, "info").setInteractive();
+    const creditos = this.add.image(1520, 746, "creditos").setInteractive();
     info.scale *= 0.8;
     creditos.scale *= 0.8;
     leaderboard.scale *= 0.8;
-    this.add.image(80, 600, "semaforo");
-    const easy = this.add.image(930, 440, "easy").setInteractive();
-    const medium = this.add.image(930, 530, "medium").setInteractive();
-    const hard = this.add.image(930, 620, "hard").setInteractive();
+    this.add.image(420, 716, "semaforo");
+    const easy = this.add.image(1270, 556, "easy").setInteractive();
+    const medium = this.add.image(1270, 646, "medium").setInteractive();
+    const hard = this.add.image(1270, 736, "hard").setInteractive();
     easy.scale *= 0.65;
     medium.scale *= 0.65;
     hard.scale *= 0.45;

@@ -16,12 +16,12 @@ export class Singleplayer extends Scene {
     // this.turn.rotation += 0.02;
     if (this.gameState.turn && this.turn.name === "cputarget") {
       this.turn.destroy();
-      this.turn = this.add.image(1122, 298, "pl2target");
+      this.turn = this.add.image(1122+340, 298+116, "pl2target");
       this.turn.name = "pl1target";
       this.turn.scale *= 0.55;
     } else if (!this.gameState.turn && this.turn.name === "pl1target") {
       this.turn.destroy();
-      this.turn = this.add.image(1122, 398, "cputarget");
+      this.turn = this.add.image(1122+340, 398+116, "cputarget");
       this.turn.name = "cputarget";
       this.turn.scale *= 0.55;
       const botMove = function () {
@@ -40,28 +40,28 @@ export class Singleplayer extends Scene {
     this.scene.start("GameOver", { turn: false });
   }
   create() {
-    this.add.image(660, 384, "background");
-    const home = this.add.image(120, 620, "home").setInteractive();
+    this.add.image(660+340, 384+116, "background");
+    const home = this.add.image(120+340, 620+116, "home").setInteractive();
     home.scale *= 0.7;
-    const grid = this.add.image(700, 380, "grid").setInteractive();
-    const logo = this.add.image(180, 125, "logo");
+    const grid = this.add.image(700+340, 380+116, "grid").setInteractive();
+    const logo = this.add.image(526, 241, "logo");
     logo.scale *= 0.7;
-    const pl1 = this.add.image(1180, 300, "pl1");
+    const pl1 = this.add.image(1180+340, 300+116, "pl1");
     pl1.scale *= 0.8;
-    const plcomputer = this.add.image(1180, 400, "plcomputer");
+    const plcomputer = this.add.image(1180+340, 400+116, "plcomputer");
     plcomputer.scale *= 0.8;
-    const pve = this.add.image(170, 270, "pve");
+    const pve = this.add.image(170+340, 270+116, "pve");
     pve.scale *= 0.5;
-    this.turn = this.add.image(1122, 298, "pl2target");
+    this.turn = this.add.image(1122+340, 298+116, "pl2target");
     this.turn.name = "pl1target";
     this.turn.scale *= 0.55;
     var difficulty;
     if (this.difficulty === this.easyDif) {
-      difficulty = this.add.image(250, 290, "easy");
+      difficulty = this.add.image(250+340, 290+116, "easy");
     } else if (this.difficulty === this.mediumDif) {
-      difficulty = this.add.image(250, 290, "medium");
+      difficulty = this.add.image(250+340, 290+116, "medium");
     } else {
-      difficulty = this.add.image(250, 290, "hard");
+      difficulty = this.add.image(250+340, 290+116, "hard");
     }
     difficulty.scale *= 0.3;
     const game = new Game(this.difficulty);
@@ -92,10 +92,10 @@ export class Singleplayer extends Scene {
     const offsetX = 6;
     // coordenadas do primeiro quadrado
     squares[0] = {
-      a: 375,
-      b: 133,
-      c: 532,
-      d: 290,
+      a: 375+340,
+      b: 133+116,
+      c: 532+340,
+      d: 290+116,
     };
     squares[4] = {
       a: squares[0].a,

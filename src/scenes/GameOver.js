@@ -10,11 +10,10 @@ export class GameOver extends Scene {
   }
 
   create() {
-    this.cameras.main.setBackgroundColor(0xff0000);
-    this.add.image(660, 384, "background");
+    this.add.image(660+340, 384+116, "background");
     if (this.playerWon) {
       this.add
-        .text(512, 300, "You Won", {
+        .text(512+340, 300+116, "You Won", {
           fontFamily: "Arial Black",
           fontSize: 64,
           color: "#ffffff",
@@ -24,7 +23,7 @@ export class GameOver extends Scene {
         })
     } else {
       this.add
-        .text(512, 300, "You Lost", {
+        .text(512+340, 300+116, "You Lost", {
           fontFamily: "Arial Black",
           fontSize: 64,
           color: "#ffffff",
@@ -33,7 +32,7 @@ export class GameOver extends Scene {
           align: "center",
         })
     }
-      const home = this.add.image(120, 620, "home").setInteractive();
+      const home = this.add.image(120+340, 620+116, "home").setInteractive();
       home.scale *= 0.7;
       home.once("pointerdown", () => {
           this.scene.start("MainMenu");

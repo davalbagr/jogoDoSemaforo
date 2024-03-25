@@ -11,12 +11,12 @@ export class Multiplayer extends Scene {
     update(time, delta) {
         if (this.gameState.turn && this.target.name === "pl2target") {
             this.target.destroy();
-            this.target = this.add.image(1122, 298, "pl2target");
+            this.target = this.add.image(1122+340, 298+116, "pl2target");
             this.target.name = "pl1target";
             this.target.scale *= 0.55;
         } else if (!this.gameState.turn && this.target.name === "pl1target") {
             this.target.destroy();
-            this.target = this.add.image(1122, 398, "pl1target");
+            this.target = this.add.image(1122+340, 398+116, "pl1target");
             this.target.name = "pl2target";
             this.target.scale *= 0.55;
         }
@@ -31,22 +31,22 @@ export class Multiplayer extends Scene {
     }
 
     create() {
-        this.add.image(660, 384, "background");
-        const home = this.add.image(120, 620, "home").setInteractive();
+        this.add.image(660+340, 384+116, "background");
+        const home = this.add.image(120+340, 620+116, "home").setInteractive();
         home.scale *= 0.7;
-        const grid = this.add.image(700, 380, "grid").setInteractive();
-        const logo = this.add.image(180, 125, "logo");
+        const grid = this.add.image(700+340, 380+116, "grid").setInteractive();
+        const logo = this.add.image(526, 241, "logo");
         logo.scale *= 0.7;
-        const pl1 = this.add.image(1180, 300, "pl1");
+        const pl1 = this.add.image(1180+340, 300+116, "pl1");
         pl1.scale *= 0.8;
-        const pl2 = this.add.image(1180, 400, "pl2");
+        const pl2 = this.add.image(1180+340, 400+116, "pl2");
         pl2.scale *= 0.8;
-        const pvp = this.add.image(170, 270, "pvp");
+        const pvp = this.add.image(170+340, 270+116, "pvp");
         pvp.scale *= 0.5;
         home.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
-        this.target = this.add.image(1122, 298, "pl2target");
+        this.target = this.add.image(1122+340, 298+116, "pl2target");
         this.target.name = "pl1target";
         this.target.scale *= 0.55;
         this.gameState = new Game(0, false);
@@ -69,10 +69,10 @@ export class Multiplayer extends Scene {
         const offsetX = 6;
         // coordenadas do primeiro quadrado
         squares[0] = {
-            a: 375,
-            b: 133,
-            c: 532,
-            d: 290,
+            a: 375+340,
+            b: 133+116,
+            c: 532+340,
+            d: 290+116,
         };
         squares[4] = {
             a: squares[0].a,

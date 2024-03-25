@@ -12,8 +12,8 @@ import { Leaderboard } from "./scenes/Leaderboard";
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {
   type: Phaser.AUTO,
-  width: 1320,
-  height: 765,
+  width: 2000,
+  height: 1000,
   parent: "game-container",
   backgroundColor: "#ffffff",
   scale: {
