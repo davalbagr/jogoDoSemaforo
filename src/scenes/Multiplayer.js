@@ -49,7 +49,6 @@ export class Multiplayer extends Scene {
         this.gameState = new Game(0, false);
 
         grid.on("pointerdown", (pointer) => {
-            console.log(pointer.x, pointer.y);
             const pos = coordToPos(pointer.x, pointer.y);
             const move = this.gameState.makeMove(pos);
             if (move == null) return;
