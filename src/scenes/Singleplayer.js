@@ -60,6 +60,7 @@ export class Singleplayer extends Scene {
         this.turnComp = this.add.image(1575, 398 + 116+5, "cputarget");
         this.turnComp.setVisible(false);
         this.turnComp.scale = 0.65;
+        this.readyMove = true;
         let difficulty;
         if (this.difficulty === this.easyDif) {
             difficulty = this.add.image(530, 420, "easy");

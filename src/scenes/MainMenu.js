@@ -30,7 +30,9 @@ export class MainMenu extends Scene {
     easy.scale = 0.7;
     medium.scale = 0.7;
     hard.scale = 0.5;
-    login.on("pointerdown", () => {});
+    login.on("pointerdown", () => {
+      this.scene.start("Login");
+    });
     leaderboard.once("pointerdown", () => {
       this.scene.start("Leaderboard");
     });
