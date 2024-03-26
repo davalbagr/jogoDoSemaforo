@@ -103,7 +103,7 @@ export class Board {
 }
 
 export class Game {
-    constructor(difficulty = 3, tossCoin = true) {
+    constructor(difficulty, tossCoin = true) {
         this.board = new Board();
         this.turn = true;
         this.difficulty = difficulty;
@@ -166,7 +166,7 @@ export class Game {
 
     makeMove(pos) {
         const t = this.board.move(pos);
-        if (t != null) this.turn = !this.turn;
+        if (t !== null) this.turn = !this.turn;
         return t;
     }
 

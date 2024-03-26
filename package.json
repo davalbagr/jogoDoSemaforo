@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node esbuild/build.prod.js && node server.js",
+    "dev": "node esbuild/dev.server.js -w",
     "build": "node esbuild/build.prod.js",
     "start": "node server.js"
   },

@@ -1,166 +1,171 @@
-import { Scene } from "phaser";
-import { Game } from "../../game.js";
+import {Scene} from "phaser";
+import {Game} from "../../game.js";
 
 export class Singleplayer extends Scene {
-  constructor() {
-    super("Singleplayer");
-  }
-
-  init(data) {
-    this.difficulty = data.difficulty;
-    this.easyDif = data.easyDif;
-    this.mediumDif = data.mediumDif;
-  }
-
-  update(time , delta) {
-    // this.turn.rotation += 0.02;
-    if (this.gameState.turn && this.turn.name === "cputarget") {
-      this.turn.destroy();
-      this.turn = this.add.image(1122+340, 298+116, "pl2target");
-      this.turn.name = "pl1target";
-      this.turn.scale *= 0.55;
-    } else if (!this.gameState.turn && this.turn.name === "pl1target") {
-      this.turn.destroy();
-      this.turn = this.add.image(1122+340, 398+116, "cputarget");
-      this.turn.name = "cputarget";
-      this.turn.scale *= 0.55;
-      const botMove = function () {
-        const cpuPos = this.gameState.cpuMove();
-        const cpuWon = this.gameState.makeMove(cpuPos);
-        this.createPiece(cpuPos);
-        if (cpuWon) this.lost();
-      };
-      setTimeout(botMove.bind(this), 2000);
+    constructor() {
+        super("Singleplayer");
     }
-  }
-  won() {
-    this.scene.start("GameOver", { turn: true });
-  }
-  lost() {
-    this.scene.start("GameOver", { turn: false });
-  }
-  create() {
-    this.add.image(660+340, 384+116, "background");
-    const home = this.add.image(120+340, 620+116, "home").setInteractive();
-    home.scale *= 0.7;
-    const grid = this.add.image(700+340, 380+116, "grid").setInteractive();
-    const logo = this.add.image(526, 241, "logo");
-    logo.scale *= 0.7;
-    const pl1 = this.add.image(1180+340, 300+116, "pl1");
-    pl1.scale *= 0.8;
-    const plcomputer = this.add.image(1180+340, 400+116, "plcomputer");
-    plcomputer.scale *= 0.8;
-    const pve = this.add.image(170+340, 270+116, "pve");
-    pve.scale *= 0.5;
-    this.turn = this.add.image(1122+340, 298+116, "pl2target");
-    this.turn.name = "pl1target";
-    this.turn.scale *= 0.55;
-    var difficulty;
-    if (this.difficulty === this.easyDif) {
-      difficulty = this.add.image(250+340, 290+116, "easy");
-    } else if (this.difficulty === this.mediumDif) {
-      difficulty = this.add.image(250+340, 290+116, "medium");
-    } else {
-      difficulty = this.add.image(250+340, 290+116, "hard");
+
+    init(data) {
+        this.difficulty = data.difficulty;
+        this.easyDif = data.easyDif;
+        this.mediumDif = data.mediumDif;
     }
-    difficulty.scale *= 0.3;
-    const game = new Game(this.difficulty);
-    this.gameState = game;
-    const images = Array(12).fill(null);
-    grid.on("pointerdown", (pointer) => {
-      if (game.turn) {
-        const pos = coordToPos(pointer.position.x, pointer.position.y);
-        if (pos >= 0 && game.board.board[pos] < 3) {
-          const playerWon = game.makeMove(pos);
-          this.createPiece(pos);
-          if (playerWon) {
-            this.won();
-          }
+
+    update(time, delta) {
+        // this.turn.rotation += 0.02;
+        if (this.gameState.turn) {
+            this.turnComp.setVisible(false);
+            this.turnPlayer.setVisible(true);
+            this.readyMove = true;
+        } else if (!this.gameState.turn) {
+            this.turnPlayer.setVisible(false);
+            this.turnComp.setVisible(true);
+            const botMove = function ()
+            {
+                const cpuPos = this.gameState.cpuMove();
+                const cpuWon = this.gameState.makeMove(cpuPos);
+                this.createPiece(cpuPos);
+                if (cpuWon) this.lost();
+            }
+            if (this.readyMove) {
+                this.time.delayedCall(2000, botMove.bind(this));
+                this.readyMove = false;
+            }
         }
-      }
-    });
-    home.once("pointerdown", () => {
-      this.scene.start("MainMenu");
-    });
-
-    // Seccao para detetar movimentos na tela de jogo
-
-    // quadrados da tela de jogo
-    var squares = Array(12).fill(null);
-    // tamanho do espaco branco entre quadrados
-    const offsetY = 9;
-    const offsetX = 6;
-    // coordenadas do primeiro quadrado
-    squares[0] = {
-      a: 375+340,
-      b: 133+116,
-      c: 532+340,
-      d: 290+116,
-    };
-    squares[4] = {
-      a: squares[0].a,
-      b: squares[0].b + offsetY + (squares[0].d - squares[0].b),
-      c: squares[0].c,
-      d: squares[0].d + offsetY + (squares[0].d - squares[0].b),
-    };
-    squares[8] = {
-      a: squares[4].a,
-      b: squares[4].b + offsetY + (squares[0].d - squares[0].b),
-      c: squares[4].c,
-      d: squares[4].d + offsetY + (squares[0].d - squares[0].b),
-    };
-    for (var i = 0; i < 12; i++) {
-      if (i % 4 === 0) continue;
-      squares[i] = {
-        a: squares[i - 1].c + offsetX,
-        b: squares[i - 1].b,
-        c: squares[i - 1].c + offsetX + (squares[0].c - squares[0].a),
-        d: squares[i - 1].d,
-      };
     }
-    this.createPiece = function createPiece(pos) {
-      const color = game.board.board[pos];
-      if (color > 1) {
-        images[pos].destroy();
-      }
-      const centerX = (squares[pos].a + squares[pos].c) / 2;
-      const centerY = (squares[pos].b + squares[pos].d) / 2;
-      let piece;
-      if (color === 1) {
-        piece = this.add.image(centerX, centerY, "green");
-      } else if (color === 2) {
-        piece = this.add.image(centerX, centerY, "yellow");
-      } else if (color === 3) {
-        piece = this.add.image(centerX, centerY, "red");
-      }
-      piece.scale *= 0.7;
-      images[pos] = piece;
-    };
-    this.createPiece = this.createPiece.bind(this);
-    function coordToPos(x, y) {
-      function isInsideSquare(x1, y1, x2, y2, px, py) {
-        const minX = Math.min(x1, x2);
-        const maxX = Math.max(x1, x2);
-        const minY = Math.min(y1, y2);
-        const maxY = Math.max(y1, y2);
 
-        return px >= minX && px <= maxX && py >= minY && py <= maxY;
-      }
-      for (var i = 0; i < 12; i++) {
-        if (
-          isInsideSquare(
-            squares[i].a,
-            squares[i].b,
-            squares[i].c,
-            squares[i].d,
-            x,
-            y,
-          )
-        ) {
-          return i;
+    won() {
+        this.scene.start("GameOver", {turn: true});
+    }
+
+    lost() {
+        this.scene.start("GameOver", {turn: false});
+    }
+
+    create() {
+        const background = this.add.image(1000, 500, "background");
+        background.scale = 1.28;
+        const home = this.add.image(310, 800, "home").setInteractive();
+        const grid = this.add.image(1080, 380 + 116, "grid").setInteractive();
+        grid.scale = 1.2;
+        const logo = this.add.image(422, 180, "logo");
+        const pl1 = this.add.image(1650, 400, "pl1");
+        const plcomputer = this.add.image(1650, 520, "plcomputer");
+        const pve = this.add.image(420, 270 + 116, "pve");
+        pve.scale = 0.7;
+        this.turnPlayer = this.add.image(1575, 298 + 116 - 17, "pl2target");
+        this.turnPlayer.setVisible(false);
+        this.turnPlayer.scale = 0.65;
+        this.turnComp = this.add.image(1575, 398 + 116+5, "cputarget");
+        this.turnComp.setVisible(false);
+        this.turnComp.scale = 0.65;
+        let difficulty;
+        if (this.difficulty === this.easyDif) {
+            difficulty = this.add.image(530, 420, "easy");
+        } else if (this.difficulty === this.mediumDif) {
+            difficulty = this.add.image(530, 420, "medium");
+        } else {
+            difficulty = this.add.image(530, 420, "hard");
         }
-      }
-      return -1;
+        difficulty.scale = 0.4;
+        this.gameState = new Game(this.difficulty);
+        const images = Array(12).fill(null);
+        grid.on("pointerdown", (pointer) => {
+            if (!this.gameState.turn) return;
+            const pos = coordToPos(pointer.position.x, pointer.position.y);
+            if (pos >= 0 && this.gameState.board.board[pos] < 3) {
+                const playerWon = this.gameState.makeMove(pos);
+                this.createPiece(pos);
+                if (playerWon) {
+                    this.won();
+                }
+            }
+        });
+        home.once("pointerdown", () => {
+            this.scene.start("MainMenu");
+        });
+
+        // Seccao para detetar movimentos na tela de jogo
+
+        // quadrados da tela de jogo
+        var squares = Array(12).fill(null);
+        // tamanho do espaco branco entre quadrados
+        const offsetY = 9;
+        const offsetX = 6;
+        // coordenadas do primeiro quadrado
+        squares[0] = {
+            a: 690,
+            b: 202,
+            c: 879,
+            d: 389,
+        };
+        squares[4] = {
+            a: squares[0].a,
+            b: squares[0].b + offsetY + (squares[0].d - squares[0].b),
+            c: squares[0].c,
+            d: squares[0].d + offsetY + (squares[0].d - squares[0].b),
+        };
+        squares[8] = {
+            a: squares[4].a,
+            b: squares[4].b + offsetY + (squares[0].d - squares[0].b),
+            c: squares[4].c,
+            d: squares[4].d + offsetY + (squares[0].d - squares[0].b),
+        };
+        for (var i = 0; i < 12; i++) {
+            if (i % 4 === 0) continue;
+            squares[i] = {
+                a: squares[i - 1].c + offsetX,
+                b: squares[i - 1].b,
+                c: squares[i - 1].c + offsetX + (squares[0].c - squares[0].a),
+                d: squares[i - 1].d,
+            };
+        }
+        this.createPiece = function createPiece(pos) {
+            const color = this.gameState.board.board[pos];
+            if (color > 1) {
+                images[pos].destroy();
+            }
+            const centerX = (squares[pos].a + squares[pos].c) / 2;
+            const centerY = (squares[pos].b + squares[pos].d) / 2;
+            let piece;
+            if (color === 1) {
+                piece = this.add.image(centerX, centerY, "green");
+            } else if (color === 2) {
+                piece = this.add.image(centerX, centerY, "yellow");
+            } else if (color === 3) {
+                piece = this.add.image(centerX, centerY, "red");
+            }
+            piece.scale = 0.9;
+            images[pos] = piece;
+        };
+        this.createPiece = this.createPiece.bind(this);
+
+        function coordToPos(x, y) {
+            function isInsideSquare(x1, y1, x2, y2, px, py) {
+                const minX = Math.min(x1, x2);
+                const maxX = Math.max(x1, x2);
+                const minY = Math.min(y1, y2);
+                const maxY = Math.max(y1, y2);
+
+                return px >= minX && px <= maxX && py >= minY && py <= maxY;
+            }
+
+            for (var i = 0; i < 12; i++) {
+                if (
+                    isInsideSquare(
+                        squares[i].a,
+                        squares[i].b,
+                        squares[i].c,
+                        squares[i].d,
+                        x,
+                        y,
+                    )
+                ) {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
-  }
 }

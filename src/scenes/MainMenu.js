@@ -10,43 +10,26 @@ export class MainMenu extends Scene {
     const mediumDif = 4;
     const hardDif = 6;
     // +340 +116
-    this.add.image(1000, 500, "background");
-    var difficulty = easyDif;
-    const logo = this.add.image(526, 241, "logo");
-    logo.scale *= 0.7;
-
-    // this.add
-    //   .text(512, 260, "Main Menu", {
-    //     fontFamily: "Arial Black",
-    //     fontSize: 38,
-    //     color: "#ffffff",
-    //     stroke: "#000000",
-    //     strokeThickness: 8,
-    //     align: "center",
-    //   })
-    //   .setOrigin(0.5);
-
+    const background = this.add.image(1000, 500, "background");
+    background.scale = 1.28;
+    let difficulty = easyDif;
+    const logo = this.add.image(422, 180, "logo");
     const pvp = this.add.image(1040, 436, "pvp").setInteractive();
-    pvp.scale *= 0.9;
     const pve = this.add.image(1040, 646, "pve").setInteractive();
-    pve.scale *= 0.9;
-    const login = this.add.image(1520, 246, "login").setInteractive();
-    login.scale *= 0.7;
+    const login = this.add.image(1670, 166, "login").setInteractive();
     const leaderboard = this.add
-      .image(1520, 506, "leaderboard")
+      .image(1670, 550, "leaderboard")
       .setInteractive();
-    const info = this.add.image(1520, 626, "info").setInteractive();
-    const creditos = this.add.image(1520, 746, "creditos").setInteractive();
-    info.scale *= 0.8;
-    creditos.scale *= 0.8;
-    leaderboard.scale *= 0.8;
-    this.add.image(420, 716, "semaforo");
-    const easy = this.add.image(1270, 556, "easy").setInteractive();
-    const medium = this.add.image(1270, 646, "medium").setInteractive();
-    const hard = this.add.image(1270, 736, "hard").setInteractive();
-    easy.scale *= 0.65;
-    medium.scale *= 0.65;
-    hard.scale *= 0.45;
+    const info = this.add.image(1670, 690, "info").setInteractive();
+    const creditos = this.add.image(1670, 830, "creditos").setInteractive();
+    const semaforo = this.add.image(250, 790, "semaforo");
+    semaforo.scale = 1.2;
+    const easy = this.add.image(1300, 556, "easy").setInteractive();
+    const medium = this.add.image(1300, 646, "medium").setInteractive();
+    const hard = this.add.image(1300, 736, "hard").setInteractive();
+    easy.scale = 0.7;
+    medium.scale = 0.7;
+    hard.scale = 0.5;
     login.on("pointerdown", () => {});
     leaderboard.once("pointerdown", () => {
       this.scene.start("Leaderboard");
