@@ -34,6 +34,7 @@ const builder = async () => {
       copy({
         assets: [
           { from: "./public/index.html", to: "./" },
+          {from : "./public/pleaserotate.min.js", to: "./"},
           { from: "./public/style.css", to: "./" },
           { from: "./public/favicon.ico", to: "./" },
           { from: "./public/favicon.png", to: "./" },
