@@ -10,11 +10,11 @@ export class GameOver extends Scene {
     }
 
     create() {
-        const background = this.add.image(1000, 500, "background");
+        const background = this.add.image(1000-47, 500, "background");
         background.scale = 1.28;
         if (this.playerWon) {
             this.add
-                .text(512 + 340, 300 + 116, "You Won", {
+                .text(512 + 340-47, 300 + 116, "You Won", {
                     fontFamily: "Arial Black",
                     fontSize: 64,
                     color: "#ffffff",
@@ -24,7 +24,7 @@ export class GameOver extends Scene {
                 })
         } else {
             this.add
-                .text(512 + 340, 300 + 116, "You Lost", {
+                .text(512 + 340-47, 300 + 116, "You Lost", {
                     fontFamily: "Arial Black",
                     fontSize: 64,
                     color: "#ffffff",

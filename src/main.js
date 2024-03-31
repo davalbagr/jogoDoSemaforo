@@ -13,8 +13,8 @@ import {Login} from "./scenes/Login.js";
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {
   type: Phaser.AUTO,
-  width: 2000,
-  height: 1000,
+  width: 1906,
+  height: 996,
   parent: "game-container",
   backgroundColor: "#ffffff",
   scale: {

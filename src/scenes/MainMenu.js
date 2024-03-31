@@ -9,23 +9,23 @@ export class MainMenu extends Scene {
     const easyDif = 1;
     const mediumDif = 4;
     const hardDif = 6;
-    const background = this.add.image(1000, 500, "background");
+    const background = this.add.image(1000-47, 500, "background");
     background.scale = 1.28;
     let difficulty = easyDif;
-    const logo = this.add.image(422, 180, "logo");
-    const pvp = this.add.image(1040, 436, "pvp").setInteractive();
-    const pve = this.add.image(1040, 646, "pve").setInteractive();
-    const login = this.add.image(1670, 166, "login").setInteractive();
+    const logo = this.add.image(422-47, 180, "logo");
+    const pvp = this.add.image(1040-47, 436, "pvp").setInteractive();
+    const pve = this.add.image(1040-47, 646, "pve").setInteractive();
+    const login = this.add.image(1670-47, 166, "login").setInteractive();
     const leaderboard = this.add
-      .image(1670, 550, "leaderboard")
+      .image(1670-47, 550, "leaderboard")
       .setInteractive();
-    const info = this.add.image(1670, 690, "info").setInteractive();
-    const creditos = this.add.image(1670, 830, "creditos").setInteractive();
-    const semaforo = this.add.image(250, 790, "semaforo");
+    const info = this.add.image(1670-47, 690, "info").setInteractive();
+    const creditos = this.add.image(1670-47, 830, "creditos").setInteractive();
+    const semaforo = this.add.image(250-47, 790, "semaforo");
     semaforo.scale = 1.2;
-    const easy = this.add.image(1300, 556, "easy").setInteractive();
-    const medium = this.add.image(1300, 646, "medium").setInteractive();
-    const hard = this.add.image(1300, 736, "hard").setInteractive();
+    const easy = this.add.image(1300-47, 556, "easy").setInteractive();
+    const medium = this.add.image(1300-47, 646, "medium").setInteractive();
+    const hard = this.add.image(1300-47, 736, "hard").setInteractive();
     easy.scale = 0.8;
     medium.scale = 0.7;
     hard.scale = 0.5;

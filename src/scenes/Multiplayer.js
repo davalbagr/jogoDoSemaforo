@@ -27,23 +27,23 @@ export class Multiplayer extends Scene {
     }
 
     create() {
-        const background = this.add.image(1000, 500, "background");
+        const background = this.add.image(1000-47, 500, "background");
         background.scale = 1.28;
-        const home = this.add.image(310, 800, "home").setInteractive();
-        const grid = this.add.image(1080, 380 + 116, "grid").setInteractive();
+        const home = this.add.image(310-47, 800, "home").setInteractive();
+        const grid = this.add.image(1080-47, 380 + 116, "grid").setInteractive();
         grid.scale = 1.2;
-        const logo = this.add.image(422, 180, "logo");
-        const pl1 = this.add.image(1650, 400, "pl1");
-        const pl2 = this.add.image(1650, 520, "pl2");
-        const pvp = this.add.image(430, 270+116, "pvp");
+        const logo = this.add.image(422-47, 180, "logo");
+        const pl1 = this.add.image(1650-47, 400, "pl1");
+        const pl2 = this.add.image(1650-47, 520, "pl2");
+        const pvp = this.add.image(430-47, 270+116, "pvp");
         pvp.scale = 0.7;
         home.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
-        this.turnPlayer1 = this.add.image(1575, 298 + 116 - 17, "pl2target");
+        this.turnPlayer1 = this.add.image(1575-47, 298 + 116 - 17, "pl2target");
         this.turnPlayer1.setVisible(false);
         this.turnPlayer1.scale = 0.65;
-        this.turnPlayer2 = this.add.image(1575, 398 + 116+5, "pl1target");
+        this.turnPlayer2 = this.add.image(1575-47, 398 + 116+5, "pl1target");
         this.turnPlayer2.setVisible(false);
         this.turnPlayer2.scale = 0.65;
         this.gameState = new Game(0, false);
@@ -66,9 +66,9 @@ export class Multiplayer extends Scene {
         const offsetX = 6;
         // coordenadas do primeiro quadrado
         squares[0] = {
-            a: 690,
+            a: 690-47,
             b: 202,
-            c: 879,
+            c: 879-47,
             d: 389,
         };
         squares[4] = {
