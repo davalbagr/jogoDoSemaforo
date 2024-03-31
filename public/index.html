@@ -1,17 +1,40 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/style.css" />
-        <title>Jogo do semaforo</title>
-    </head>
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/x-icon" href="https://www.hypatiamat.com/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, target-densityDpi=device-dpi">
+    <link rel="stylesheet" href="/style.css"/>
+    <title>Jogo do Semaforo - Jogos - Hypatiamat</title>
+    <style>
+        /* style the elements with CSS */
+        #pleaserotate-graphic {
+            fill: #fff;
+        }
 
-    <body>
-        <div id="app">
-            <div id="game-container"></div>
-        </div>
-        <script type="module" src="./bundle.min.js"></script>
-    </body>
+        #pleaserotate-backdrop {
+            color: #fff;
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+<script>
+    PleaseRotateOptions = {
+        onlyMobile: true,
+        forcePortrait: false,
+        message: "Por Favor Rode o Ecrã",
+        allowClickBypass: false,
+        subMessage: ""
+        //subMessage: "(ou clique para continuar)",
+        //allowClickBypass: true
+    }
+</script>
+<script src="pleaserotate.js"></script>
+<div id="app">
+    <div id="game-container"></div>
+</div>
+<script type="module" src="./bundle.min.js"></script>
+</body>
 </html>
