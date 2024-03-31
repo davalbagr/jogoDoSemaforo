@@ -6,7 +6,6 @@ export class Leaderboard extends Scene {
   }
 
   create() {
-    // +340 +116
     const background = this.add.image(1000, 500, "background");
     background.scale = 1.28;
     const logo = this.add.image(422, 180, "logo");

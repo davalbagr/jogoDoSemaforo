@@ -9,7 +9,6 @@ export class MainMenu extends Scene {
     const easyDif = 1;
     const mediumDif = 4;
     const hardDif = 6;
-    // +340 +116
     const background = this.add.image(1000, 500, "background");
     background.scale = 1.28;
     let difficulty = easyDif;
@@ -27,7 +26,7 @@ export class MainMenu extends Scene {
     const easy = this.add.image(1300, 556, "easy").setInteractive();
     const medium = this.add.image(1300, 646, "medium").setInteractive();
     const hard = this.add.image(1300, 736, "hard").setInteractive();
-    easy.scale = 0.7;
+    easy.scale = 0.8;
     medium.scale = 0.7;
     hard.scale = 0.5;
     login.on("pointerdown", () => {

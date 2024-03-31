@@ -21,6 +21,9 @@ const config = {
     mode: Phaser.Scale.LANDSCAPE,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
+  dom: {
+    createContainer: true
+  },
   scene: [
     Boot,
     Preloader,
