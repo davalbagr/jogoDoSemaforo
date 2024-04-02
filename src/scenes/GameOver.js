@@ -33,7 +33,7 @@ export class GameOver extends Scene {
                     align: "center",
                 })
         }
-        const home = this.add.image(310, 800, "home").setInteractive();
+        const home = this.add.image(310-47, 800, "home").setInteractive();
         home.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
