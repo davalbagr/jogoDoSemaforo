@@ -18,7 +18,7 @@ const config = {
   parent: "game-container",
   backgroundColor: "#ffffff",
   scale: {
-    mode: Phaser.Scale.LANDSCAPE,
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   dom: {

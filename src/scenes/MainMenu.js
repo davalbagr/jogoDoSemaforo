@@ -77,11 +77,5 @@ export class MainMenu extends Scene {
       }
       difficulty = hardDif;
     });
-
-
-    this.scale.on('resize', (gameSize, baseSize, displaySize, previousWidth, previousHeight) => {
-      background.x += (baseSize.width - previousWidth);
-      background.y += (baseSize.height - previousHeight);
-    })
   }
 }
