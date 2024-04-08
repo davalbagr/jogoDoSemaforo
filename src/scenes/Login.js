@@ -21,7 +21,7 @@ export class Login extends Scene {
         login.on("pointerdown", () => {
 
         });
-        const home = this.add.image(310-47, 800, "home").setInteractive();
+        const home = this.add.image(310-47, 800, "home").setInteractive({ useHandCursor: true });
         home.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });

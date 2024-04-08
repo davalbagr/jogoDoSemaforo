@@ -39,8 +39,8 @@ export class Singleplayer extends Scene {
 
     wonLostHelper() {
         this.grid.disableInteractive();
-        const sim = this.add.image(280, 480 + 116, "green").setInteractive();
-        const nao = this.add.image(465, 480 + 116, "red").setInteractive();
+        const sim = this.add.image(280, 480 + 116, "green").setInteractive({ useHandCursor: true });
+        const nao = this.add.image(465, 480 + 116, "red").setInteractive({ useHandCursor: true });
         sim.scale = nao.scale = 0.5
         // function sim and nao interactive
 
@@ -101,8 +101,8 @@ export class Singleplayer extends Scene {
     create() {
         const background = this.add.image(1000 - 47, 500, "background");
         background.scale = 1.28;
-        const home = this.add.image(310 - 47, 800, "home").setInteractive();
-        const grid = this.add.image(1080 - 47, 380 + 116, "grid").setInteractive();
+        const home = this.add.image(310 - 47, 800, "home").setInteractive({ useHandCursor: true });
+        const grid = this.add.image(1080 - 47, 380 + 116, "grid").setInteractive({ useHandCursor: true });
         grid.scale = 1.2;
         this.grid = grid;
         const logo = this.add.image(422 - 47, 180, "logo");
