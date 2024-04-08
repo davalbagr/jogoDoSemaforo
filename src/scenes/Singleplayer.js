@@ -36,11 +36,97 @@ export class Singleplayer extends Scene {
     }
 
     won() {
-        this.scene.start("GameOver", {turn: true});
+	this.add
+                .text(280, 330 + 116, "Tu ganhaste!\nQueres jogar mais?", {
+                    fontFamily: "Arial Black",
+                    fontSize: 28,
+                    color: "#ffffff",
+                    stroke: "#000000",
+                    strokeThickness: 8,
+                    align: "center",
+                })
+	
+	
+	const sim = this.add.image(280, 480 + 116, "green").setInteractive();
+	const nao = this.add.image(465, 480 + 116, "red").setInteractive();
+	sim.scale = nao.scale = 0.5
+	// function sim and nao interactive
+	
+        sim.once("pointerdown", () => {
+            this.scene.start("Singleplayer");
+        });
+		
+        nao.once("pointerdown", () => {
+            this.scene.start("MainMenu");
+        });
+
+	this.add
+                .text(250, 530 + 116, "Sim", {
+                    fontFamily: "Arial Black",
+                    fontSize: 28,
+                    color: "#ffffff",
+                    stroke: "#000000",
+                    strokeThickness: 8,
+                    align: "center",
+                })
+
+	
+	this.add
+                .text(435, 530 + 116, "Não", {
+                    fontFamily: "Arial Black",
+                    fontSize: 28,
+                    color: "#ffffff",
+                    stroke: "#000000",
+                    strokeThickness: 8,
+                    align: "center",
+                })
     }
 
     lost() {
-        this.scene.start("GameOver", {turn: false});
+	this.add
+                .text(205, 330 + 116, "O computador ganhou!\nQueres jogar mais?", {
+                    fontFamily: "Arial Black",
+                    fontSize: 28,
+                    color: "#ffffff",
+                    stroke: "#000000",
+                    strokeThickness: 8,
+                    align: "center",
+                })
+	
+	const sim = this.add.image(280, 480 + 116, "green").setInteractive();
+	const nao = this.add.image(465, 480 + 116, "red").setInteractive();
+	sim.scale = nao.scale = 0.5
+	// function sim and nao interactive
+	
+        sim.once("pointerdown", () => {
+            this.scene.start("Singleplayer");
+        });
+		
+        nao.once("pointerdown", () => {
+            this.scene.start("MainMenu");
+        });
+
+	this.add
+                .text(250, 530 + 116, "Sim", {
+                    fontFamily: "Arial Black",
+                    fontSize: 28,
+                    color: "#ffffff",
+                    stroke: "#000000",
+                    strokeThickness: 8,
+                    align: "center",
+                })
+
+	
+	this.add
+                .text(435, 530 + 116, "Não", {
+                    fontFamily: "Arial Black",
+                    fontSize: 28,
+                    color: "#ffffff",
+                    stroke: "#000000",
+                    strokeThickness: 8,
+                    align: "center",
+                })
+
     }
 
     create() {
