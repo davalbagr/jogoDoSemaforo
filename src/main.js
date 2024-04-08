@@ -1,5 +1,4 @@
 import { Boot } from "./scenes/Boot";
-import { GameOver } from "./scenes/GameOver";
 import { MainMenu } from "./scenes/MainMenu";
 import { Preloader } from "./scenes/Preloader";
 import { Singleplayer } from "./scenes/Singleplayer";
@@ -30,7 +29,6 @@ const config = {
     MainMenu,
     Singleplayer,
     Multiplayer,
-    GameOver,
     Leaderboard,
     Info,
     Creditos,

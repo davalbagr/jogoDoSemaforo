@@ -13,7 +13,6 @@ export class Singleplayer extends Scene {
     }
 
     update(time, delta) {
-        // this.turn.rotation += 0.02;
         if (this.gameState.turn) {
             this.turnComp.setVisible(false);
             this.turnPlayer.setVisible(true);
@@ -21,12 +20,14 @@ export class Singleplayer extends Scene {
         } else if (!this.gameState.turn) {
             this.turnPlayer.setVisible(false);
             this.turnComp.setVisible(true);
-            const botMove = function ()
-            {
+            const botMove = function () {
                 const cpuPos = this.gameState.cpuMove();
                 const cpuWon = this.gameState.makeMove(cpuPos);
                 this.createPiece(cpuPos);
-                if (cpuWon) this.lost();
+                if (cpuWon) {
+                    this.grid.disableInteractive();
+                    this.lost();
+                }
             }
             if (this.readyMove) {
                 this.time.delayedCall(2000, botMove.bind(this));
@@ -35,125 +36,94 @@ export class Singleplayer extends Scene {
         }
     }
 
-    won() {
-	this.add
-                .text(280, 330 + 116, "Tu ganhaste!\nQueres jogar mais?", {
-                    fontFamily: "Arial Black",
-                    fontSize: 28,
-                    color: "#ffffff",
-                    stroke: "#000000",
-                    strokeThickness: 8,
-                    align: "center",
-                })
-	
-	
-	const sim = this.add.image(280, 480 + 116, "green").setInteractive();
-	const nao = this.add.image(465, 480 + 116, "red").setInteractive();
-	sim.scale = nao.scale = 0.5
-	// function sim and nao interactive
-	
+
+    wonLostHelper() {
+        this.grid.disableInteractive();
+        const sim = this.add.image(280, 480 + 116, "green").setInteractive();
+        const nao = this.add.image(465, 480 + 116, "red").setInteractive();
+        sim.scale = nao.scale = 0.5
+        // function sim and nao interactive
+
         sim.once("pointerdown", () => {
             this.scene.start("Singleplayer");
         });
-		
+
         nao.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
 
-	this.add
-                .text(250, 530 + 116, "Sim", {
-                    fontFamily: "Arial Black",
-                    fontSize: 28,
-                    color: "#ffffff",
-                    stroke: "#000000",
-                    strokeThickness: 8,
-                    align: "center",
-                })
+        this.add
+            .text(250, 530 + 116, "Sim", {
+                fontFamily: "Arial Black",
+                fontSize: 28,
+                color: "#ffffff",
+                stroke: "#000000",
+                strokeThickness: 8,
+                align: "center",
+            })
 
-	
-	this.add
-                .text(435, 530 + 116, "Não", {
-                    fontFamily: "Arial Black",
-                    fontSize: 28,
-                    color: "#ffffff",
-                    stroke: "#000000",
-                    strokeThickness: 8,
-                    align: "center",
-                })
+
+        this.add
+            .text(435, 530 + 116, "Não", {
+                fontFamily: "Arial Black",
+                fontSize: 28,
+                color: "#ffffff",
+                stroke: "#000000",
+                strokeThickness: 8,
+                align: "center",
+            })
+    }
+
+    won() {
+        this.wonLostHelper();
+        this.add.text(280, 330 + 116, "Tu ganhaste!\nQueres jogar mais?", {
+            fontFamily: "Arial Black",
+            fontSize: 28,
+            color: "#ffffff",
+            stroke: "#000000",
+            strokeThickness: 8,
+            align: "center",
+        })
     }
 
     lost() {
-	this.add
-                .text(205, 330 + 116, "O computador ganhou!\nQueres jogar mais?", {
-                    fontFamily: "Arial Black",
-                    fontSize: 28,
-                    color: "#ffffff",
-                    stroke: "#000000",
-                    strokeThickness: 8,
-                    align: "center",
-                })
-	
-	const sim = this.add.image(280, 480 + 116, "green").setInteractive();
-	const nao = this.add.image(465, 480 + 116, "red").setInteractive();
-	sim.scale = nao.scale = 0.5
-	// function sim and nao interactive
-	
-        sim.once("pointerdown", () => {
-            this.scene.start("Singleplayer");
-        });
-		
-        nao.once("pointerdown", () => {
-            this.scene.start("MainMenu");
-        });
-
-	this.add
-                .text(250, 530 + 116, "Sim", {
-                    fontFamily: "Arial Black",
-                    fontSize: 28,
-                    color: "#ffffff",
-                    stroke: "#000000",
-                    strokeThickness: 8,
-                    align: "center",
-                })
-
-	
-	this.add
-                .text(435, 530 + 116, "Não", {
-                    fontFamily: "Arial Black",
-                    fontSize: 28,
-                    color: "#ffffff",
-                    stroke: "#000000",
-                    strokeThickness: 8,
-                    align: "center",
-                })
-
+        this.wonLostHelper();
+        this.add.text(205, 330 + 116, "O computador ganhou!\nQueres jogar mais?", {
+            fontFamily: "Arial Black",
+            fontSize: 28,
+            color: "#ffffff",
+            stroke: "#000000",
+            strokeThickness: 8,
+            align: "center",
+        })
     }
 
     create() {
-        const background = this.add.image(1000-47, 500, "background");
+        const background = this.add.image(1000 - 47, 500, "background");
         background.scale = 1.28;
-        const home = this.add.image(310-47, 800, "home").setInteractive();
-        const grid = this.add.image(1080-47, 380 + 116, "grid").setInteractive();
+        const home = this.add.image(310 - 47, 800, "home").setInteractive();
+        const grid = this.add.image(1080 - 47, 380 + 116, "grid").setInteractive();
         grid.scale = 1.2;
-        const logo = this.add.image(422-47, 180, "logo");
-        const pl1 = this.add.image(1650-47, 400, "pl1");
-        const plcomputer = this.add.image(1650-47, 520, "plcomputer");
-        const pve = this.add.image(420-47, 270 + 116, "pve");
+        this.grid = grid;
+        const logo = this.add.image(422 - 47, 180, "logo");
+        const pl1 = this.add.image(1650 - 47, 400, "pl1");
+        const plcomputer = this.add.image(1650 - 47, 520, "plcomputer");
+        const pve = this.add.image(420 - 47, 270 + 116, "pve");
         pve.scale = 0.7;
-        this.turnPlayer = this.add.image(1575-47, 298 + 116 - 17, "pl2target");
+        this.turnPlayer = this.add.image(1575 - 47, 298 + 116 - 17, "pl2target");
         this.turnPlayer.setVisible(false);
         this.turnPlayer.scale = 0.65;
-        this.turnComp = this.add.image(1575-47, 398 + 116+5, "cputarget");
+        this.turnComp = this.add.image(1575 - 47, 398 + 116 + 5, "cputarget");
         this.turnComp.setVisible(false);
         this.turnComp.scale = 0.65;
         this.readyMove = true;
         let difficulty;
         if (this.difficulty === this.easyDif) {
-            difficulty = this.add.image(530-47, 420, "easy");
+            difficulty = this.add.image(530 - 47, 420, "easy");
         } else if (this.difficulty === this.mediumDif) {
-            difficulty = this.add.image(530-47, 420, "medium");
+            difficulty = this.add.image(530 - 47, 420, "medium");
         } else {
-            difficulty = this.add.image(530-47, 420, "hard");
+            difficulty = this.add.image(530 - 47, 420, "hard");
         }
         difficulty.scale = 0.4;
         this.gameState = new Game(this.difficulty);
@@ -182,9 +152,9 @@ export class Singleplayer extends Scene {
         const offsetX = 6;
         // coordenadas do primeiro quadrado
         squares[0] = {
-            a: 690-47,
+            a: 690 - 47,
             b: 202,
-            c: 879-47,
+            c: 879 - 47,
             d: 389,
         };
         squares[4] = {
