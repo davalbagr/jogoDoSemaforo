@@ -14,7 +14,7 @@ export class MainMenu extends Scene {
     let difficulty = easyDif;
     const logo = this.add.image(422-47, 180, "logo");
     const pvp = this.add.image(1040-47, 436, "pvp").setInteractive({ useHandCursor: true });
-    const pve = this.add.image(1040-47, 646, "pve").setInteractive({ useHandCursor: true });
+    const pve = this.add.image(1040-47, 646, "pve");
     const login = this.add.image(1670-47, 166, "login").setInteractive({ useHandCursor: true });
     const leaderboard = this.add
       .image(1670-47, 550, "leaderboard")

@@ -19,6 +19,7 @@ export class Login extends Scene {
         passwordField.scale = 2.0;
         let login = this.add.text(900-47, 700, "Login", { fontFamily: 'font1', fontSize: 40, color: '#000000'}).setInteractive();
         login.on("pointerdown", () => {
+            usertext.text
 
         });
         const home = this.add.image(310-47, 800, "home").setInteractive({ useHandCursor: true });
