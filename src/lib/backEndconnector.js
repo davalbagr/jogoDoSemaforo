@@ -6,7 +6,7 @@
  */
 
 
- function login(username, password,scene) {
+export function login(username, password, scene) {
     
     $.ajax
     ({
@@ -17,7 +17,7 @@
         cache: false,
 
         success: function (response) {
-            if (response!="false") {
+            if (response!=="false") {
                 infoUser.user = response.split(",")[0];    						     // username
 				if  (infoUser.user!="prof") {                                       // username
 
@@ -27,7 +27,6 @@
 
                     infoUser.setLocalData();
                     scene.ola.visible = true;
-                    scene.scene.transition({ target: 'Menu', duration: 100 });
                 }
                 else{
                     // alert("Registado como professor");
@@ -56,7 +55,7 @@
 /**
  * Check if there is an active session
  */
-function sessionVerify() {  
+export function sessionVerify() {
     $.ajax
     ({
 	type: "POST",
@@ -84,7 +83,7 @@ function sessionVerify() {
     })
 }
 
-function destroySession() {
+export function destroySession() {
     $.ajax
     ({
         type: "POST",
@@ -107,7 +106,7 @@ function destroySession() {
  * @param {string} password Password to try to login with
  * @param {Phaser.Scene} scene scope in with the login is being made
  */
-function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
+export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
     var data;
     $.ajax
     ({
@@ -161,7 +160,7 @@ function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
 }
 
 
-function updateTOP(di, df, globalCodTurma, globalCodEscola, tip, flag,scene) {
+export function updateTOP(di, df, globalCodTurma, globalCodEscola, tip, flag,scene) {
     var data;
     $.ajax
     ({
@@ -214,7 +213,7 @@ function updateTOP(di, df, globalCodTurma, globalCodEscola, tip, flag,scene) {
 }
 
 
-function verificaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao,  scene) {
+export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao,  scene) {
 
     $.ajax
     ({
@@ -231,6 +230,7 @@ function verificaRecords(username, globalCodTurma, globalCodEscola, tip, pontuac
             data.push(parseFloat(response.split("vlMin1=")[1].split("&")[0])); //minimo global - TOP 100 
             pontuacao = parseFloat(pontuacao);
             if(pontuacao >= 0 ) {
+                let please;
                 if (infoUser.user != '') {
                     if (data[0] < pontuacao && pontuacao>0) {
                         if (data[3] < pontuacao) {//top global
@@ -279,7 +279,7 @@ function verificaRecords(username, globalCodTurma, globalCodEscola, tip, pontuac
 }
 
 
-function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao) {
+export function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao) {
 
     $.ajax
     ({
@@ -309,9 +309,9 @@ function getRecords(username, globalCodTurma, globalCodEscola, tip, scene) {
         cache: false,
         success: function (response) {
 
-            pontuacao = parseFloat(response.split("vlMin4=")[1]);               //melhor resultado pessoal
+            let pontuacao = parseFloat(response.split("vlMin4=")[1]);               //melhor resultado pessoal
 
-            pontuacaoGlobal = parseFloat(response.split("vlMin1=")[1].split("&")[0]); //minimo global - TOP 100 
+            let pontuacaoGlobal = parseFloat(response.split("vlMin1=")[1].split("&")[0]); //minimo global - TOP 100
 
 
             if (response.split("vlMin4=")[1] <= (response.split("vlMin1=")[1].split("&")[0]) && pontuacao>0) {

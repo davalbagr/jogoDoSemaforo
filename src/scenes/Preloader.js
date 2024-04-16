@@ -17,6 +17,7 @@ export class Preloader extends Scene {
 
   preload() {
     //  Load the assets for the game - Replace with your own assets
+    this.load.scenePlugin('rexuiplugin', 'gridTable.min.js', 'rexUI', 'rexUI');
     this.load.setPath("assets");
 
     this.load.image("logo", "logo.png");
@@ -41,6 +42,11 @@ export class Preloader extends Scene {
     this.load.image("pl1target", "pl1target.png");
     this.load.image("pl2target", "pl2target.png");
     this.load.image("cputarget", "cputarget.png");
+    this.load.image("login2", "login2.png");
+    this.load.image("monstro", "monstro.png");
+    this.load.image("btok", "btok.png");
+    this.load.image("btnotok", "btnotok.png");
+    this.load.image("creditos2", "creditos2.png");
   }
 
   create() {

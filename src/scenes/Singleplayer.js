@@ -39,8 +39,8 @@ export class Singleplayer extends Scene {
 
     wonLostHelper() {
         this.grid.disableInteractive();
-        const sim = this.add.image(280, 480 + 116, "green").setInteractive({ useHandCursor: true });
-        const nao = this.add.image(465, 480 + 116, "red").setInteractive({ useHandCursor: true });
+        const sim = this.add.image(280, 480 + 116, "btok").setInteractive({ useHandCursor: true });
+        const nao = this.add.image(465, 480 + 116, "btnotok").setInteractive({ useHandCursor: true });
         sim.scale = nao.scale = 0.5
         // function sim and nao interactive
 
@@ -51,27 +51,6 @@ export class Singleplayer extends Scene {
         nao.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
-
-        this.add
-            .text(250, 530 + 116, "Sim", {
-                fontFamily: "Arial Black",
-                fontSize: 28,
-                color: "#ffffff",
-                stroke: "#000000",
-                strokeThickness: 8,
-                align: "center",
-            })
-
-
-        this.add
-            .text(435, 530 + 116, "Não", {
-                fontFamily: "Arial Black",
-                fontSize: 28,
-                color: "#ffffff",
-                stroke: "#000000",
-                strokeThickness: 8,
-                align: "center",
-            })
     }
 
     won() {
@@ -105,7 +84,8 @@ export class Singleplayer extends Scene {
         const grid = this.add.image(1080 - 47, 380 + 116, "grid").setInteractive({ useHandCursor: true });
         grid.scale = 1.2;
         this.grid = grid;
-        const logo = this.add.image(422 - 47, 180, "logo");
+        const logo = this.add.image(422-74, 180, "logo");
+        logo.scale = 0.9;
         const pl1 = this.add.image(1650 - 47, 400, "pl1");
         const plcomputer = this.add.image(1650 - 47, 520, "plcomputer");
         const pve = this.add.image(420 - 47, 270 + 116, "pve");

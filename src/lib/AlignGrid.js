@@ -1,11 +1,11 @@
 /**
  * Class to help on asset placement on the game screen
  */
-class AlignGrid {
+export class AlignGrid {
     /**
      * Create a new AlignGrid
      */
-    constructor(config) {
+    constructor(game, config) {
         if (!config.scene) {
             return;
         }
