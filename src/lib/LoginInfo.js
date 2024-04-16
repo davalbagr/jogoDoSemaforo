@@ -1,7 +1,7 @@
 /**
  * Class represents data about player 
  */
- class loginInfo {
+ export class LoginInfo {
     /**
      * Create inicial loginInfo
      */

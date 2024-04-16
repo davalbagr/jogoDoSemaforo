@@ -39,7 +39,6 @@ const builder = async () => {
           { from: "./public/favicon.ico", to: "./" },
           { from: "./public/favicon.png", to: "./" },
           { from: "./public/assets/**/*", to: "./assets/" },
-          { from: "/public/gridTable.min.js", to: "./" },
         ],
       }),
       msgPhaser,

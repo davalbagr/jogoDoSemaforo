@@ -1,3 +1,7 @@
+import { LoginInfo } from './LoginInfo.js';
+
+export var infoUser = new LoginInfo();
+
 /**
  * Login user
  * @param {string} username Name to try to login with
@@ -19,26 +23,26 @@ export function login(username, password, scene) {
         success: function (response) {
             if (response!=="false") {
                 infoUser.user = response.split(",")[0];    						     // username
-				if  (infoUser.user!="prof") {                                       // username
+				if  (infoUser.user!=="prof") {                                       // username
 
                     infoUser.firstName = response.split(",")[1];                          // primeiro nome do aluno
                     infoUser.escola = response.split(",")[2];                             // codigo da escola
                     infoUser.turma = response.split(",")[3];
 
                     infoUser.setLocalData();
-                    scene.ola.visible = true;
+                    // scene.ola.visible = true;
                 }
                 else{
-                    // alert("Registado como professor");
-					scene.loginErrorMsg2.visible = true;
-                    scene.loginErrorMsg.visible = false;
+                    alert("Registado como professor");
+					// scene.loginErrorMsg2.visible = true;
+                    // scene.loginErrorMsg.visible = false;
                     return -1;
                 }
             }
             else {
-                // alert("Utilizador ou Password Errados");
-                scene.loginErrorMsg.visible = true;
-                scene.loginErrorMsg2.visible = false;
+                alert("Utilizador ou Password Errados");
+                // scene.loginErrorMsg.visible = true;
+                // scene.loginErrorMsg2.visible = false;
                 return -1;
             }
 

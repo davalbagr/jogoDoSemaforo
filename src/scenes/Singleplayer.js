@@ -1,5 +1,6 @@
 import {Scene} from "phaser";
 import {Game} from "../../game.js";
+import * as Backend from "../lib/backEndconnector.js";
 
 export class Singleplayer extends Scene {
     constructor() {
@@ -41,8 +42,7 @@ export class Singleplayer extends Scene {
         this.grid.disableInteractive();
         const sim = this.add.image(280, 480 + 116, "btok").setInteractive({ useHandCursor: true });
         const nao = this.add.image(465, 480 + 116, "btnotok").setInteractive({ useHandCursor: true });
-        sim.scale = nao.scale = 0.5
-        // function sim and nao interactive
+        sim.scale = nao.scale = 0.5;
 
         sim.once("pointerdown", () => {
             this.scene.start("Singleplayer");
@@ -63,6 +63,7 @@ export class Singleplayer extends Scene {
             strokeThickness: 8,
             align: "center",
         })
+        if (Backend.infoUser.user !== '') {}
     }
 
     lost() {
@@ -75,6 +76,7 @@ export class Singleplayer extends Scene {
             strokeThickness: 8,
             align: "center",
         })
+        if (Backend.infoUser.user !== '') {}
     }
 
     create() {

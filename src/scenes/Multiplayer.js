@@ -22,8 +22,7 @@ export class Multiplayer extends Scene {
         this.grid.disableInteractive();
         const sim = this.add.image(280, 480 + 116, "btok").setInteractive({ useHandCursor: true });
         const nao = this.add.image(465, 480 + 116, "btnotok").setInteractive({ useHandCursor: true });
-        sim.scale = nao.scale = 0.5
-        // function sim and nao interactive
+        sim.scale = nao.scale = 0.5;
 
         sim.once("pointerdown", () => {
             this.scene.start("Multiplayer");

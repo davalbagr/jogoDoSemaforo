@@ -1,11 +1,28 @@
 import { Scene } from "phaser";
+import * as Backend from "../lib/backEndconnector.js";
 
 export class MainMenu extends Scene {
   constructor() {
     super("MainMenu");
   }
 
+  update(time, delta) {
+    if (Backend.infoUser.user !== '') {
+      if (this.greeting === undefined) {
+        this.greeting = this.add.text(850, 150, "Olá " + Backend.infoUser.firstName.split(" ")[0]);
+        this.greeting.scale = 2.0;
+      }
+    } else {
+      Backend.infoUser.getLocalData();
+      if (this.greeting !== undefined) {
+        this.greeting.destroy();
+        this.greeting = undefined;
+      }
+    }
+  }
+
   create() {
+    this.greeting = undefined;
     const easyDif = 1;
     const mediumDif = 4;
     const hardDif = 6;
@@ -57,6 +74,16 @@ export class MainMenu extends Scene {
     let pass = `<input type="password" name="password" style="font-size: 15px; font-family:'font1'; text-align:center;">`;
     var usernameField;
     var passwordField;
+
+    ok.on("pointerdown", () => {
+      let uTxt = usernameField.getChildByName("username").value
+      let pTxt = passwordField.getChildByName("password").value
+      if (uTxt !== '' && pTxt !== '') {
+        Backend.login(uTxt, pTxt, this);
+        usernameField.getChildByName("username").value = '';
+        passwordField.getChildByName("password").value = '';
+      }
+    });
 
     closeForm.on("pointerdown", () => {
       infoForm.setVisible(false);
