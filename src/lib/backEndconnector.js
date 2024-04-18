@@ -142,7 +142,11 @@ export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
                 }
                 data.push(response[i]);
             }
-            scene.scene.start('Leaderboard', data);
+            scene.scene.transition({
+                target: 'Leaderboard',
+                data: data,
+                duration: 100,
+            });
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Falha de ligação, por favor verifique a sua conexão")
