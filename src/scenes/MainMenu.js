@@ -30,6 +30,10 @@ export class MainMenu extends Scene {
 
   update(time, delta) {
     if (Backend.infoUser.user !== '') {
+      this.login.setVisible(false);
+      this.logout.setVisible(true);
+      this.logout.setInteractive({ useHandCursor: true });
+      this.login.disableInteractive();
       if (this.greeting === undefined) {
         this.greeting = this.add.text(850, 120, "Olá " + Backend.infoUser.firstName.split(" ")[0], {
           fontFamily: "font1",
@@ -38,6 +42,10 @@ export class MainMenu extends Scene {
         this.greeting.scale = 2.0;
       }
     } else {
+      this.login.setVisible(true);
+      this.logout.setVisible(false);
+      this.logout.disableInteractive();
+      this.login.setInteractive({ useHandCursor: true });
       Backend.infoUser.getLocalData();
       if (this.greeting !== undefined) {
         this.greeting.destroy();
@@ -62,7 +70,10 @@ export class MainMenu extends Scene {
     logo.scale = 0.9;
     const pvp = this.add.image(1040-47, 436, "pvp").setInteractive({ useHandCursor: true });
     const pve = this.add.image(1040-47, 646, "pve");
-    const login = this.add.image(1670-47, 180, "login").setInteractive({ useHandCursor: true });
+    this.login = this.add.image(1670-47, 180, "login");
+    this.login.setVisible(false);
+    this.logout = this.add.image(1670-47, 180, "logout");
+    this.logout.setVisible(false);
     const leaderboard = this.add
       .image(1670-47, 550, "leaderboard")
       .setInteractive({ useHandCursor: true });
@@ -87,7 +98,7 @@ export class MainMenu extends Scene {
     ok.scale = 0.7;
     ok.setVisible(false);
 
-    const infoForm = this.add.image(1050, 500, "creditos2");
+    const infoForm = this.add.image(1050, 500, "info2");
     infoForm.scale = 1.3;
     infoForm.setVisible(false);
 
@@ -126,7 +137,7 @@ export class MainMenu extends Scene {
       hard.setInteractive({ useHandCursor: true });
       creditos.setInteractive({ useHandCursor: true });
       info.setInteractive({ useHandCursor: true });
-      login.setInteractive({ useHandCursor: true });
+      this.login.setInteractive({ useHandCursor: true });
       closeForm.setVisible(false);
       if (usernameField !== undefined) {
         usernameField.destroy();
@@ -135,7 +146,7 @@ export class MainMenu extends Scene {
         passwordField = undefined;
       }
     })
-    login.on("pointerdown", () => {
+    this.login.on("pointerdown", () => {
       closeForm.emit("pointerdown");
       loginForm.setVisible(true);
       closeForm.setVisible(true);
@@ -149,8 +160,11 @@ export class MainMenu extends Scene {
       usernameField.scale = 1.7;
       passwordField = this.add.dom(1100, 570).createFromHTML(pass);
       passwordField.scale = 1.7;
-      login.disableInteractive();
+      this.login.disableInteractive();
     });
+    this.logout.on("pointerdown", () => {
+      infoUser.logout();
+    })
     leaderboard.on("pointerdown", () => {
       getTOP(di, df, "", "", 1, this);
     });
