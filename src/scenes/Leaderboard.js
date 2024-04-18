@@ -103,7 +103,7 @@ export class Leaderboard extends Scene {
           newwith = 10;
         }
         if (cell.index % 6 == 2) {//pontos
-          newwith = 525;
+          newwith = 550;
         }
         if (cell.index % 6 == 3) {//Escola
           newwith = 850;
