@@ -142,9 +142,9 @@ export class MainMenu extends Scene {
       medium.disableInteractive();
       hard.disableInteractive();
       usernameField = this.add.dom(1100, 400).createFromHTML(user);
-      usernameField.scale = 1.2;
+      usernameField.scale = 1.5;
       passwordField = this.add.dom(1100, 570).createFromHTML(pass);
-      passwordField.scale = 1.2;
+      passwordField.scale = 1.5;
     });
     leaderboard.on("pointerdown", () => {
       getTOP(di, df, "", "", 1, this);
