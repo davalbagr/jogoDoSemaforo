@@ -124,6 +124,9 @@ export class MainMenu extends Scene {
       easy.setInteractive({ useHandCursor: true });
       medium.setInteractive({ useHandCursor: true });
       hard.setInteractive({ useHandCursor: true });
+      creditos.setInteractive({ useHandCursor: true });
+      info.setInteractive({ useHandCursor: true });
+      login.setInteractive({ useHandCursor: true });
       closeForm.setVisible(false);
       if (usernameField !== undefined) {
         usernameField.destroy();
@@ -145,6 +148,9 @@ export class MainMenu extends Scene {
       usernameField.scale = 1.7;
       passwordField = this.add.dom(1100, 570).createFromHTML(pass);
       passwordField.scale = 1.7;
+      creditos.disableInteractive();
+      info.disableInteractive();
+      login.disableInteractive();
     });
     leaderboard.on("pointerdown", () => {
       getTOP(di, df, "", "", 1, this);
@@ -156,6 +162,9 @@ export class MainMenu extends Scene {
       easy.disableInteractive();
       medium.disableInteractive();
       hard.disableInteractive();
+      creditos.disableInteractive();
+      login.disableInteractive();
+      info.disableInteractive();
     });
     creditos.on("pointerdown", () => {
       infoForm.setVisible(true);
@@ -164,6 +173,9 @@ export class MainMenu extends Scene {
       easy.disableInteractive();
       medium.disableInteractive();
       hard.disableInteractive();
+      login.disableInteractive();
+      info.disableInteractive();
+      creditos.disableInteractive();
     });
     pvp.once("pointerdown", () => {
       this.scene.start("Multiplayer");
