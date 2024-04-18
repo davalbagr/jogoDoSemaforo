@@ -18,7 +18,7 @@ const config = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   dom: {
-    createContainer: true
+    createContainer: true,
   },
   scene: [
     Boot,

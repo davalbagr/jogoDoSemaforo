@@ -62,7 +62,7 @@ export class MainMenu extends Scene {
     logo.scale = 0.9;
     const pvp = this.add.image(1040-47, 436, "pvp").setInteractive({ useHandCursor: true });
     const pve = this.add.image(1040-47, 646, "pve");
-    const login = this.add.image(1670-47, 166, "login").setInteractive({ useHandCursor: true });
+    const login = this.add.image(1670-47, 180, "login").setInteractive({ useHandCursor: true });
     const leaderboard = this.add
       .image(1670-47, 550, "leaderboard")
       .setInteractive({ useHandCursor: true });
@@ -142,9 +142,9 @@ export class MainMenu extends Scene {
       medium.disableInteractive();
       hard.disableInteractive();
       usernameField = this.add.dom(1100, 400).createFromHTML(user);
-      usernameField.scale = 1.5;
+      usernameField.scale = 1.7;
       passwordField = this.add.dom(1100, 570).createFromHTML(pass);
-      passwordField.scale = 1.5;
+      passwordField.scale = 1.7;
     });
     leaderboard.on("pointerdown", () => {
       getTOP(di, df, "", "", 1, this);
