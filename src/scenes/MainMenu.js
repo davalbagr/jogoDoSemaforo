@@ -136,6 +136,7 @@ export class MainMenu extends Scene {
       }
     })
     login.on("pointerdown", () => {
+      closeForm.emit("pointerdown");
       loginForm.setVisible(true);
       closeForm.setVisible(true);
       ok.setVisible(true);
@@ -148,33 +149,29 @@ export class MainMenu extends Scene {
       usernameField.scale = 1.7;
       passwordField = this.add.dom(1100, 570).createFromHTML(pass);
       passwordField.scale = 1.7;
-      creditos.disableInteractive();
-      info.disableInteractive();
       login.disableInteractive();
     });
     leaderboard.on("pointerdown", () => {
       getTOP(di, df, "", "", 1, this);
     });
     info.on("pointerdown", () => {
+      closeForm.emit("pointerdown");
       infoForm.setVisible(true);
       closeForm.setVisible(true);
       pvp.disableInteractive();
       easy.disableInteractive();
       medium.disableInteractive();
       hard.disableInteractive();
-      creditos.disableInteractive();
-      login.disableInteractive();
       info.disableInteractive();
     });
     creditos.on("pointerdown", () => {
+      closeForm.emit("pointerdown");
       infoForm.setVisible(true);
       closeForm.setVisible(true);
       pvp.disableInteractive();
       easy.disableInteractive();
       medium.disableInteractive();
       hard.disableInteractive();
-      login.disableInteractive();
-      info.disableInteractive();
       creditos.disableInteractive();
     });
     pvp.once("pointerdown", () => {
