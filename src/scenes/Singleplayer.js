@@ -15,6 +15,7 @@ export class Singleplayer extends Scene {
     }
 
     update(time, delta) {
+        if (this.hasEnded) return;
         if (this.gameState.turn) {
             this.turnComp.setVisible(false);
             this.turnPlayer.setVisible(true);
@@ -52,6 +53,7 @@ export class Singleplayer extends Scene {
         nao.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
+        this.hasEnded = true;
     }
 
     won() {
@@ -85,6 +87,7 @@ export class Singleplayer extends Scene {
     }
 
     create() {
+        this.hasEnded = false;
         const background = this.add.image(1000 - 47, 500, "background");
         background.scale = 1.28;
         const home = this.add.image(310 - 47, 800, "home").setInteractive({ useHandCursor: true });
