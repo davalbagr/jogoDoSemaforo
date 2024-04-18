@@ -1,5 +1,27 @@
 import { Scene } from "phaser";
 import * as Backend from "../lib/backEndconnector.js";
+import {getTOP, infoUser} from "../lib/backEndconnector.js";
+
+var x;
+var y;
+var nome;
+var nome2;
+var cred = false;
+var info = false;
+var d = new Date();
+var m = d.getMonth();
+var n = d.getFullYear();
+var timeoutMenu;
+if (m > 7) {
+  var x = n;
+  var y = n +1;
+}
+else {
+  var x = n - 1;
+  var y = n;
+}
+let di = x + "-09-01";
+let df = y + "-08-31";
 
 export class MainMenu extends Scene {
   constructor() {
@@ -9,7 +31,10 @@ export class MainMenu extends Scene {
   update(time, delta) {
     if (Backend.infoUser.user !== '') {
       if (this.greeting === undefined) {
-        this.greeting = this.add.text(850, 150, "Olá " + Backend.infoUser.firstName.split(" ")[0]);
+        this.greeting = this.add.text(850, 120, "Olá " + Backend.infoUser.firstName.split(" ")[0], {
+          fontFamily: "font1",
+          fontSize: 20,
+        });
         this.greeting.scale = 2.0;
       }
     } else {
@@ -116,7 +141,7 @@ export class MainMenu extends Scene {
       passwordField = this.add.dom(1100, 570).createFromHTML(pass);
     });
     leaderboard.on("pointerdown", () => {
-      this.scene.start("Leaderboard");
+      getTOP(di, df, "", "", 1, this);
     });
     info.on("pointerdown", () => {
       infoForm.setVisible(true);

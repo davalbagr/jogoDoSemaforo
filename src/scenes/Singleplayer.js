@@ -1,6 +1,7 @@
 import {Scene} from "phaser";
 import {Game} from "../../game.js";
 import * as Backend from "../lib/backEndconnector.js";
+import {infoUser} from "../lib/backEndconnector.js";
 
 export class Singleplayer extends Scene {
     constructor() {
@@ -55,28 +56,32 @@ export class Singleplayer extends Scene {
 
     won() {
         this.wonLostHelper();
-        this.add.text(280, 330 + 116, "Tu ganhaste!\nQueres jogar mais?", {
-            fontFamily: "Arial Black",
+        this.add.text(205+30, 330 + 116, "Tu ganhaste!\nQueres jogar mais?", {
+            fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
             stroke: "#000000",
             strokeThickness: 8,
             align: "center",
         })
-        if (Backend.infoUser.user !== '') {}
+        if (Backend.infoUser.user !== '') {
+            let tip = 3;
+            if (this.difficulty === this.easyDif) { tip = 1;}
+            if (this.difficulty === this.mediumDif) { tip = 2;}
+            Backend.updatePontuacao(infoUser.user, infoUser.turma, infoUser.escola, tip);
+        }
     }
 
     lost() {
         this.wonLostHelper();
-        this.add.text(205, 330 + 116, "O computador ganhou!\nQueres jogar mais?", {
-            fontFamily: "Arial Black",
+        this.add.text(205+30, 330 + 116, "O computador ganhou!\nQueres jogar mais?", {
+            fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
             stroke: "#000000",
             strokeThickness: 8,
             align: "center",
         })
-        if (Backend.infoUser.user !== '') {}
     }
 
     create() {
@@ -161,6 +166,7 @@ export class Singleplayer extends Scene {
             };
         }
         this.createPiece = function createPiece(pos) {
+            if (squares[pos] === undefined) {return;}
             const color = this.gameState.board.board[pos];
             if (color > 1) {
                 images[pos].destroy();

@@ -111,7 +111,7 @@ export function destroySession() {
  * @param {Phaser.Scene} scene scope in with the login is being made
  */
 export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
-    var data;
+    var data = [];
     $.ajax
     ({
         type: "POST",
@@ -120,7 +120,6 @@ export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
         crossDomain: true,
         cache: false,
         success: function (response) {
-            data = [];
             let j = 0;
             response = response.split('&');
             for (let i = 0; i < response.length; i++) {
@@ -143,28 +142,16 @@ export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
                 }
                 data.push(response[i]);
             }
-
-            scene.scene.transition({
-                target: 'rankingScene',
-                data: data,
-                duration: 100,
-            });
-
+            scene.scene.start('Leaderboard', data);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Falha de ligação, por favor verifique a sua conexão")
-            data = [];
-            scene.scene.transition({
-                target: 'rankingScene',
-                data: data,
-                duration: 100,
-            });
         }
     })
 }
 
 
-export function updateTOP(di, df, globalCodTurma, globalCodEscola, tip, flag,scene) {
+export function updateTOP(di, df, globalCodTurma, globalCodEscola, flag, tip,scene) {
     var data;
     $.ajax
     ({
@@ -300,6 +287,24 @@ export function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pon
     });
 }
 
+
+export function updatePontuacao(username, globalCodTurma, globalCodEscola, tip) {
+    $.ajax
+    ({
+        type: "POST",
+        url: "https://www.hypatiamat.com/newHRecords.php",
+        data: "action=minimoGlobal&codAl=" + username + "&codTurma=" + globalCodTurma + "&codEscola=" + globalCodEscola + "&pont=" + 0 + "&tip=" + tip + "&t=semaforoHypatia&tC=semaforoTOP",
+        crossDomain: true,
+        cache: false,
+        success: function (response) {
+
+            let pontuacao = parseFloat(response.split("vlMin4=")[1]);
+            gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao+1);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        }
+    })
+}
 
 
 function getRecords(username, globalCodTurma, globalCodEscola, tip, scene) {

@@ -35,8 +35,8 @@ export class Multiplayer extends Scene {
 
     p1Won() {
         this.wonLostHelper();
-        this.add.text(205, 330 + 116, "O jogador 1 ganhou!\nQueres jogar mais?", {
-            fontFamily: "Arial Black",
+        this.add.text(205+30, 330 + 116, "O jogador 1 ganhou!\nQueres jogar mais?", {
+            fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
             stroke: "#000000",
@@ -47,8 +47,8 @@ export class Multiplayer extends Scene {
 
     p2Won() {
         this.wonLostHelper();
-        this.add.text(205, 330 + 116, "O jogador 2 ganhou!\nQueres jogar mais?", {
-            fontFamily: "Arial Black",
+        this.add.text(205+30, 330 + 116, "O jogador 2 ganhou!\nQueres jogar mais?", {
+            fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
             stroke: "#000000",
@@ -125,6 +125,7 @@ export class Multiplayer extends Scene {
             };
         }
         this.createPiece = function createPiece(pos) {
+            if (squares[pos] === undefined) {return;}
             const color = this.gameState.board.board[pos];
             if (images[pos] != null) {
                 images[pos].destroy();
