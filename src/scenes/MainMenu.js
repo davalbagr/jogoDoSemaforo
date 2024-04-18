@@ -48,6 +48,10 @@ export class MainMenu extends Scene {
 
   create() {
     this.greeting = undefined;
+    const bugfix = this.add.text(5000, 5000, "", {
+      fontFamily: "font1"
+    });
+    bugfix.destroy();
     const easyDif = 1;
     const mediumDif = 4;
     const hardDif = 6;
@@ -138,7 +142,9 @@ export class MainMenu extends Scene {
       medium.disableInteractive();
       hard.disableInteractive();
       usernameField = this.add.dom(1100, 400).createFromHTML(user);
+      usernameField.scale = 1.2;
       passwordField = this.add.dom(1100, 570).createFromHTML(pass);
+      passwordField.scale = 1.2;
     });
     leaderboard.on("pointerdown", () => {
       getTOP(di, df, "", "", 1, this);
