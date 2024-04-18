@@ -8,7 +8,7 @@ export class Leaderboard extends Scene {
   }
 
   preload(){
-    this.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
+    this.load.scenePlugin('rexuiplugin', 'rexuiplugin.min.js', 'rexUI', 'rexUI');
   }
 
   init(data) {
