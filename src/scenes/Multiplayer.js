@@ -21,8 +21,8 @@ export class Multiplayer extends Scene {
 
     wonLostHelper() {
         this.grid.disableInteractive();
-        const sim = this.add.image(280, 480 + 116, "btok").setInteractive({useHandCursor: true});
-        const nao = this.add.image(465, 480 + 116, "btnotok").setInteractive({useHandCursor: true});
+        const sim = this.add.image(280, 480 + 140, "btok").setInteractive({useHandCursor: true});
+        const nao = this.add.image(465, 480 + 140, "btnotok").setInteractive({useHandCursor: true});
         sim.scale = nao.scale = 0.5;
 
         sim.once("pointerdown", () => {
@@ -36,7 +36,7 @@ export class Multiplayer extends Scene {
 
     p1Won() {
         this.wonLostHelper();
-        this.add.text(205 + 30, 330 + 116, "O jogador 1 ganhou!\nQueres jogar mais?", {
+        this.add.text(205 + 30, 330 + 140, "O jogador 1 ganhou!\nQueres jogar mais?", {
             fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
@@ -48,7 +48,7 @@ export class Multiplayer extends Scene {
 
     p2Won() {
         this.wonLostHelper();
-        this.add.text(205 + 30, 330 + 116, "O jogador 2 ganhou!\nQueres jogar mais?", {
+        this.add.text(205 + 30, 330 + 140, "O jogador 2 ganhou!\nQueres jogar mais?", {
             fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
