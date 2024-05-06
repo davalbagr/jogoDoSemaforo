@@ -9,7 +9,7 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "https://www.hypatiamat.com/images/favicon.ico",
+      "src": "/assets/favicon.png",
       "sizes": "any"
     }
   ]

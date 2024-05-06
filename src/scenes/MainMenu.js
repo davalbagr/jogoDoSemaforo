@@ -96,12 +96,12 @@ export class MainMenu extends Scene {
       .setInteractive({ useHandCursor: true });
     const info = this.add.image(1680, 750, "info").setInteractive({ useHandCursor: true });
     const creditos = this.add.image(1680, 890, "creditos").setInteractive({ useHandCursor: true });
-    this.fullscreen = this.add.image(1680, 460, "fullscreen");
+    this.fullscreen = this.add.image(1680, 470, "fullscreen");
     this.fullscreen.setVisible(false);
-    this.fullscreen2 = this.add.image(1680, 460, "fullscreen2");
+    this.fullscreen2 = this.add.image(1680, 470, "fullscreen2");
     this.fullscreen2.setVisible(false);
-    this.fullscreen.scale = 0.7;
-    this.fullscreen2.scale = 0.7;
+    this.fullscreen.scale = 1;
+    this.fullscreen2.scale = 1;
     const semaforo = this.add.image(250-47, 850, "semaforo");
     semaforo.scale = 1.2;
     const easy = this.add.image(1300-30, 656, "easy").setInteractive({ useHandCursor: true });
