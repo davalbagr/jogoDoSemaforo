@@ -276,7 +276,7 @@ export class Leaderboard extends Scene {
     this.aGrid.placeAtIndex(163, this.filtro);
 
     this.todos = this.add.text(0, 0, 'Todos', { fontFamily: "font1", fontSize: 25, color: color1, align: 'left' });
-    this.todos.setOrigin(2, 1.4);
+    this.todos.setOrigin(2, 1.5);
     this.aGrid.placeAtIndex(178, this.todos);
     this.todos.setInteractive({ useHandCursor: true });
 
@@ -285,21 +285,21 @@ export class Leaderboard extends Scene {
     this.aGrid.placeAtIndex(178, this.todos_icon);
 
     this.escola_filtro = this.add.text(0, 0, 'Escola', { fontFamily: "font1", fontSize: 25, color: color1, align: 'left' });
-    this.escola_filtro.setOrigin(1.9, -0.05);
+    this.escola_filtro.setOrigin(1.9, 0.1);
     this.aGrid.placeAtIndex(178, this.escola_filtro);
     this.escola_filtro.setInteractive({ useHandCursor: true });
 
     this.escola_icon = this.add.circle(0,0,10).setFillStyle('0xffffff');
-    this.escola_icon.setOrigin(9, -0.5);
+    this.escola_icon.setOrigin(9, -0.35);
     this.aGrid.placeAtIndex(178, this.escola_icon);
 
     this.turma_filtro = this.add.text(0, 0, 'Turma', { fontFamily: "font1", fontSize: 25, color: color1, align: 'left' });
-    this.turma_filtro.setOrigin(1.9, -1.5);
+    this.turma_filtro.setOrigin(1.9, -1.3);
     this.aGrid.placeAtIndex(178, this.turma_filtro);
     this.turma_filtro.setInteractive({ useHandCursor: true });
 
     this.turma_icon = this.add.circle(0,0,10).setFillStyle('0xffffff');
-    this.turma_icon.setOrigin(9, -2.7);
+    this.turma_icon.setOrigin(9, -2.5);
     this.aGrid.placeAtIndex(178, this.turma_icon);
 
     this.filtro.y -= 50;
