@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="icon" type="image/x-icon" href="https://www.hypatiamat.com/images/favicon.ico">
-    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, target-densityDpi=device-dpi">
+    <meta name="viewport"
+          content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, target-densityDpi=device-dpi">
     <link rel="stylesheet" href="/style.css"/>
-    <title>Jogo do Semaforo - Jogos - Hypatiamat</title>
+    <link rel="apple-touch-icon" href="https://www.hypatiamat.com/images/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Semáforo">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Jogo do Semáforo - Jogos - Hypatiamat</title>
     <style>
         /* style the elements with CSS */
         #pleaserotate-graphic {
@@ -30,6 +35,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     PleaseRotateOptions = {
+        startOnPageLoad: !window.navigator.standalone,
         onlyMobile: true,
         forcePortrait: false,
         message: "Por Favor Rode o Ecrã",

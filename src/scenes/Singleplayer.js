@@ -88,18 +88,25 @@ export class Singleplayer extends Scene {
 
     create() {
         this.hasEnded = false;
-        const background = this.add.image(1000 - 47, 498, "background");
-        background.scale = 1.26;
-        const home = this.add.image(310 - 40, 800, "home").setInteractive({ useHandCursor: true });
-        const grid = this.add.image(1080 - 47, 380 + 116, "grid").setInteractive({ useHandCursor: true });
-        grid.scale = 1.2;
+        const background = this.add.image(1000 - 30, 540, "background");
+        background.scale = 1.35;
+        const home = this.add.image(240, 860, "home").setInteractive({ useHandCursor: true });
+        const grid = this.add.image(1000, 570, "grid").setInteractive({ useHandCursor: true });
         this.grid = grid;
-        const logo = this.add.image(422-62, 180, "logo");
+        this.grid.scale = 1.2;
+        const logo = this.add.image(318, 180, "logo");
         logo.scale = 0.9;
         const pl1 = this.add.image(1650 - 47, 400, "pl1");
         const plcomputer = this.add.image(1650 - 47, 520, "plcomputer");
-        const pve = this.add.image(420 - 47, 270 + 116, "pve");
+        const pve = this.add.image(350, 270 + 116, "pve");
         pve.scale = 0.7;
+        if (Backend.infoUser.user !== '') {
+            this.add.text(1620, 390, Backend.infoUser.firstName.split(" ")[0],
+                {
+                    fontFamily: "font1",
+                    fontSize: 15,
+                });
+        }
         this.turnPlayer = this.add.image(1575 - 47, 298 + 116 - 17, "pl2target");
         this.turnPlayer.setVisible(false);
         this.turnPlayer.scale = 0.65;
@@ -109,11 +116,11 @@ export class Singleplayer extends Scene {
         this.readyMove = true;
         let difficulty;
         if (this.difficulty === this.easyDif) {
-            difficulty = this.add.image(530 - 47, 420, "easy");
+            difficulty = this.add.image(530 - 50, 420, "easy");
         } else if (this.difficulty === this.mediumDif) {
-            difficulty = this.add.image(530 - 47, 420, "medium");
+            difficulty = this.add.image(530 - 50, 420, "medium");
         } else {
-            difficulty = this.add.image(530 - 47, 420, "hard");
+            difficulty = this.add.image(530 - 50, 420, "hard");
         }
         difficulty.scale = 0.4;
         this.gameState = new Game(this.difficulty);
@@ -142,10 +149,10 @@ export class Singleplayer extends Scene {
         const offsetX = 6;
         // coordenadas do primeiro quadrado
         squares[0] = {
-            a: 690 - 47,
-            b: 202,
-            c: 879 - 47,
-            d: 389,
+            a: 612,
+            b: 273,
+            c: 801,
+            d: 464,
         };
         squares[4] = {
             a: squares[0].a,

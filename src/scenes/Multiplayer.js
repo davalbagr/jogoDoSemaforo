@@ -1,5 +1,6 @@
 import {Scene} from "phaser";
 import {Game} from "../../game.js";
+import * as Backend from "../lib/backEndconnector.js";
 
 
 export class Multiplayer extends Scene {
@@ -20,8 +21,8 @@ export class Multiplayer extends Scene {
 
     wonLostHelper() {
         this.grid.disableInteractive();
-        const sim = this.add.image(280, 480 + 116, "btok").setInteractive({ useHandCursor: true });
-        const nao = this.add.image(465, 480 + 116, "btnotok").setInteractive({ useHandCursor: true });
+        const sim = this.add.image(280, 480 + 116, "btok").setInteractive({useHandCursor: true});
+        const nao = this.add.image(465, 480 + 116, "btnotok").setInteractive({useHandCursor: true});
         sim.scale = nao.scale = 0.5;
 
         sim.once("pointerdown", () => {
@@ -35,7 +36,7 @@ export class Multiplayer extends Scene {
 
     p1Won() {
         this.wonLostHelper();
-        this.add.text(205+30, 330 + 116, "O jogador 1 ganhou!\nQueres jogar mais?", {
+        this.add.text(205 + 30, 330 + 116, "O jogador 1 ganhou!\nQueres jogar mais?", {
             fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
@@ -47,7 +48,7 @@ export class Multiplayer extends Scene {
 
     p2Won() {
         this.wonLostHelper();
-        this.add.text(205+30, 330 + 116, "O jogador 2 ganhou!\nQueres jogar mais?", {
+        this.add.text(205 + 30, 330 + 116, "O jogador 2 ganhou!\nQueres jogar mais?", {
             fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
@@ -58,16 +59,16 @@ export class Multiplayer extends Scene {
     }
 
     create() {
-        const background = this.add.image(1000 - 47, 498, "background");
-        background.scale = 1.26;
-        const home = this.add.image(310-40, 800, "home").setInteractive({ useHandCursor: true });
-        this.grid = this.add.image(1080 - 47, 380 + 116, "grid").setInteractive({ useHandCursor: true });
+        const background = this.add.image(1000 - 30, 540, "background");
+        background.scale = 1.35;
+        const home = this.add.image(240, 860, "home").setInteractive({useHandCursor: true});
+        this.grid = this.add.image(1000, 570, "grid").setInteractive({useHandCursor: true});
         this.grid.scale = 1.2;
-        const logo = this.add.image(422-62, 180, "logo");
+        const logo = this.add.image(318, 180, "logo");
         logo.scale = 0.9;
         const pl1 = this.add.image(1650 - 47, 400, "pl1");
         const pl2 = this.add.image(1650 - 47, 520, "pl2");
-        const pvp = this.add.image(430 - 47, 270 + 116, "pvp");
+        const pvp = this.add.image(350, 270 + 116, "pvp");
         pvp.scale = 0.7;
         home.once("pointerdown", () => {
             this.scene.start("MainMenu");
@@ -80,7 +81,16 @@ export class Multiplayer extends Scene {
         this.turnPlayer2.scale = 0.65;
         this.gameState = new Game(0, false);
 
+        if (Backend.infoUser.user !== '') {
+            this.add.text(1620, 390, Backend.infoUser.firstName.split(" ")[0],
+                {
+                    fontFamily: "font1",
+                    fontSize: 15,
+                });
+        }
+
         this.grid.on("pointerdown", (pointer) => {
+            console.log(pointer.x, pointer.y);
             const pos = coordToPos(pointer.x, pointer.y);
             const move = this.gameState.makeMove(pos);
             if (move == null) return;
@@ -98,10 +108,10 @@ export class Multiplayer extends Scene {
         const offsetX = 6;
         // coordenadas do primeiro quadrado
         squares[0] = {
-            a: 690 - 47,
-            b: 202,
-            c: 879 - 47,
-            d: 389,
+            a: 612,
+            b: 273,
+            c: 801,
+            d: 464,
         };
         squares[4] = {
             a: squares[0].a,
@@ -125,7 +135,9 @@ export class Multiplayer extends Scene {
             };
         }
         this.createPiece = function createPiece(pos) {
-            if (squares[pos] === undefined) {return;}
+            if (squares[pos] === undefined) {
+                return;
+            }
             const color = this.gameState.board.board[pos];
             if (images[pos] != null) {
                 images[pos].destroy();

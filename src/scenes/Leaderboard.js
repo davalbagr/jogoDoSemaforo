@@ -46,11 +46,11 @@ export class Leaderboard extends Scene {
     this.df = y + "-08-31";
 
     var scrollMode = 0;
-    const background = this.add.image(1000-47, 498, "background");
-    background.scale = 1.26;
-    const logo = this.add.image(306, 140, "logo");
-    logo.scale = 0.7;
-    const home = this.add.image(310-40, 800, "home").setInteractive({ useHandCursor: true });
+    const background = this.add.image(1000 - 30, 540, "background");
+    background.scale = 1.35;
+    const logo = this.add.image(318, 180, "logo");
+    logo.scale = 0.9;
+    const home = this.add.image(240, 860, "home").setInteractive({ useHandCursor: true });
     home.once("pointerdown", () => {
       this.scene.start("MainMenu");
     });
@@ -140,12 +140,12 @@ export class Leaderboard extends Scene {
 
     //#region Region filtro de ano letivo
     this.containerAno = this.rexUI.add.roundRectangle(0, 0, 200, 580, 20, 0x610716)//.setAlpha(0.95);
-    this.containerAno.setOrigin(0.42, 0.555);
+    this.containerAno.setOrigin(0.42, 0.56);
     this.aGrid.placeAtIndex(132, this.containerAno);
 
     this.dropdown = this.rexUI.add.gridTable({
-      x: 1600,
-      y: 420,
+      x: 1610,
+      y: 470,
       width: 180,
       height: 250,
 
@@ -246,9 +246,9 @@ export class Leaderboard extends Scene {
     }).layout();
     //#endregion
 
-    const easy = this.add.image(300, 390, "easy").setInteractive({ useHandCursor: true });
-    const medium = this.add.image(300, 500, "medium").setInteractive({ useHandCursor: true });
-    const hard = this.add.image(300, 610, "hard").setInteractive({ useHandCursor: true });
+    const easy = this.add.image(300, 450, "easy").setInteractive({ useHandCursor: true });
+    const medium = this.add.image(300, 560, "medium").setInteractive({ useHandCursor: true });
+    const hard = this.add.image(300, 670, "hard").setInteractive({ useHandCursor: true });
 
     easy.scale = 0.75;
     medium.scale = 0.75;
@@ -360,7 +360,7 @@ export class Leaderboard extends Scene {
 
     //#region Headers das tabelas
     this.ano = this.add.text(0, 0, 'Ano letivo', { fontFamily: 'font1', fontSize: 30, color: color1 });
-    this.ano.setOrigin(0, 1);
+    this.ano.setOrigin(0, 0.7);
     this.aGrid.placeAtIndex(71.5, this.ano);
 
     this.jogador = this.add.text(0, 0, 'Jogador', { fontFamily: 'font1', fontSize: 30, color: color1 });

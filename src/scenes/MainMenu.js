@@ -29,6 +29,17 @@ export class MainMenu extends Scene {
   }
 
   update(time, delta) {
+    if (this.scale.isFullscreen) {
+      this.fullscreen2.setVisible(true);
+      this.fullscreen2.setInteractive({ useHandCursor: true });
+      this.fullscreen.setVisible(false);
+      this.fullscreen.disableInteractive();
+    } else {
+      this.fullscreen2.setVisible(false);
+      this.fullscreen2.disableInteractive();
+      this.fullscreen.setVisible(true);
+      this.fullscreen.setInteractive({ useHandCursor: true });
+    }
     if (Backend.infoUser.user !== '') {
       if (this.login.visible) {
         this.closeForm.emit("pointerdown");
@@ -39,7 +50,7 @@ export class MainMenu extends Scene {
       this.logout.setInteractive({ useHandCursor: true });
       this.login.disableInteractive();
       if (this.greeting === undefined) {
-        this.greeting = this.add.text(1540, 305, "Olá " + Backend.infoUser.firstName.split(" ")[0], {
+        this.greeting = this.add.text(1600, 335, "Olá " + Backend.infoUser.firstName.split(" ")[0], {
           fontFamily: "font1",
           fontSize: 15,
         });
@@ -67,53 +78,69 @@ export class MainMenu extends Scene {
     const easyDif = 1;
     const mediumDif = 4;
     const hardDif = 6;
-    const background = this.add.image(1000-47, 498, "background");
-    background.scale = 1.26;
+    const background = this.add.image(1000 - 30, 540, "background");
+    background.scale = 1.35;
     let difficulty = easyDif;
-    const logo = this.add.image(422-62, 180, "logo");
+    const logo = this.add.image(318, 180, "logo");
     logo.scale = 0.9;
-    const pvp = this.add.image(1040-47, 436, "pvp").setInteractive({ useHandCursor: true });
-    const pve = this.add.image(1040-47, 646, "pve");
-    this.login = this.add.image(1670-47, 180, "login");
+    const pvp = this.add.image(1040-47, 550, "pvp").setInteractive({ useHandCursor: true });
+    pvp.scale = 1.1;
+    const pve = this.add.image(1040-47, 750, "pve");
+    pve.scale = 1.1;
+    this.login = this.add.image(1670, 200, "login");
     this.login.setVisible(false);
-    this.logout = this.add.image(1670-47, 180, "logout");
+    this.logout = this.add.image(1670, 200, "logout");
     this.logout.setVisible(false);
     const leaderboard = this.add
-      .image(1670-47, 550, "leaderboard")
+      .image(1680, 610, "leaderboard")
       .setInteractive({ useHandCursor: true });
-    const info = this.add.image(1670-47, 690, "info").setInteractive({ useHandCursor: true });
-    const creditos = this.add.image(1670-47, 830, "creditos").setInteractive({ useHandCursor: true });
-    const semaforo = this.add.image(250-47, 790, "semaforo");
+    const info = this.add.image(1680, 750, "info").setInteractive({ useHandCursor: true });
+    const creditos = this.add.image(1680, 890, "creditos").setInteractive({ useHandCursor: true });
+    this.fullscreen = this.add.image(1680, 460, "fullscreen");
+    this.fullscreen.setVisible(false);
+    this.fullscreen2 = this.add.image(1680, 460, "fullscreen2");
+    this.fullscreen2.setVisible(false);
+    this.fullscreen.scale = 0.7;
+    this.fullscreen2.scale = 0.7;
+    const semaforo = this.add.image(250-47, 850, "semaforo");
     semaforo.scale = 1.2;
-    const easy = this.add.image(1300-47, 556, "easy").setInteractive({ useHandCursor: true });
-    const medium = this.add.image(1300-47, 646, "medium").setInteractive({ useHandCursor: true });
-    const hard = this.add.image(1300-47, 736, "hard").setInteractive({ useHandCursor: true });
+    const easy = this.add.image(1300-30, 656, "easy").setInteractive({ useHandCursor: true });
+    const medium = this.add.image(1300-30, 756, "medium").setInteractive({ useHandCursor: true });
+    const hard = this.add.image(1300-30, 848, "hard").setInteractive({ useHandCursor: true });
     easy.scale = 0.73;
     medium.scale = 0.7;
     hard.scale = 0.5;
     const monstro = this.add.image(500, 500, "monstro");
     monstro.scale = 0.8;
 
-    const loginForm = this.add.image(1050, 500, "login2");
+    const loginForm = this.add.image(1030, 600, "login2");
     loginForm.scale = 1.35;
     loginForm.setVisible(false);
 
-    const ok = this.add.image(1050, 700, "btok");
+    const ok = this.add.image(1030, 810, "btok");
     ok.scale = 0.7;
     ok.setVisible(false);
 
-    const infoForm = this.add.image(1050, 500, "info2");
+    const infoForm = this.add.image(1030, 600, "info2");
     infoForm.scale = 1.3;
     infoForm.setVisible(false);
 
-    const creditosForm = this.add.image(1050, 500, "creditos2");
+    const creditosForm = this.add.image(1130, 600, "creditos2");
     creditosForm.scale = 1.3;
     creditosForm.setVisible(false);
 
-    const closeForm = this.add.image(1330, 220, "btnotok").setInteractive({ useHandCursor: true });
+    const closeForm = this.add.image(1310, 320, "btnotok").setInteractive({ useHandCursor: true });
     this.closeForm = closeForm;
     closeForm.scale = 0.6;
     closeForm.setVisible(false);
+
+    this.fullscreen.on("pointerdown", () => {
+      this.scale.toggleFullscreen();
+    });
+
+    this.fullscreen2.on("pointerdown", () => {
+      this.scale.toggleFullscreen();
+    });
 
     let user = `<input type="text" name="username" style="font-size: 15px; font-family:'font1'; text-align:center;">`;
     let pass = `<input type="password" name="password" style="font-size: 15px; font-family:'font1'; text-align:center;">`;
@@ -157,9 +184,9 @@ export class MainMenu extends Scene {
       easy.disableInteractive();
       medium.disableInteractive();
       hard.disableInteractive();
-      this.usernameField = this.add.dom(1100, 400).createFromHTML(user);
+      this.usernameField = this.add.dom(1080, 500).createFromHTML(user);
       this.usernameField.scale = 1.7;
-      this.passwordField = this.add.dom(1100, 570).createFromHTML(pass);
+      this.passwordField = this.add.dom(1080, 670).createFromHTML(pass);
       this.passwordField.scale = 1.7;
       this.login.disableInteractive();
     });
