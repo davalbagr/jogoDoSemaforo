@@ -1,0 +1,16 @@
+{
+  "name": "Jogo do Semáforo",
+  "short_name": "Semáforo",
+  "theme_color": "white",
+  "background_color": "white",
+  "display": "standalone",
+  "orientation": "landscape",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "https://www.hypatiamat.com/images/favicon.ico",
+      "sizes": "any"
+    }
+  ]
+}
