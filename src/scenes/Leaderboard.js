@@ -42,15 +42,15 @@ export class Leaderboard extends Scene {
       var y = n;
     }
 
-    this.di = x + "-09-01";  // 2022-09-01
-    this.df = y + "-08-31"; // 2023-08-31
+    this.di = x + "-09-01";
+    this.df = y + "-08-31";
 
     var scrollMode = 0;
-    const background = this.add.image(1000-47, 500, "background");
-    background.scale = 1.28;
-    const logo = this.add.image(422-74, 180, "logo");
-    logo.scale = 0.9;
-    const home = this.add.image(310-47, 800, "home").setInteractive({ useHandCursor: true });
+    const background = this.add.image(1000-47, 498, "background");
+    background.scale = 1.26;
+    const logo = this.add.image(306, 140, "logo");
+    logo.scale = 0.7;
+    const home = this.add.image(310-40, 800, "home").setInteractive({ useHandCursor: true });
     home.once("pointerdown", () => {
       this.scene.start("MainMenu");
     });
@@ -60,7 +60,7 @@ export class Leaderboard extends Scene {
       x: 1238, //569
       y: 686, //343
       width: 1100, //787.5
-      height: 500,
+      height: 580,
 
       scrollMode: scrollMode,
 
@@ -135,17 +135,17 @@ export class Leaderboard extends Scene {
       items: this.CreateItems(600)
     }).layout();
 
-    this.aGrid.placeAt(7, 8, this.table);
+    this.aGrid.placeAt(7, 7.5, this.table);
     //#endregion
 
     //#region Region filtro de ano letivo
-    this.containerAno = this.rexUI.add.roundRectangle(0, 0, 200, 640, 20, 0x610716)//.setAlpha(0.95);
-    this.containerAno.setOrigin(0.42, 0.5);
+    this.containerAno = this.rexUI.add.roundRectangle(0, 0, 200, 580, 20, 0x610716)//.setAlpha(0.95);
+    this.containerAno.setOrigin(0.42, 0.555);
     this.aGrid.placeAtIndex(132, this.containerAno);
 
     this.dropdown = this.rexUI.add.gridTable({
       x: 1600,
-      y: 455,
+      y: 420,
       width: 180,
       height: 250,
 
@@ -246,9 +246,9 @@ export class Leaderboard extends Scene {
     }).layout();
     //#endregion
 
-    const easy = this.add.image(300, 436, "easy").setInteractive({ useHandCursor: true });
-    const medium = this.add.image(300, 546, "medium").setInteractive({ useHandCursor: true });
-    const hard = this.add.image(300, 656, "hard").setInteractive({ useHandCursor: true });
+    const easy = this.add.image(300, 390, "easy").setInteractive({ useHandCursor: true });
+    const medium = this.add.image(300, 500, "medium").setInteractive({ useHandCursor: true });
+    const hard = this.add.image(300, 610, "hard").setInteractive({ useHandCursor: true });
 
     easy.scale = 0.75;
     medium.scale = 0.75;
@@ -360,27 +360,27 @@ export class Leaderboard extends Scene {
 
     //#region Headers das tabelas
     this.ano = this.add.text(0, 0, 'Ano letivo', { fontFamily: 'font1', fontSize: 30, color: color1 });
-    this.ano.setOrigin(0, 0.5);
+    this.ano.setOrigin(0, 1);
     this.aGrid.placeAtIndex(71.5, this.ano);
 
     this.jogador = this.add.text(0, 0, 'Jogador', { fontFamily: 'font1', fontSize: 30, color: color1 });
-    this.jogador.setOrigin(0.7, 0.05);
+    this.jogador.setOrigin(0.7, 2);
     this.aGrid.placeAtIndex(79, this.jogador);
 
     this.pontos = this.add.text(0, 0, 'Pontos', { fontFamily: 'font1', fontSize: 30, color: color1 });
-    this.pontos.setOrigin(0.9, 0.05); //old 0.55 (i think) new 0.25
+    this.pontos.setOrigin(0.9, 2); //old 0.55 (i think) new 0.25
     this.aGrid.placeAtIndex(81, this.pontos);
 
     this.escola = this.add.text(0, 0, 'Escola', { fontFamily: 'font1', fontSize: 30, color: color1 });
-    this.escola.setOrigin(1.7, 0.05);
+    this.escola.setOrigin(1.7, 2);
     this.aGrid.placeAtIndex(83, this.escola);
 
     this.turma = this.add.text(0, 0, 'Turma', { fontFamily: 'font1', fontSize: 30, color: color1 });
-    this.turma.setOrigin(2, 0.05);
+    this.turma.setOrigin(2, 2);
     this.aGrid.placeAtIndex(85, this.turma);
 
     this.data = this.add.text(0, 0, 'Data', { fontFamily: 'font1', fontSize: 30, color: color1 });
-    this.data.setOrigin(4.3, 0.05);
+    this.data.setOrigin(4.3, 2);
     this.aGrid.placeAtIndex(87, this.data);
     //#endregion
   }
@@ -402,7 +402,6 @@ export class Leaderboard extends Scene {
 
   selectYear() {
     var data = []
-
     var d = new Date();
     var m = d.getMonth();
     var n = d.getFullYear();

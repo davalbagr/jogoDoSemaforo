@@ -88,13 +88,13 @@ export class Singleplayer extends Scene {
 
     create() {
         this.hasEnded = false;
-        const background = this.add.image(1000 - 47, 500, "background");
-        background.scale = 1.28;
-        const home = this.add.image(310 - 47, 800, "home").setInteractive({ useHandCursor: true });
+        const background = this.add.image(1000 - 47, 498, "background");
+        background.scale = 1.26;
+        const home = this.add.image(310 - 40, 800, "home").setInteractive({ useHandCursor: true });
         const grid = this.add.image(1080 - 47, 380 + 116, "grid").setInteractive({ useHandCursor: true });
         grid.scale = 1.2;
         this.grid = grid;
-        const logo = this.add.image(422-74, 180, "logo");
+        const logo = this.add.image(422-62, 180, "logo");
         logo.scale = 0.9;
         const pl1 = this.add.image(1650 - 47, 400, "pl1");
         const plcomputer = this.add.image(1650 - 47, 520, "plcomputer");

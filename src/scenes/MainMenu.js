@@ -30,14 +30,18 @@ export class MainMenu extends Scene {
 
   update(time, delta) {
     if (Backend.infoUser.user !== '') {
+      if (this.login.visible) {
+        this.closeForm.emit("pointerdown");
+      }
+      this.login.setVisible(false);
       this.login.setVisible(false);
       this.logout.setVisible(true);
       this.logout.setInteractive({ useHandCursor: true });
       this.login.disableInteractive();
       if (this.greeting === undefined) {
-        this.greeting = this.add.text(850, 120, "Olá " + Backend.infoUser.firstName.split(" ")[0], {
+        this.greeting = this.add.text(1540, 305, "Olá " + Backend.infoUser.firstName.split(" ")[0], {
           fontFamily: "font1",
-          fontSize: 20,
+          fontSize: 15,
         });
         this.greeting.scale = 2.0;
       }
@@ -63,10 +67,10 @@ export class MainMenu extends Scene {
     const easyDif = 1;
     const mediumDif = 4;
     const hardDif = 6;
-    const background = this.add.image(1000-47, 500, "background");
-    background.scale = 1.28;
+    const background = this.add.image(1000-47, 498, "background");
+    background.scale = 1.26;
     let difficulty = easyDif;
-    const logo = this.add.image(422-74, 180, "logo");
+    const logo = this.add.image(422-62, 180, "logo");
     logo.scale = 0.9;
     const pvp = this.add.image(1040-47, 436, "pvp").setInteractive({ useHandCursor: true });
     const pve = this.add.image(1040-47, 646, "pve");
@@ -107,21 +111,18 @@ export class MainMenu extends Scene {
     creditosForm.setVisible(false);
 
     const closeForm = this.add.image(1330, 220, "btnotok").setInteractive({ useHandCursor: true });
+    this.closeForm = closeForm;
     closeForm.scale = 0.6;
     closeForm.setVisible(false);
 
     let user = `<input type="text" name="username" style="font-size: 15px; font-family:'font1'; text-align:center;">`;
     let pass = `<input type="password" name="password" style="font-size: 15px; font-family:'font1'; text-align:center;">`;
-    var usernameField;
-    var passwordField;
 
     ok.on("pointerdown", () => {
-      let uTxt = usernameField.getChildByName("username").value
-      let pTxt = passwordField.getChildByName("password").value
+      let uTxt = this.usernameField.getChildByName("username").value
+      let pTxt = this.passwordField.getChildByName("password").value
       if (uTxt !== '' && pTxt !== '') {
         Backend.login(uTxt, pTxt, this);
-        usernameField.getChildByName("username").value = '';
-        passwordField.getChildByName("password").value = '';
       }
     });
 
@@ -139,11 +140,11 @@ export class MainMenu extends Scene {
       info.setInteractive({ useHandCursor: true });
       this.login.setInteractive({ useHandCursor: true });
       closeForm.setVisible(false);
-      if (usernameField !== undefined) {
-        usernameField.destroy();
-        passwordField.destroy();
-        usernameField = undefined;
-        passwordField = undefined;
+      if (this.usernameField !== undefined) {
+        this.usernameField.destroy();
+        this.passwordField.destroy();
+        this.usernameField = undefined;
+        this.passwordField = undefined;
       }
     })
     this.login.on("pointerdown", () => {
@@ -156,10 +157,10 @@ export class MainMenu extends Scene {
       easy.disableInteractive();
       medium.disableInteractive();
       hard.disableInteractive();
-      usernameField = this.add.dom(1100, 400).createFromHTML(user);
-      usernameField.scale = 1.7;
-      passwordField = this.add.dom(1100, 570).createFromHTML(pass);
-      passwordField.scale = 1.7;
+      this.usernameField = this.add.dom(1100, 400).createFromHTML(user);
+      this.usernameField.scale = 1.7;
+      this.passwordField = this.add.dom(1100, 570).createFromHTML(pass);
+      this.passwordField.scale = 1.7;
       this.login.disableInteractive();
     });
     this.logout.on("pointerdown", () => {
