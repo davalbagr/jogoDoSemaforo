@@ -16,6 +16,22 @@ export class Leaderboard extends Scene {
     this.rexUI = this.plugins.get('rexUI');
   }
 
+  update(time, delta) {
+    if (this.dificulty === 1) {
+      this.smallEasy.setVisible(true);
+      this.smallMedium.setVisible(false);
+      this.smallHard.setVisible(false);
+    } else if (this.dificulty === 2) {
+      this.smallEasy.setVisible(false);
+      this.smallMedium.setVisible(true);
+      this.smallHard.setVisible(false);
+    } else if (this.dificulty === 3) {
+      this.smallEasy.setVisible(false);
+      this.smallMedium.setVisible(false);
+      this.smallHard.setVisible(true);
+    }
+  }
+
   create() {
     this.dificulty = 1;
     this.flag = 2;
@@ -249,6 +265,16 @@ export class Leaderboard extends Scene {
     const easy = this.add.image(300, 450, "easy").setInteractive({ useHandCursor: true });
     const medium = this.add.image(300, 560, "medium").setInteractive({ useHandCursor: true });
     const hard = this.add.image(300, 670, "hard").setInteractive({ useHandCursor: true });
+
+    this.smallEasy = this.add.image(1470, 330, "easy");
+    this.smallEasy.setVisible(false);
+    this.smallMedium = this.add.image(1470, 330, "medium");
+    this.smallMedium.setVisible(false);
+    this.smallHard = this.add.image(1470, 330, "hard");
+    this.smallHard.setVisible(false);
+    this.smallEasy.scale = 0.4;
+    this.smallMedium.scale = 0.4;
+    this.smallHard.scale = 0.29;
 
     easy.scale = 0.75;
     medium.scale = 0.75;
