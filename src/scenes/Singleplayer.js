@@ -84,7 +84,7 @@ export class Singleplayer extends Scene {
         var scoreTxt;
         if (this.flag) {
             score = this.add.image(1000, 700, "score");
-            scoreTxt = this.add.text(1000, 670, this.timer, {
+            scoreTxt = this.add.text(1000, 670, Math.round(this.timer).toString(), {
                 fontFamily: "font1",
                 fontSize: 28,
                 color: "#ffffff",
@@ -119,7 +119,7 @@ export class Singleplayer extends Scene {
             let tip = 3;
             if (this.difficulty === this.easyDif) { tip = 1;}
             if (this.difficulty === this.mediumDif) { tip = 2;}
-            Backend.gravaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, this.timer);
+            Backend.gravaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, Math.round(this.timer));
         }
         this.wonLostHelper();
     }
