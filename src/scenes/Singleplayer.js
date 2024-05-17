@@ -12,11 +12,12 @@ export class Singleplayer extends Scene {
         this.difficulty = data.difficulty;
         this.easyDif = data.easyDif;
         this.mediumDif = data.mediumDif;
-        this.startTime = this.time.now + 400;
+        this.startTime = undefined;
     }
 
     update(time, delta) {
         if (this.hasEnded) return;
+        if (this.startTime === undefined) this.startTime =  this.time.now;
         this.timer = time - this.startTime;
         this.timerText.setText(this.timer / 10000);
         if (this.gameState.turn) {
