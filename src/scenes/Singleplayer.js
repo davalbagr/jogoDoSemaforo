@@ -51,7 +51,7 @@ export class Singleplayer extends Scene {
         nao.setVisible(false);
 
         sim.once("pointerdown", () => {
-            this.scene.start("Multiplayer");
+            this.scene.start("Singleplayer");
         });
 
         nao.once("pointerdown", () => {
@@ -75,16 +75,33 @@ export class Singleplayer extends Scene {
         sim2.scale = 0.7;
 
         sim2.once("pointerdown", () => {
-            this.scene.start("Multiplayer");
+            this.scene.start("Singleplayer");
         })
         nao2.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
+        var score;
+        var scoreTxt;
+        if (this.flag) {
+            score = this.add.image(1000, 700, "score");
+            scoreTxt = this.add.text(1000, 670, this.timer, {
+                fontFamily: "font1",
+                fontSize: 28,
+                color: "#ffffff",
+                stroke: "#000000",
+                strokeThickness: 8,
+                align: "center",
+            });
+        }
         hide.once("pointerdown", () => {
             board.destroy();
             sim2.destroy();
             nao2.destroy();
             hide.destroy();
+            if (this.flag) {
+                score.destroy();
+                scoreTxt.destroy();
+            }
             sim.setVisible(true);
             sim.setInteractive({ useHandCursor: true });
             nao.setVisible(true);
