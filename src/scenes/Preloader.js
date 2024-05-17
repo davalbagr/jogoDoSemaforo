@@ -50,6 +50,7 @@ export class Preloader extends Scene {
     this.load.image("logout", "logout.png");
     this.load.image("fullscreen", "fullscreen2.png");
     this.load.image("fullscreen2", "fullscreen1.png");
+    this.load.image("timer", "ampulhetaTempo.png");
   }
 
   create() {

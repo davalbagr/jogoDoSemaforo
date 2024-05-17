@@ -161,7 +161,7 @@ export function updateTOP(di, df, globalCodTurma, globalCodEscola, flag, tip,sce
     ({
         type: "POST",
         url: "https://www.hypatiamat.com/newHRecords.php",
-        data: "action=mostraNew&anoLi=" + di + "&anoLf=" + df + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&flag="+flag  + "&tip=" + tip + "&tC=semaforoTOP",
+        data: "action=mostraNewA&anoLi=" + di + "&anoLf=" + df + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&flag="+flag  + "&tip=" + tip + "&tC=semaforoTOP",
         crossDomain: true,
         cache: false,
         success: function (response) {
@@ -290,26 +290,6 @@ export function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pon
         }
     });
 }
-
-
-export function updatePontuacao(username, globalCodTurma, globalCodEscola, tip) {
-    $.ajax
-    ({
-        type: "POST",
-        url: "https://www.hypatiamat.com/newHRecords.php",
-        data: "action=minimoGlobal&codAl=" + username + "&codTurma=" + globalCodTurma + "&codEscola=" + globalCodEscola + "&pont=" + 0 + "&tip=" + tip + "&t=semaforoHypatia&tC=semaforoTOP",
-        crossDomain: true,
-        cache: false,
-        success: function (response) {
-
-            let pontuacao = parseFloat(response.split("vlMin4=")[1]);
-            gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao+1);
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-        }
-    })
-}
-
 
 function getRecords(username, globalCodTurma, globalCodEscola, tip, scene) {
 

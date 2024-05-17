@@ -12,10 +12,13 @@ export class Singleplayer extends Scene {
         this.difficulty = data.difficulty;
         this.easyDif = data.easyDif;
         this.mediumDif = data.mediumDif;
+        this.startTime = this.time.now + 400;
     }
 
     update(time, delta) {
         if (this.hasEnded) return;
+        this.timer = time - this.startTime;
+        this.timerText.setText(this.timer / 10000);
         if (this.gameState.turn) {
             this.turnComp.setVisible(false);
             this.turnPlayer.setVisible(true);
@@ -70,7 +73,7 @@ export class Singleplayer extends Scene {
             let tip = 3;
             if (this.difficulty === this.easyDif) { tip = 1;}
             if (this.difficulty === this.mediumDif) { tip = 2;}
-            Backend.updatePontuacao(infoUser.user, infoUser.turma, infoUser.escola, tip);
+            Backend.gravaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, this.timer);
         }
     }
 
@@ -96,8 +99,8 @@ export class Singleplayer extends Scene {
         this.grid.scale = 1.2;
         const logo = this.add.image(318, 180, "logo");
         logo.scale = 0.9;
-        const pl1 = this.add.image(1650 - 47, 400, "pl1");
-        const plcomputer = this.add.image(1650 - 47, 520, "plcomputer");
+        const pl1 = this.add.image(1650 - 47, 460, "pl1");
+        const plcomputer = this.add.image(1650 - 47, 580, "plcomputer");
         const pve = this.add.image(350, 270 + 116, "pve");
         pve.scale = 0.7;
         if (Backend.infoUser.user !== '') {
@@ -107,10 +110,15 @@ export class Singleplayer extends Scene {
                     fontSize: 15,
                 });
         }
-        this.turnPlayer = this.add.image(1575 - 47, 298 + 116 - 17, "pl2target");
+        this.timer = 0;
+        const timerSprite = this.add.image(1600, 200, "timer");
+        this.timerText = this.add.text(1590, 180, "0");
+        this.timerText.scale = 1.3;
+        timerSprite.scale = 0.8;
+        this.turnPlayer = this.add.image(1575 - 47, 458, "pl2target");
         this.turnPlayer.setVisible(false);
         this.turnPlayer.scale = 0.65;
-        this.turnComp = this.add.image(1575 - 47, 398 + 116 + 5, "cputarget");
+        this.turnComp = this.add.image(1575 - 47, 578, "cputarget");
         this.turnComp.setVisible(false);
         this.turnComp.scale = 0.65;
         this.readyMove = true;

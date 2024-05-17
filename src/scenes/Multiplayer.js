@@ -66,21 +66,20 @@ export class Multiplayer extends Scene {
         this.grid.scale = 1.2;
         const logo = this.add.image(318, 180, "logo");
         logo.scale = 0.9;
-        const pl1 = this.add.image(1650 - 47, 400, "pl1");
-        const pl2 = this.add.image(1650 - 47, 520, "pl2");
+        const pl1 = this.add.image(1650 - 47, 460, "pl1");
+        const pl2 = this.add.image(1650 - 47, 580, "pl2");
         const pvp = this.add.image(350, 270 + 116, "pvp");
         pvp.scale = 0.7;
         home.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
-        this.turnPlayer1 = this.add.image(1575 - 47, 298 + 116 - 17, "pl2target");
+        this.turnPlayer1 = this.add.image(1575 - 47, 458, "pl2target");
         this.turnPlayer1.setVisible(false);
         this.turnPlayer1.scale = 0.65;
-        this.turnPlayer2 = this.add.image(1575 - 47, 398 + 116 + 5, "pl1target");
+        this.turnPlayer2 = this.add.image(1575 - 47, 578, "pl1target");
         this.turnPlayer2.setVisible(false);
         this.turnPlayer2.scale = 0.65;
         this.gameState = new Game(0, false);
-
         if (Backend.infoUser.user !== '') {
             this.add.text(1620, 390, Backend.infoUser.firstName.split(" ")[0],
                 {
