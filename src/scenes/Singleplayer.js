@@ -116,13 +116,13 @@ export class Singleplayer extends Scene {
     won() {
         this.hasEnded = true;
         this.flag = true;
+        this.wonLostHelper();
         if (Backend.infoUser.user !== '') {
             let tip = 3;
             if (this.difficulty === this.easyDif) { tip = 1;}
             if (this.difficulty === this.mediumDif) { tip = 2;}
-            Backend.gravaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, Math.round(this.timer));
+            Backend.verificaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, Math.round(this.timer), this);
         }
-        this.wonLostHelper();
     }
 
     lost() {
