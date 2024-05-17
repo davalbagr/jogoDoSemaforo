@@ -46,7 +46,7 @@ export class Preloader extends Scene {
     this.load.image("btok", "btok.png");
     this.load.image("btnotok", "btnotok.png");
     this.load.image("creditos2", "creditos2.png");
-    this.load.image("info2", "creditos2.png");
+    this.load.image("info2", "info2.png");
     this.load.image("logout", "logout.png");
     this.load.image("fullscreen", "fullscreen2.png");
     this.load.image("fullscreen2", "fullscreen1.png");
