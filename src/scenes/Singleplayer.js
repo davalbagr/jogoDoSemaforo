@@ -19,7 +19,7 @@ export class Singleplayer extends Scene {
         if (this.hasEnded) return;
         if (this.startTime === undefined) this.startTime =  this.time.now;
         this.timer = time - this.startTime;
-        this.timerText.setText((this.timer / 10000).toFixed(4));
+        this.timerText.setText((this.timer / 1000).toFixed(4));
         if (this.gameState.turn) {
             this.turnComp.setVisible(false);
             this.turnPlayer.setVisible(true);
