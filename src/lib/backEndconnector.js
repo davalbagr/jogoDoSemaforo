@@ -116,7 +116,7 @@ export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
     ({
         type: "POST",
         url: "https://www.hypatiamat.com/newHRecords.php",
-        data: "action=mostraNew&anoLi=" + di + "&anoLf=" + df + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&flag=2" + "&tip=" + tip  + "&tC=semaforoTOP",
+        data: "action=mostraNewA&anoLi=" + di + "&anoLf=" + df + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&flag=2" + "&tip=" + tip  + "&tC=semaforoTOP",
         crossDomain: true,
         cache: false,
         success: function (response) {
