@@ -59,7 +59,7 @@ export class Singleplayer extends Scene {
         });
         const board = this.add.image(1000, 550, "board");
         board.scale = 1.3;
-        const txt = this.add.text(870, 300, this.flag ? "Tu ganhaste!\nQueres jogar mais?" : "O computador ganhou!\nQueres jogar mais?", {
+        const txt = this.add.text(860, 300, this.flag ? "Tu ganhaste!\nQueres jogar mais?" : "O computador ganhou!\nQueres jogar mais?", {
             fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",

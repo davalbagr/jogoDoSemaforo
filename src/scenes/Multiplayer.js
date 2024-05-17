@@ -36,7 +36,7 @@ export class Multiplayer extends Scene {
         });
         const board = this.add.image(1000, 550, "board");
         board.scale = 1.3;
-        const txt = this.add.text(870, 300, this.flag ? "O jogador 1 ganhou!\nQueres jogar mais?" : "O jogador 2 ganhou!\nQueres jogar mais?", {
+        const txt = this.add.text(860, 300, this.flag ? "O jogador 1 ganhou!\nQueres jogar mais?" : "O jogador 2 ganhou!\nQueres jogar mais?", {
             fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
