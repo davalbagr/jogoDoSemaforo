@@ -114,6 +114,7 @@ export class Singleplayer extends Scene {
 
 
     won() {
+        this.hasEnded = true;
         this.flag = true;
         if (Backend.infoUser.user !== '') {
             let tip = 3;
@@ -125,6 +126,7 @@ export class Singleplayer extends Scene {
     }
 
     lost() {
+        this.hasEnded = true;
         this.flag = false;
         this.wonLostHelper();
     }
