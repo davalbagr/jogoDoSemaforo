@@ -51,6 +51,7 @@ export class Preloader extends Scene {
     this.load.image("fullscreen", "fullscreen2.png");
     this.load.image("fullscreen2", "fullscreen1.png");
     this.load.image("timer", "ampulhetaTempo.png");
+    this.load.image("board", "quadroFinal.png");
   }
 
   create() {

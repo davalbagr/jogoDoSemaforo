@@ -41,52 +41,74 @@ export class Singleplayer extends Scene {
             }
         }
     }
-
-
     wonLostHelper() {
         this.grid.disableInteractive();
-        const sim = this.add.image(280, 480 + 140, "btok").setInteractive({ useHandCursor: true });
-        const nao = this.add.image(465, 480 + 140, "btnotok").setInteractive({ useHandCursor: true });
+        const sim = this.add.image(280, 480 + 140, "btok");
+        const nao = this.add.image(465, 480 + 140, "btnotok");
         sim.scale = nao.scale = 0.5;
+        sim.setVisible(false);
+        nao.setVisible(false);
 
         sim.once("pointerdown", () => {
-            this.scene.start("Singleplayer");
+            this.scene.start("Multiplayer");
         });
 
         nao.once("pointerdown", () => {
             this.scene.start("MainMenu");
         });
-        this.hasEnded = true;
-    }
-
-    won() {
-        this.wonLostHelper();
-        this.add.text(205+30, 330 + 140, "Tu ganhaste!\nQueres jogar mais?", {
+        const board = this.add.image(1000, 550, "board");
+        board.scale = 1.3;
+        const txt = this.add.text(870, 300, this.flag ? "Tu ganhaste!\nQueres jogar mais?" : "O computador ganhou!\nQueres jogar mais?", {
             fontFamily: "font1",
             fontSize: 28,
             color: "#ffffff",
             stroke: "#000000",
             strokeThickness: 8,
             align: "center",
+        });
+        const sim2 = this.add.image(900, 500, "btok").setInteractive({ useHandCursor: true });
+        const nao2 = this.add.image(1100, 500, "btnotok").setInteractive({ useHandCursor: true });
+        const hide = this.add.image(1270, 270, "btnotok").setInteractive({ useHandCursor: true });
+        hide.scale = 0.7;
+        nao2.scale = 0.7;
+        sim2.scale = 0.7;
+
+        sim2.once("pointerdown", () => {
+            this.scene.start("Multiplayer");
         })
+        nao2.once("pointerdown", () => {
+            this.scene.start("MainMenu");
+        });
+        hide.once("pointerdown", () => {
+            board.destroy();
+            sim2.destroy();
+            nao2.destroy();
+            hide.destroy();
+            sim.setVisible(true);
+            sim.setInteractive({ useHandCursor: true });
+            nao.setVisible(true);
+            nao.setInteractive({ useHandCursor: true });
+            txt.x = 235;
+            txt.y = 470;
+        })
+    }
+
+
+
+    won() {
+        this.flag = true;
         if (Backend.infoUser.user !== '') {
             let tip = 3;
             if (this.difficulty === this.easyDif) { tip = 1;}
             if (this.difficulty === this.mediumDif) { tip = 2;}
             Backend.gravaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, this.timer);
         }
+        this.wonLostHelper();
     }
 
     lost() {
+        this.flag = false;
         this.wonLostHelper();
-        this.add.text(205+30, 330 + 140, "O computador ganhou!\nQueres jogar mais?", {
-            fontFamily: "font1",
-            fontSize: 28,
-            color: "#ffffff",
-            stroke: "#000000",
-            strokeThickness: 8,
-            align: "center",
-        })
     }
 
     create() {
@@ -104,7 +126,7 @@ export class Singleplayer extends Scene {
         const pve = this.add.image(350, 270 + 116, "pve");
         pve.scale = 0.7;
         if (Backend.infoUser.user !== '') {
-            this.add.text(1620, 390, Backend.infoUser.firstName.split(" ")[0],
+            this.add.text(1620, 450, Backend.infoUser.firstName.split(" ")[0],
                 {
                     fontFamily: "font1",
                     fontSize: 15,
