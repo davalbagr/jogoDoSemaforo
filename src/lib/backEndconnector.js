@@ -247,7 +247,7 @@ export function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pon
     ({
         type: "POST",
         url: "https://www.hypatiamat.com/newHRecords.php",
-        data: "action=insere&musername=" + username + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&mpontuacao=" + pontuacao + "&mtipo=" + tip + "&t=semaforoHypatia&tC=semaforoTOP",
+        data: "action=insereA&musername=" + username + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&mpontuacao=" + pontuacao + "&mtipo=" + tip + "&t=semaforoHypatia&tC=semaforoTOP",
         crossDomain: true,
         cache: false,
         success: function (response) {
