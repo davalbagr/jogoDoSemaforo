@@ -106,7 +106,7 @@ export function destroySession() {
  * @param {string} password Password to try to login with
  * @param {Phaser.Scene} scene scope in with the login is being made
  */
-export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
+export async function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
     var data = [];
     $.ajax
     ({
@@ -114,6 +114,7 @@ export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
         url: "https://www.hypatiamat.com/newHRecords.php",
         data: "action=mostraNewA&anoLi=" + di + "&anoLf=" + df + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&flag=2" + "&tip=" + tip + "&tC=semaforoTOP",
         crossDomain: true,
+        async: true,
         cache: false,
         success: function (response) {
             let j = 0;
