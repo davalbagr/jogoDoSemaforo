@@ -242,8 +242,7 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
 }
 
 
-export function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao) {
-
+export async function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao) {
     $.ajax
     ({
         type: "POST",

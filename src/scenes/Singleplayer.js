@@ -121,7 +121,7 @@ export class Singleplayer extends Scene {
             let tip = 3;
             if (this.difficulty === this.easyDif) { tip = 1;}
             if (this.difficulty === this.mediumDif) { tip = 2;}
-            Backend.verificaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, Math.round(this.timer), this);
+            Backend.gravaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, Math.round(this.timer), this);
         }
     }
 
