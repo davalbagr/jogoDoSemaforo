@@ -50,7 +50,7 @@ export class Leaderboard extends Scene {
     var m = d.getMonth();
     var n = d.getFullYear();
     if (m > 7) {
-      var x = n;  // 8 - x : 2023, y:2024 , 7 - x : 2022, y: 2023
+      var x = n;
       var y = n + 1;
     }
     else {
@@ -71,11 +71,10 @@ export class Leaderboard extends Scene {
       this.scene.start("MainMenu");
     });
 
-    //#region Player Score
     this.table = this.rexUI.add.gridTable({
-      x: 1238, //569
-      y: 686, //343
-      width: 1100, //787.5
+      x: 1238,
+      y: 686,
+      width: 1100,
       height: 580,
 
       scrollMode: scrollMode,
@@ -112,19 +111,19 @@ export class Leaderboard extends Scene {
       createCellContainerCallback: function (cell, cellContainer) {
         let newwith ;
 
-        if (cell.index % 6 == 0) {//index
+        if (cell.index % 6 == 0) { // index
           newwith = 10;
         }
-        if (cell.index % 6 == 1) {//nome
+        if (cell.index % 6 == 1) { // nome
           newwith = 10;
         }
-        if (cell.index % 6 == 2) {//pontos
+        if (cell.index % 6 == 2) { // pontos
           newwith = 550;
         }
-        if (cell.index % 6 == 3) {//Escola
+        if (cell.index % 6 == 3) { // escola
           newwith = 850;
         }
-        if (cell.index % 6 == 4) {//turma
+        if (cell.index % 6 == 4) { // turma
           newwith = 1175;
         }
         if (cell.index % 6 == 5) {
@@ -152,14 +151,12 @@ export class Leaderboard extends Scene {
     }).layout();
 
     this.aGrid.placeAt(7, 7.5, this.table);
-    //#endregion
 
-    //#region Region filtro de ano letivo
     this.containerAno = this.rexUI.add.roundRectangle(0, 0, 200, 580, 20, 0x610716)//.setAlpha(0.95);
     this.containerAno.setOrigin(0.42, 0.56);
     this.aGrid.placeAtIndex(132, this.containerAno);
 
-    this.dropdown = this.rexUI.add.gridTable({
+    this.rexUI.add.gridTable({
       x: 1610,
       y: 470,
       width: 180,
@@ -260,7 +257,6 @@ export class Leaderboard extends Scene {
       },
       items: this.selectYear()
     }).layout();
-    //#endregion
 
     const easy = this.add.image(300, 450, "easy").setInteractive({ useHandCursor: true });
     const medium = this.add.image(300, 560, "medium").setInteractive({ useHandCursor: true });
@@ -296,7 +292,6 @@ export class Leaderboard extends Scene {
     })
 
 
-    //#region Region Filtro Todos, Escola, Turma
     this.filtro = this.add.text(0, 0, 'Filtro', { fontFamily: 'font1', fontSize: 30, color: color1});
     this.filtro.setOrigin(2, 1);
     this.aGrid.placeAtIndex(163, this.filtro);
@@ -382,9 +377,7 @@ export class Leaderboard extends Scene {
       this.flag = 0;
       updateTOP(this.di, this.df, infoUser.turma, infoUser.escola, this.flag, this.dificulty, this);
     });
-    //#endregion
 
-    //#region Headers das tabelas
     this.ano = this.add.text(0, 0, 'Ano letivo', { fontFamily: 'font1', fontSize: 30, color: color1 });
     this.ano.setOrigin(0, 0.7);
     this.aGrid.placeAtIndex(71.5, this.ano);
@@ -408,7 +401,6 @@ export class Leaderboard extends Scene {
     this.data = this.add.text(0, 0, 'Data', { fontFamily: 'font1', fontSize: 30, color: color1 });
     this.data.setOrigin(4.3, 2);
     this.aGrid.placeAtIndex(87, this.data);
-    //#endregion
   }
 
   CreateItems(count) {
@@ -432,15 +424,11 @@ export class Leaderboard extends Scene {
     var m = d.getMonth();
     var n = d.getFullYear();
     if (m > 7) {
-      //var x = n;
       var y = n + 1;
     }
     else {
-      //var x = n - 1;
       var y = n;
     }
-    //let di = x + "-09-01";
-    //let df = y + "-08-31";
     let j = 23;
     for (let i = 2023; i < y; i++) {
 
