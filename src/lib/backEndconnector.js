@@ -106,7 +106,7 @@ export function destroySession() {
  * @param {string} password Password to try to login with
  * @param {Phaser.Scene} scene scope in with the login is being made
  */
-export async function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
+export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
     var data = [];
     $.ajax
     ({
@@ -114,7 +114,7 @@ export async function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene
         url: "https://www.hypatiamat.com/newHRecords.php",
         data: "action=mostraNewA&anoLi=" + di + "&anoLf=" + df + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&flag=2" + "&tip=" + tip + "&tC=semaforoTOP",
         crossDomain: true,
-        async: true,
+        async: false,
         cache: false,
         success: function (response) {
             let j = 0;
@@ -207,6 +207,7 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
     ({
         type: "POST",
         url: "https://www.hypatiamat.com/newHRecords.php",
+        async: false,
         data: "action=minimoGlobal&codAl=" + username + "&codTurma=" + globalCodTurma + "&codEscola=" + globalCodEscola + "&pont=" + pontuacao + "&tip=" + tip + "&t=semaforoHypatia&tC=semaforoTOP",
         crossDomain: true,
         cache: false,
