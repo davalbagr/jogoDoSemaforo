@@ -227,8 +227,10 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
                         please = "Conseguiste um novo recorde na tua escola!";
                     } else if (data[1] > pontuacao) { // top turma
                         please = "Conseguiste um novo recorde na tua turma!";
-                    } else { // top pessoal
+                    } else if (data[0] > pontuacao) { // top pessoal
                         please = "     Conseguiste melhorar o teu recorde!";
+                    } else {
+                        please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + pontuacao + " pontos";
                     }
                 } else {
                     please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + pontuacao + " pontos";
