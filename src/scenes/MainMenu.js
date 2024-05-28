@@ -78,10 +78,10 @@ export class MainMenu extends Scene {
     const easyDif = 1;
     const mediumDif = 4;
     const hardDif = 6;
-    const background = this.add.image(1000 - 30, 540, "background");
+    const background = this.add.image(1000 - 37, 540, "background");
     background.scale = 1.35;
     let difficulty = easyDif;
-    const logo = this.add.image(318, 180, "logo");
+    const logo = this.add.image(311, 180, "logo");
     logo.scale = 0.9;
     const pvp = this.add.image(1040-47, 550, "pvp").setInteractive({ useHandCursor: true });
     pvp.scale = 1.1;

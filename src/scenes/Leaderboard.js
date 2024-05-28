@@ -62,11 +62,11 @@ export class Leaderboard extends Scene {
     this.df = y + "-08-31";
 
     var scrollMode = 0;
-    const background = this.add.image(1000 - 30, 540, "background");
+    const background = this.add.image(1000 - 37, 540, "background");
     background.scale = 1.35;
-    const logo = this.add.image(318, 180, "logo");
+    const logo = this.add.image(311, 180, "logo");
     logo.scale = 0.9;
-    const home = this.add.image(240, 860, "home").setInteractive({ useHandCursor: true });
+    const home = this.add.image(233, 860, "home").setInteractive({ useHandCursor: true });
     home.once("pointerdown", () => {
       this.scene.start("MainMenu");
     });
