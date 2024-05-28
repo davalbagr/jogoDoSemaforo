@@ -17,7 +17,7 @@ export class Singleplayer extends Scene {
 
     update(time, delta) {
         if (this.hasEnded) return;
-        if (this.startTime === undefined) this.startTime =  this.time.now;
+        if (this.startTime === undefined) this.startTime = this.time.now;
         this.timer = time - this.startTime;
         this.timerText.setText((this.timer / 1000).toFixed(3));
         if (this.gameState.turn) {
@@ -42,6 +42,7 @@ export class Singleplayer extends Scene {
             }
         }
     }
+
     wonLostHelper() {
         this.grid.disableInteractive();
         const sim = this.add.image(280, 480 + 140, "btok");
@@ -67,9 +68,9 @@ export class Singleplayer extends Scene {
             strokeThickness: 8,
             align: "center",
         });
-        const sim2 = this.add.image(900, 500, "btok").setInteractive({ useHandCursor: true });
-        const nao2 = this.add.image(1100, 500, "btnotok").setInteractive({ useHandCursor: true });
-        const hide = this.add.image(1270, 270, "btnotok").setInteractive({ useHandCursor: true });
+        const sim2 = this.add.image(900, 550, "btok").setInteractive({useHandCursor: true});
+        const nao2 = this.add.image(1100, 550, "btnotok").setInteractive({useHandCursor: true});
+        const hide = this.add.image(1270, 270, "btnotok").setInteractive({useHandCursor: true});
         hide.scale = 0.7;
         nao2.scale = 0.7;
         sim2.scale = 0.7;
@@ -93,6 +94,14 @@ export class Singleplayer extends Scene {
                 align: "center",
             });
         }
+        this.pleaseText = this.add.text(810, 410, this.please, {
+            fontFamily: "font1",
+            fontSize: 20,
+            color: "#ffffff",
+            stroke: "#000000",
+            strokeThickness: 8,
+            align: "center",
+        });
         hide.once("pointerdown", () => {
             board.destroy();
             sim2.destroy();
@@ -102,32 +111,36 @@ export class Singleplayer extends Scene {
                 score.destroy();
                 scoreTxt.destroy();
             }
+            this.pleaseText.destroy();
             sim.setVisible(true);
-            sim.setInteractive({ useHandCursor: true });
+            sim.setInteractive({useHandCursor: true});
             nao.setVisible(true);
-            nao.setInteractive({ useHandCursor: true });
+            nao.setInteractive({useHandCursor: true});
             txt.x = 235;
             txt.y = 470;
-        })
+        });
     }
-
 
 
     won() {
         this.hasEnded = true;
         this.flag = true;
-        this.wonLostHelper();
-        if (Backend.infoUser.user !== '') {
-            let tip = 3;
-            if (this.difficulty === this.easyDif) { tip = 1;}
-            if (this.difficulty === this.mediumDif) { tip = 2;}
-            Backend.gravaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, Math.round(this.timer), this);
+        let tip = 3;
+        if (this.difficulty === this.easyDif) {
+            tip = 1;
         }
+        if (this.difficulty === this.mediumDif) {
+            tip = 2;
+        }
+        this.please = "";
+        Backend.verificaRecords(infoUser.user, infoUser.turma, infoUser.escola, tip, Math.round(this.timer), this);
+        this.wonLostHelper();
     }
 
     lost() {
         this.hasEnded = true;
         this.flag = false;
+        this.please = "";
         this.wonLostHelper();
     }
 
@@ -135,8 +148,8 @@ export class Singleplayer extends Scene {
         this.hasEnded = false;
         const background = this.add.image(1000 - 30, 540, "background");
         background.scale = 1.35;
-        const home = this.add.image(240, 860, "home").setInteractive({ useHandCursor: true });
-        const grid = this.add.image(1000, 570, "grid").setInteractive({ useHandCursor: true });
+        const home = this.add.image(240, 860, "home").setInteractive({useHandCursor: true});
+        const grid = this.add.image(1000, 570, "grid").setInteractive({useHandCursor: true});
         this.grid = grid;
         this.grid.scale = 1.2;
         const logo = this.add.image(318, 180, "logo");
@@ -155,7 +168,7 @@ export class Singleplayer extends Scene {
         this.timer = 0;
         const timerSprite = this.add.image(1600, 200, "timer");
         this.timerText = this.add.text(1590, 180, "0");
-        this.timerText.scale = 1.3;
+        this.timerText.scale = 1.5;
         timerSprite.scale = 0.8;
         this.turnPlayer = this.add.image(1575 - 47, 458, "pl2target");
         this.turnPlayer.setVisible(false);
@@ -226,7 +239,9 @@ export class Singleplayer extends Scene {
             };
         }
         this.createPiece = function createPiece(pos) {
-            if (squares[pos] === undefined) {return;}
+            if (squares[pos] === undefined) {
+                return;
+            }
             const color = this.gameState.board.board[pos];
             if (color > 1) {
                 images[pos].destroy();

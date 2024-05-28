@@ -203,7 +203,6 @@ export function updateTOP(di, df, globalCodTurma, globalCodEscola, flag, tip, sc
 
 
 export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao, scene) {
-
     $.ajax
     ({
         type: "POST",
@@ -216,33 +215,41 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
             data.push(parseFloat(response.split("vlMin4=")[1]));               //melhor resultado pessoal
             data.push(parseFloat(response.split("vlMin3=")[1].split("&")[0])); //minimo da turma
             data.push(parseFloat(response.split("vlMin2=")[1].split("&")[0])); //minimo da escola
-            data.push(parseFloat(response.split("vlMin1=")[1].split("&")[0])); //minimo global - TOP 100 
+            data.push(parseFloat(response.split("vlMin1=")[1].split("&")[0])); //minimo global - TOP 100
             pontuacao = parseFloat(pontuacao);
             let please;
-            if (data[0] < pontuacao && pontuacao > 0) {
-                if (data[3] < pontuacao) {//top global
-                    please = (username + ", conseguiste um novo record ABSOLUTO!  Com " + pontuacao + " pontos.\nVê o teu resultado no TOP 100 absoluto.");
-                } else if (data[2] < pontuacao) {//top escola
-                    please = (username + ", conseguiste um novo record na tua escola! " + "Com " + pontuacao + " pontos.\nVê o teu resultado no TOP 100 da tua escola.");
-                } else if (data[1] < pontuacao) { // top turma
-                    please = (username + ", conseguiste um novo record na tua turma!" + "Com " + pontuacao + " pontos.\nVê o teu resultado no TOP 100 da tua turma.");
-                } else { // top pessoal
-                    please = (username + ", conseguiste melhorar o teu resultado anterior. Estás no bom caminho!");
+            if (infoUser.user !== '') {
+                if (data[0] > pontuacao && pontuacao > 0) {
+                    if (data[3] > pontuacao) {//top global
+                        please = "Conseguiste um novo record absoluto!";
+                    } else if (data[2] > pontuacao) {//top escola
+                        please = "Conseguiste um novo record na tua escola!";
+                    } else if (data[1] > pontuacao) { // top turma
+                        please = "Conseguiste um novo record na tua turma!";
+                    } else { // top pessoal
+                        please = "     Conseguiste melhorar o teu record!";
+                    }
+                } else {
+                    please = "Não conseguiste melhorar o teu resultado anterior \no teu melhor resultado é " + pontuacao + " pontos";
                 }
+                gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
             } else {
-                please = (username + ", obtiveste " + pontuacao + " pontos.\nNão conseguiste melhorar o teu resultado anterior (o teu melhor resultado é " + data[0] + " pontos). Tenta outra vez.");
+                if (data[3] > pontuacao && pontuacao > 0) {
+                    please = "Se estivesses registado o teu nome figuraria \nno TOP 100 absoluto";
+                } else {
+                    please = "  Para que o teu nome figure nos TOPs \n  tens de estar registado";
+                }
             }
-            gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao);
+            scene.please = please;
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Falha de ligação, por favor verifique a sua conexão");
         }
     })
-
 }
 
 
-export async function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao) {
+export function gravaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao) {
     $.ajax
     ({
         type: "POST",
