@@ -222,16 +222,16 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
             if (infoUser.user !== '') {
                 if (data[0] > pontuacao && pontuacao > 0) {
                     if (data[3] > pontuacao) {//top global
-                        please = "  Conseguiste um novo record absoluto!";
+                        please = "  Conseguiste um novo recorde absoluto!";
                     } else if (data[2] > pontuacao) {//top escola
-                        please = "Conseguiste um novo record na tua escola!";
+                        please = "Conseguiste um novo recorde na tua escola!";
                     } else if (data[1] > pontuacao) { // top turma
-                        please = "Conseguiste um novo record na tua turma!";
+                        please = "Conseguiste um novo recorde na tua turma!";
                     } else { // top pessoal
-                        please = "     Conseguiste melhorar o teu record!";
+                        please = "     Conseguiste melhorar o teu recorde!";
                     }
                 } else {
-                    please = "  Não conseguiste melhorar o teu resultado anterior \no teu melhor resultado é " + pontuacao + " pontos";
+                    please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + pontuacao + " pontos";
                 }
                 gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
             } else {
