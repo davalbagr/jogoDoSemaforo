@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "node esbuild/dev.server.js -w",
     "build": "node esbuild/build.prod.js",
+    "prepare": "mkdir semaforo && cp -r public/* semaforo/ && rm semaforo/bundle.js && cp -r src semaforo/ && cp game.js semaforo/ && zip -r -m semaforo semaforo",
     "start": "node server.js"
   },
   "author": "David Agra, Tiago Teixiera, João Silva",
