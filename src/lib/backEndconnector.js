@@ -220,7 +220,7 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
             pontuacao = parseFloat(pontuacao);
             let please;
             if (infoUser.user !== '') {
-                if (data[0] > pontuacao && pontuacao > 0) {
+                if (data[0] > pontuacao) {
                     if (data[3] > pontuacao) {//top global
                         please = "  Conseguiste um novo recorde absoluto!";
                     } else if (data[2] > pontuacao) {//top escola
@@ -229,15 +229,13 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
                         please = "Conseguiste um novo recorde na tua turma!";
                     } else if (data[0] > pontuacao) { // top pessoal
                         please = "     Conseguiste melhorar o teu recorde!";
-                    } else {
-                        please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + pontuacao + " pontos";
                     }
                 } else {
                     please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + pontuacao + " pontos";
                 }
                 gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
             } else {
-                if (data[3] > pontuacao && pontuacao > 0) {
+                if (data[3] > pontuacao) {
                     please = "Se estivesses registado o teu nome figuraria \nno TOP 100 absoluto";
                 } else {
                     please = "  Para que o teu nome figure nos TOPs \n  tens de estar registado";
