@@ -107,16 +107,16 @@ export function destroySession() {
  * @param {Phaser.Scene} scene scope in with the login is being made
  */
 export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
-    var data = [];
     $.ajax
     ({
         type: "POST",
         url: "https://www.hypatiamat.com/newHRecords.php",
         data: "action=mostraNewA&anoLi=" + di + "&anoLf=" + df + "&mturma=" + globalCodTurma + "&mescola=" + globalCodEscola + "&flag=2" + "&tip=" + tip + "&tC=semaforoTOP",
         crossDomain: true,
-        async: false,
+        async: true,
         cache: false,
         success: function (response) {
+            var data = [];
             let j = 0;
             response = response.split('&');
             for (let i = 0; i < response.length; i++) {
@@ -152,7 +152,6 @@ export function getTOP(di, df, globalCodTurma, globalCodEscola, tip, scene) {
 
 
 export function updateTOP(di, df, globalCodTurma, globalCodEscola, flag, tip, scene) {
-    var data;
     $.ajax
     ({
         type: "POST",
@@ -161,7 +160,7 @@ export function updateTOP(di, df, globalCodTurma, globalCodEscola, flag, tip, sc
         crossDomain: true,
         cache: false,
         success: function (response) {
-            data = [];
+            var data = [];
             let j = 0;
             response = response.split('&');
             for (let i = 0; i < response.length; i++) {
