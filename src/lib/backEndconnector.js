@@ -217,8 +217,6 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
             data.push(parseFloat(response.split("vlMin3=")[1].split("&")[0])); //minimo da turma
             data.push(parseFloat(response.split("vlMin2=")[1].split("&")[0])); //minimo da escola
             data.push(parseFloat(response.split("vlMin1=")[1].split("&")[0])); //minimo global - TOP 100
-            pontuacao = parseFloat(pontuacao);
-            if (pontuacao > 0) {
                 let please;
                 if (infoUser.user !== '') {
                     if (data[0] > pontuacao) {
@@ -231,9 +229,10 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
                         } else if (data[0] > pontuacao) { // top pessoal
                             please = "     Conseguiste melhorar o teu recorde!";
                         }
-                    } else {
-                        please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + pontuacao + " pontos";
+                    } else if (data[0] > 0) {
+                        please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + data[0] + " pontos";
                     }
+                    gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
                 } else {
                     if (data[3] > pontuacao) {
                         please = "Se estivesses registado o teu nome figuraria \nno TOP 100 absoluto";
@@ -242,15 +241,11 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
                     }
                 }
                 scene.please = please;
-            }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Falha de ligação, por favor verifique a sua conexão");
         }
     })
-    if (infoUser.user !== '') {
-        gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
-    }
 }
 
 
