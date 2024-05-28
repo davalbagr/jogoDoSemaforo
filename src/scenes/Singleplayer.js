@@ -94,9 +94,9 @@ export class Singleplayer extends Scene {
                 align: "center",
             });
         }
-        this.pleaseText = this.add.text(810, 410, this.please, {
+        this.pleaseText = this.add.text(790, 410, this.please, {
             fontFamily: "font1",
-            fontSize: 20,
+            fontSize: 22,
             color: "#ffffff",
             stroke: "#000000",
             strokeThickness: 8,
