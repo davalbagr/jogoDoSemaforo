@@ -219,7 +219,7 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
             data.push(parseFloat(response.split("vlMin1=")[1].split("&")[0])); //minimo global - TOP 100
             let please = "";
             if (infoUser.user !== '') {
-                if (data[0] > pontuacao) {
+                if (data[0] > pontuacao || data[0] === 0.0) {
                     if (data[3] > pontuacao) {//top global
                         please = "  Conseguiste um novo recorde absoluto!";
                     } else if (data[2] > pontuacao) {//top escola
@@ -229,7 +229,7 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
                     } else if (data[0] > pontuacao) { // top pessoal
                         please = "     Conseguiste melhorar o teu recorde!";
                     }
-                } else if (data[0] > 0) {
+                } else {
                     please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + data[0] + " pontos";
                 }
                 gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
