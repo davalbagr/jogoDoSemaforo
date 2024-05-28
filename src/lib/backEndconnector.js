@@ -234,7 +234,6 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
                     } else {
                         please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + pontuacao + " pontos";
                     }
-                    gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
                 } else {
                     if (data[3] > pontuacao) {
                         please = "Se estivesses registado o teu nome figuraria \nno TOP 100 absoluto";
@@ -249,6 +248,9 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
             alert("Falha de ligação, por favor verifique a sua conexão");
         }
     })
+    if (infoUser.user !== '') {
+        gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
+    }
 }
 
 
