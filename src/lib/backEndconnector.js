@@ -202,6 +202,23 @@ export function updateTOP(di, df, globalCodTurma, globalCodEscola, flag, tip, sc
 
 
 export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao, scene) {
+    var minimoPessoal = 0;
+    $.ajax
+    ({
+        type: "POST",
+        url: "https://www.hypatiamat.com/newHRecords.php",
+        async: false,
+        data: "action=maximoGlobal&codAl=" + username + "&codTurma=" + globalCodTurma + "&codEscola=" + globalCodEscola + "&pont=" + pontuacao + "&tip=" + tip + "&t=semaforoHypatia&tC=semaforoTOP",
+        crossDomain: true,
+        cache: false,
+        success: function (response) {
+            minimoPessoal = parseFloat(response.split("vlMin4=")[1]);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Falha de ligação, por favor verifique a sua conexão");
+        }
+    })
+
     $.ajax
     ({
         type: "POST",
@@ -218,18 +235,18 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
             data.push(parseFloat(response.split("vlMin1=")[1].split("&")[0])); //minimo global - TOP 100
             let please = "";
             if (infoUser.user !== '') {
-                if (data[0] > pontuacao || data[0] === 0.0) {
+                if (minimoPessoal > pontuacao || data[0] === 0.0) {
                     if (data[3] > pontuacao) {//top global
                         please = "  Conseguiste um novo recorde absoluto!";
                     } else if (data[2] > pontuacao) {//top escola
                         please = "Conseguiste um novo recorde na tua escola!";
                     } else if (data[1] > pontuacao) { // top turma
                         please = "Conseguiste um novo recorde na tua turma!";
-                    } else if (data[0] > pontuacao) { // top pessoal
+                    } else if (minimoPessoal > pontuacao) { // top pessoal
                         please = "     Conseguiste melhorar o teu recorde!";
                     }
                 } else {
-                    please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + data[0] + " pontos";
+                    please = "  Não conseguiste melhorar o teu recorde \no teu melhor resultado é " + minimoPessoal + " pontos";
                 }
                 gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
             } else {
