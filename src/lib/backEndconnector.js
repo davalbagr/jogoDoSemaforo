@@ -203,6 +203,7 @@ export function updateTOP(di, df, globalCodTurma, globalCodEscola, flag, tip, sc
 
 export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, pontuacao, scene) {
     var minimoPessoal = 0;
+    var maximoTop100 = 0;
     $.ajax
     ({
         type: "POST",
@@ -213,6 +214,7 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
         cache: false,
         success: function (response) {
             minimoPessoal = parseFloat(response.split("vlMin4=")[1]);
+            maximoTop100 = parseFloat(response.split("vlMin1=")[1].split("&")[0]);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Falha de ligação, por favor verifique a sua conexão");
@@ -250,7 +252,7 @@ export function verificaRecords(username, globalCodTurma, globalCodEscola, tip, 
                 }
                 gravaRecords(infoUser.user, globalCodTurma, globalCodEscola, tip, pontuacao);
             } else {
-                if (data[3] > pontuacao) {
+                if (maximoTop100 > pontuacao) {
                     please = "Se estivesses registado o teu nome figuraria \nno TOP 100 absoluto";
                 } else {
                     please = "  Para que o teu nome figure nos TOPs \n  tens de estar registado";
