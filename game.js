@@ -161,6 +161,7 @@ export class Game {
             }
             this.undoMove(pos);
         }
+        score += Math.random();
         return score;
     }
 
