@@ -1,4 +1,3 @@
-import { Boot } from "./scenes/Boot";
 import { MainMenu } from "./scenes/MainMenu";
 import { Preloader } from "./scenes/Preloader";
 import { Singleplayer } from "./scenes/Singleplayer";
@@ -22,7 +21,6 @@ const config = {
     createContainer: true,
   },
   scene: [
-    Boot,
     Preloader,
     MainMenu,
     Singleplayer,

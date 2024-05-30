@@ -53,6 +53,7 @@ export class Preloader extends Scene {
     this.load.image("timer", "ampulhetaTempo.png");
     this.load.image("board", "quadroFinal.png");
     this.load.image("score", "pontuacaoTempo.png");
+    this.load.image("background", "bg.png");
   }
 
   create() {
