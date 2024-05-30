@@ -44,9 +44,9 @@ export class Multiplayer extends Scene {
             strokeThickness: 8,
             align: "center",
         });
-        const sim2 = this.add.image(900, 550, "btok").setInteractive({ useHandCursor: true });
-        const nao2 = this.add.image(1100, 550, "btnotok").setInteractive({ useHandCursor: true });
-        const hide = this.add.image(1270, 270, "btnotok").setInteractive({ useHandCursor: true });
+        const sim2 = this.add.image(900, 550, "btok").setInteractive({useHandCursor: true});
+        const nao2 = this.add.image(1100, 550, "btnotok").setInteractive({useHandCursor: true});
+        const hide = this.add.image(1270, 270, "btnotok").setInteractive({useHandCursor: true});
         hide.scale = 0.7;
         nao2.scale = 0.7;
         sim2.scale = 0.7;
@@ -63,9 +63,9 @@ export class Multiplayer extends Scene {
             nao2.destroy();
             hide.destroy();
             sim.setVisible(true);
-            sim.setInteractive({ useHandCursor: true });
+            sim.setInteractive({useHandCursor: true});
             nao.setVisible(true);
-            nao.setInteractive({ useHandCursor: true });
+            nao.setInteractive({useHandCursor: true});
             txt.x = 235;
             txt.y = 470;
         })
