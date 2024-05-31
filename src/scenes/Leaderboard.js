@@ -9,11 +9,11 @@ export class Leaderboard extends Scene {
 
     preload() {
         this.load.scenePlugin('rexuiplugin', 'rexuiplugin.min.js', 'rexUI', 'rexUI');
+        this.rexUI = this.plugins.get('rexUI');
     }
 
     init(data) {
         this.array = data;
-        this.rexUI = this.plugins.get('rexUI');
     }
 
     update(time, delta) {
