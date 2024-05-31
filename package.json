@@ -7,7 +7,7 @@
     "dev": "node esbuild/dev.server.js -w",
     "build": "node esbuild/build.prod.js"
   },
-  "author": "David Agra, Tiago Teixiera, João Silva",
+  "author": "David Agra, Tiago Teixeira, João Silva",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davalbagr/jogoDoSemaforo"
